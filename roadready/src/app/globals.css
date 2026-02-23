@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Warm off-white backgrounds — premium, not minty */
+  --color-slate-950: #FAFBF9;
+  /* page bg */
+  --color-slate-900: #FFFFFF;
+  /* cards */
+  --color-slate-800: #E8EDEA;
+  /* borders — subtler, lighter */
+  --color-slate-700: #9BB8A8;
+  --color-slate-600: #6B9B81;
+  --color-slate-500: #5A8A70;
+  --color-slate-400: #5E7D6C;
+  /* body text */
+  --color-slate-300: #A8C5B5;
+  --color-slate-200: #E2EFE8;
+
+  /* Primary green accent — slightly darker for contrast */
+  --color-blue-400: #2D9F47;
+  --color-blue-500: #248F3E;
+  --color-blue-600: #1B7A32;
+  --color-blue-700: #15602D;
+
+  /* Highlight / success */
+  --color-emerald-400: #2D9649;
+  --color-emerald-500: #248F3E;
+
+  /* Dark accent for headings and trust strip */
+  --color-dark: #0F1F17;
+  /* Gold/amber for trust badges and stars */
+  --color-amber-400: #D4A853;
+  --color-amber-500: #C49B3D;
+  --color-amber-600: #A67C2E;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-display), Georgia, serif;
+  --font-family-heading: var(--font-heading);
+
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-slide-right: slide-right 0.35s ease-out;
+  --animate-pulse-soft: pulse-soft 2s ease-in-out infinite;
+  --animate-count-up: count-up 1.5s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-reveal-up: reveal-up 0.4s ease-out forwards;
+  --animate-reveal-scale: reveal-scale 0.35s ease-out forwards;
+  --animate-shimmer: shimmer 2.5s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-right {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes pulse-soft {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes count-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-slate-950);
+  color: var(--color-dark);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0F2F1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-slate-700);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-slate-600);
+}
+
+/* Selection */
+::selection {
+  background: var(--color-blue-500);
+  color: #fff;
+}
+
+/* Grain texture overlay (use with ::before on hero) */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
