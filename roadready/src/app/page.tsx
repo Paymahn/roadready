@@ -256,11 +256,9 @@ function TrustStrip() {
 function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
   const { ref, revealed } = useReveal();
   const [currentSalary, setCurrentSalary] = useState(24000);
-  const [selectedCourse, setSelectedCourse] = useState(2200);
 
   const hgvAvg = 38000;
-  const monthlyUplift = Math.round((hgvAvg - currentSalary) / 12);
-  const paybackMonths = monthlyUplift > 0 ? (selectedCourse / monthlyUplift).toFixed(1) : "—";
+  const monthlyUplift = Math.max(0, Math.round((hgvAvg - currentSalary) / 12));
   const yearOneExtra = Math.max(0, hgvAvg - currentSalary);
   const fiveYearExtra = yearOneExtra * 5;
 
@@ -269,29 +267,15 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-12">
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
-            How Fast Will Your Licence{" "}
-            <span className="text-blue-600">Pay For Itself?</span>
+            What Could You Be{" "}
+            <span className="text-blue-600">Earning?</span>
           </h2>
           <p className="text-slate-400 max-w-lg mx-auto">
-            Slide the bar to your current earnings — watch the numbers change.
+            Slide to your current salary and see the potential uplift as a qualified HGV driver.
           </p>
         </div>
 
         <div className="max-w-2xl mx-auto bg-white border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm">
-          <div className="mb-8">
-            <label className="block text-sm font-medium text-dark mb-2">Course</label>
-            <select
-              value={selectedCourse}
-              onChange={(e) => setSelectedCourse(Number(e.target.value))}
-              className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px]"
-            >
-              <option value={1800}>HGV Cat C — £1,800</option>
-              <option value={2200}>HGV Cat C+E — £2,200</option>
-              <option value={3500}>Cat C + C+E Combo — £3,500</option>
-              <option value={650}>Forklift — £650</option>
-            </select>
-          </div>
-
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-medium text-dark">Your current salary</label>
@@ -312,10 +296,14 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <ResultCard label="Extra income / month" value={formatCurrency(Math.max(0, monthlyUplift))} highlight />
-            <ResultCard label="Licence paid off in" value={`${paybackMonths} months`} highlight />
-            <ResultCard label="Extra income Year 1" value={formatCurrency(yearOneExtra)} />
+          <div className="bg-blue-600/5 border border-blue-600/15 rounded-xl p-4 mb-6 text-center">
+            <div className="text-sm text-slate-500 mb-1">Average HGV driver salary</div>
+            <div className="text-3xl font-extrabold text-blue-600">£38,000</div>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <ResultCard label="Extra / month" value={formatCurrency(monthlyUplift)} highlight />
+            <ResultCard label="Extra in Year 1" value={formatCurrency(yearOneExtra)} />
             <ResultCard label="Extra over 5 years" value={formatCurrency(fiveYearExtra)} />
           </div>
 
@@ -353,7 +341,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12">
           <div>
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">Our Courses</h2>
-            <p className="text-slate-400">No hidden fees. Everything included in the price.</p>
+            <p className="text-slate-400">Everything included. Enquire for details on any course.</p>
           </div>
           <Link
             href="/courses"
@@ -1031,11 +1019,21 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
           This Licence Opens{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">An Entire Career</span>
         </h2>
-        <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-6">
-          It&apos;s not just a licence — it&apos;s the entry point to a whole new field. Our graduates have gone on to become long-haul drivers, fleet managers, owner-operators, and even driving instructors themselves.
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-8">
+          It&apos;s not just a licence — it&apos;s the entry point to a whole new field. Our graduates have gone on to build careers including:
         </p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 max-w-xl mx-auto mb-10 text-left">
+          {["Long-haul driver", "Fleet manager", "Owner-operator", "Driving instructor", "Logistics coordinator", "Warehouse manager"].map((role) => (
+            <div key={role} className="flex items-center gap-2 text-dark font-medium">
+              <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+              {role}
+            </div>
+          ))}
+        </div>
         <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-10">
-          If you&apos;re looking for a fresh start, a better income, or a career you can actually be proud of — <span className="font-semibold text-dark">this is where it begins</span>.
+          If you&apos;re ready for a fresh start and a career with real progression — <span className="font-semibold text-dark">this is where it begins</span>.
         </p>
         <button
           onClick={onEnquire}
