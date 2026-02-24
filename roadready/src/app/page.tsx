@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useEnquiry } from "@/context/EnquiryContext";
-import { courses, testimonials, stats, howItWorksSteps, comparisonRows } from "@/lib/data";
+import { courses, stats, howItWorksSteps, comparisonRows, shortageStats, trainingLocations, successStories } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
 import CourseCategoryIcon from "@/components/CourseCategoryIcon";
 
@@ -63,11 +63,14 @@ export default function HomePage() {
     <>
       <HeroSection onEnquire={openEnquiry} />
       <TrustStrip />
+      <CareerSupport />
+      <StudyTools />
+      <DriverShortage onEnquire={openEnquiry} />
       <ROICalculator onEnquire={openEnquiry} />
       <CoursePreview onEnquire={openEnquiry} />
+      <NationwideTraining />
       <HowItWorks />
-      <StudyTools />
-      <Testimonials />
+      <SuccessStories />
       <ComparisonSection />
       <FinalCTA onEnquire={openEnquiry} />
     </>
@@ -100,26 +103,30 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
             </span>
             <span className="flex items-center gap-1.5">
               <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
-              1,240+ Trained
+              10+ Years in the Industry
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/80 backdrop-blur-sm border border-slate-800/40 rounded-full text-sm text-slate-600 mb-6 animate-fade-in shadow-sm">
-            <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-soft" />
-            Now accepting bookings for Spring 2026
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 backdrop-blur-sm border border-blue-600/20 rounded-full text-sm font-semibold text-blue-600 mb-6 animate-fade-in shadow-sm">
+            <span className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse-soft" />
+            Now Accepting Bookings — Spring 2026
           </div>
 
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-dark leading-[1.08] tracking-tight mb-6 animate-slide-up">
-            Your Licence{" "}
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-dark leading-[1.08] tracking-tight mb-3 animate-slide-up">
+            Your New Career{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
-              Pays For Itself
+              Starts With Us
             </span>
           </h1>
 
+          <p className="font-heading text-xl sm:text-2xl font-bold text-slate-600 mb-6 animate-slide-up tracking-tight">
+            Your licence pays for itself.
+          </p>
+
           <p className="text-lg sm:text-xl text-slate-500 leading-relaxed mb-8 max-w-xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            Ethical HGV &amp; forklift training. 94% first-time pass rate, no hidden fees, and real job placement support. Most students break even in under 8 weeks.
+            You&apos;re not just a number here — you&apos;re someone building a better life, and we want that for you. With over a decade of industry experience, <a href="#study-tools" className="font-semibold text-blue-600 hover:text-blue-500 underline decoration-blue-600/30 hover:decoration-blue-600 transition-colors">our own free study materials</a>, and real career support, <span className="font-semibold text-dark">we&apos;re with you every step of the way</span> — from first enquiry to first day on the job.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.2s" }}>
@@ -127,7 +134,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
               onClick={onEnquire}
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95 min-h-[48px]"
             >
-              Enquire Now
+              Start Your Journey
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -143,24 +150,24 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
             </a>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 mt-10 text-sm text-slate-500 animate-slide-up" style={{ animationDelay: "0.3s" }}>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="flex flex-wrap items-center gap-4 mt-10 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm">
+              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              No hidden fees
+              94% first-time pass rate
             </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <a href="#study-tools" className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm hover:bg-blue-600/20 transition-colors">
+              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              Job placement
-            </span>
-            <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              Free study materials
+            </a>
+            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm">
+              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              £350 retests
+              Job placement support
             </span>
           </div>
         </div>
@@ -385,11 +392,8 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
                 </h3>
                 <p className="text-sm text-slate-400 mb-4 line-clamp-2">{course.description}</p>
 
-                <div className="flex items-baseline gap-2 mb-1">
-                  <span className="text-2xl font-bold text-dark">{formatCurrency(course.price)}</span>
-                </div>
                 <p className="text-xs text-slate-500 mb-4">
-                  All-inclusive. From £{course.weeklyFrom}/week · {course.duration}
+                  All-inclusive · {course.duration}
                 </p>
 
                 <button
@@ -492,24 +496,289 @@ function HowItWorks() {
   );
 }
 
+// Avatar initials from "Dave M." -> "DM"
+function getInitials(name: string) {
+  return name
+    .split(/[\s.]+/)
+    .filter(Boolean)
+    .map((s) => s[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+// ── DRIVER SHORTAGE ─────────────────────────────────────
+function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
+  const { ref, revealed } = useReveal();
+  const stat1 = useCountUp(60000, 2500);
+  const stat2 = useCountUp(38, 2000);
+  const stat3 = useCountUp(89, 2000);
+  const stat4 = useCountUp(12, 1800);
+
+  const statItems = [
+    { ...stat1, label: "Unfilled HGV positions in the UK", suffix: "+", prefix: "" },
+    { ...stat2, label: "Average HGV driver salary", suffix: "k", prefix: "£" },
+    { ...stat3, label: "Graduates employed within 4 weeks", suffix: "%", prefix: "" },
+    { ...stat4, label: "Industry growth forecast", suffix: "%", prefix: "" },
+  ];
+
+  const statColors = ["text-red-600", "text-emerald-600", "text-emerald-600", "text-emerald-600"];
+
+  return (
+    <section className="py-20 lg:py-28 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-red-600/8 via-red-500/3 to-transparent" />
+      <div ref={ref} className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-red-500/15 text-red-600 text-sm font-bold rounded-full border border-red-500/30 mb-4">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+            National driver shortage
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-dark mb-4 tracking-tight">
+            The UK Needs{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-red-400">60,000+ Drivers</span>
+          </h2>
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+            There&apos;s never been a better time to get qualified. The logistics industry is desperate for drivers — and the salaries reflect it. Your opportunity starts here.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {statItems.map((stat, i) => (
+            <div key={i} ref={stat.ref} className="bg-white border-2 border-amber-400/60 rounded-2xl p-6 text-center shadow-sm hover:shadow-lg hover:border-amber-400 transition-all duration-300">
+              <div className={`text-3xl sm:text-4xl font-extrabold mb-2 flex items-center justify-center gap-1 ${statColors[i]}`}>
+                {stat.prefix}{stat.count >= 1000 ? `${Math.round(stat.count).toLocaleString()}` : Math.round(stat.count)}{stat.suffix}
+                {i === 3 && (
+                  <svg className="w-6 h-6 text-emerald-500 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                )}
+              </div>
+              <div className="text-sm text-slate-500">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={onEnquire}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95"
+          >
+            Start Your Journey
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CAREER SUPPORT ──────────────────────────────────────
+function CareerSupport() {
+  const { ref, revealed } = useReveal();
+  const cards = [
+    {
+      title: "CV & Application Support",
+      description: "Professional CV templates tailored to logistics, application coaching, and help writing cover letters that actually get read.",
+      icon: (
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Industry Contacts",
+      description: "We've built relationships with major haulage firms, agencies, and logistics companies. We don't just train you — we introduce you.",
+      icon: (
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Interview Preparation",
+      description: "Know what employers look for. We'll coach you on industry-specific questions, what to wear, what to bring, and how to stand out.",
+      icon: (
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+        </svg>
+      ),
+    },
+    {
+      title: "Ongoing Support",
+      description: "Your relationship with us doesn't end when you pass. Need advice 6 months in? We're still here. That's what 'every step of the way' actually means.",
+      icon: (
+        <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+        </svg>
+      ),
+    },
+  ];
+
+  return (
+    <section className="py-20 lg:py-28 bg-white/50">
+      <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
+        <div className="text-center mb-14">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+            With you every step
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
+            Not Just Qualified —{" "}
+            <span className="text-blue-600">Hireable</span>
+          </h2>
+          <p className="text-slate-500 max-w-xl mx-auto">
+            A licence gets you started. We make sure you&apos;re a candidate employers actually want. CV support, industry contacts, interview coaching — and we don&apos;t stop when you pass.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cards.map((card) => (
+            <div key={card.title} className="group bg-white border border-slate-800 rounded-2xl p-6 hover:border-blue-600/30 hover:shadow-lg hover:shadow-blue-600/5 hover:-translate-y-1 transition-all duration-300">
+              <div className="w-12 h-12 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600/15 transition-colors">
+                {card.icon}
+              </div>
+              <h3 className="font-bold text-dark mb-2 group-hover:text-blue-600 transition-colors">{card.title}</h3>
+              <p className="text-sm text-slate-500 leading-relaxed">{card.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── NATIONWIDE TRAINING ─────────────────────────────────
+function NationwideTraining() {
+  const { ref, revealed } = useReveal();
+  const [search, setSearch] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const filtered = search.trim()
+    ? trainingLocations.filter(
+      (l) =>
+        l.city.toLowerCase().includes(search.toLowerCase()) ||
+        l.region.toLowerCase().includes(search.toLowerCase())
+    )
+    : trainingLocations;
+
+  const regions = [...new Set(trainingLocations.map((l) => l.region))];
+
+  return (
+    <section className="py-20 lg:py-28">
+      <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+            </svg>
+            {trainingLocations.length} locations
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
+            Training Centres{" "}
+            <span className="text-blue-600">Across the UK</span>
+          </h2>
+          <p className="text-slate-500 max-w-xl mx-auto mb-8">
+            Wherever you are, we&apos;re nearby. Search for your nearest centre or scroll through our nationwide network.
+          </p>
+
+          {/* Search input */}
+          <div className="max-w-md mx-auto relative">
+            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by city or region..."
+              className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-800 rounded-xl text-dark placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+            />
+            {search && (
+              <button
+                onClick={() => setSearch("")}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Scrolling location cards */}
+        <div ref={scrollRef} className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide -mx-4 px-4">
+          {filtered.map((loc) => (
+            <div
+              key={loc.city}
+              className="snap-start shrink-0 w-56 bg-white border border-slate-800 rounded-2xl p-5 hover:border-blue-600/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <svg className="w-5 h-5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                </svg>
+                <h3 className="font-bold text-dark group-hover:text-blue-600 transition-colors">{loc.city}</h3>
+              </div>
+              <div className="text-xs text-slate-400 mb-3">{loc.region}</div>
+              <div className="flex flex-wrap gap-1.5">
+                {loc.courses.map((c) => (
+                  <span key={c} className="text-[10px] font-medium px-2 py-0.5 bg-blue-600/8 text-blue-600 rounded-full border border-blue-600/15">{c}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-10">
+            <p className="text-slate-400">No locations found for &quot;{search}&quot;. Try a different search.</p>
+          </div>
+        )}
+
+        {/* Region summary strip */}
+        <div className="flex flex-wrap justify-center gap-3 mt-8">
+          {regions.map((r) => (
+            <button
+              key={r}
+              onClick={() => setSearch(r)}
+              className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-200 ${search === r
+                ? "bg-blue-600 text-white border-blue-600"
+                : "bg-white text-slate-500 border-slate-800 hover:border-blue-600/30 hover:text-blue-600"
+                }`}
+            >
+              {r}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── STUDY TOOLS ─────────────────────────────────────────
 function StudyTools() {
   const { ref, revealed } = useReveal();
   const tools = [
     {
       title: "Spaced Repetition Study Tool",
-      description: "Learn smarter, not harder. Our AI-powered tool uses the same science behind Duolingo and Anki — questions you struggle with come back more often, ones you've mastered get spaced out. 15 minutes a day is all it takes.",
+      description: "Our AI-powered tool uses the Ebbinghaus forgetting curve and Leitner system — the same science behind Duolingo and Anki. Questions you struggle with come back more often. 15 minutes a day beats 5 hours of cramming. Included free with every course, forever.",
       icon: (
         <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 0 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
         </svg>
       ),
-      badge: "Included with every course",
+      badge: "Free with every course",
       badgeColor: "bg-blue-600/10 text-blue-600 border-blue-600/20",
     },
     {
       title: "User Hub",
-      description: "Your personal dashboard to track study progress, view upcoming sessions, access learning tools, and manage your entire training journey in one place.",
+      description: "Your personal dashboard to track study progress, review weak areas, access all learning tools, and manage your entire training journey — from first enquiry to first day on the job.",
       icon: (
         <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
@@ -520,7 +789,7 @@ function StudyTools() {
     },
     {
       title: "Driver Wellness Hub",
-      description: "Mental health check-ins, nutrition on the road, back care tips, and financial planning guidance. Because we care about your career long after you pass.",
+      description: "We\u2019re championing physical and mental health in the driving industry. Back care, nutrition on the road, sleep hygiene, mental health check-ins, and financial planning — because your wellbeing matters as much as your licence.",
       icon: (
         <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -532,21 +801,21 @@ function StudyTools() {
   ];
 
   return (
-    <section className="py-20 lg:py-28 bg-white/50">
+    <section id="study-tools" className="py-20 lg:py-28 bg-white/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-14">
           <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
             </svg>
-            Built by us, for you
+            Built by us, constantly updated
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
-            We Don&apos;t Just Teach You —{" "}
-            <span className="text-blue-600">We Built the Tools</span>
+            We Create Our Own{" "}
+            <span className="text-blue-600">Study Materials</span>
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto">
-            Most schools hand you a textbook. We built AI-powered study tools backed by cognitive science to help you pass first time.
+            Most schools hand you a textbook. We built AI-powered study tools backed by cognitive science — included free with every course, and we never stop improving them.
           </p>
         </div>
 
@@ -574,7 +843,7 @@ function StudyTools() {
 
         <div className="text-center mt-10">
           <p className="text-sm text-slate-400">
-            Powered by spaced repetition — proven to improve long-term retention by up to 400%
+            Based on the Ebbinghaus forgetting curve — proven to improve long-term retention by up to 400% vs traditional study methods
           </p>
         </div>
       </div>
@@ -582,61 +851,90 @@ function StudyTools() {
   );
 }
 
-// Avatar initials from "Dave M." -> "DM"
-function getInitials(name: string) {
-  return name
-    .split(/[\s.]+/)
-    .filter(Boolean)
-    .map((s) => s[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-}
-
-// ── TESTIMONIALS ────────────────────────────────────────
-function Testimonials() {
+// ── SUCCESS STORIES ─────────────────────────────────────
+function SuccessStories() {
   const { ref, revealed } = useReveal();
-  const shown = testimonials.slice(0, 3);
+  const featured = successStories.find((s) => s.featured);
+  const others = successStories.filter((s) => !s.featured);
 
   return (
-    <section className="py-20 lg:py-28 bg-white/50">
+    <section id="success-stories" className="py-20 lg:py-28 bg-white/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-dark mb-3 font-heading">Real People, Real Results</h2>
-          <p className="text-slate-500 max-w-lg mx-auto">Don&apos;t take our word for it — here&apos;s what our graduates say.</p>
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+            Graduate profiles
+          </span>
+          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">Career Transformations</h2>
+          <p className="text-slate-500 max-w-lg mx-auto">Real people who changed their lives through RoadReady. Here&apos;s where they are now.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {shown.map((t, i) => (
-            <div key={t.name} className="bg-white border border-slate-800 rounded-2xl p-6 lg:p-8 shadow-sm flex flex-col relative overflow-hidden">
-              <span className="absolute top-6 right-6 text-6xl font-heading text-slate-800/10 leading-none">&quot;</span>
+        {/* Featured story */}
+        {featured && (
+          <div className="bg-white border border-slate-800 rounded-2xl p-6 lg:p-10 shadow-sm mb-8 relative overflow-hidden">
+            <span className="absolute top-6 right-6 text-8xl font-heading text-slate-800/5 leading-none">&quot;</span>
+            <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-center">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                    {getInitials(featured.name)}
+                  </div>
+                  <div>
+                    <div className="font-bold text-dark text-lg">{featured.name}</div>
+                    <div className="text-sm text-slate-500">{featured.course} · {featured.graduateDate}</div>
+                  </div>
+                  <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-blue-600/10 text-blue-600 rounded-full border border-blue-600/20">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                    Verified Graduate
+                  </span>
+                </div>
+                <blockquote className="text-dark text-lg leading-relaxed mb-5">&quot;{featured.quote}&quot;</blockquote>
+                <p className="text-sm text-slate-500 mb-5">{featured.whereNow}</p>
+                <div className="flex flex-wrap items-center gap-6">
+                  <div>
+                    <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Before</div>
+                    <div className="text-sm text-slate-500">{featured.beforeRole} · <span className="line-through">{formatCurrency(featured.beforeSalary)}</span></div>
+                  </div>
+                  <svg className="w-5 h-5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                  <div>
+                    <div className="text-xs text-blue-600 uppercase tracking-wider mb-1 font-semibold">After</div>
+                    <div className="text-sm font-bold text-dark">{featured.afterRole} · <span className="text-blue-600">{formatCurrency(featured.afterSalary)}</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Other stories */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {others.map((s) => (
+            <div key={s.name} className="bg-white border border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col relative overflow-hidden hover:border-blue-600/30 hover:shadow-lg transition-all duration-300">
+              <span className="absolute top-5 right-5 text-5xl font-heading text-slate-800/5 leading-none">&quot;</span>
               <div className="flex items-center gap-1 mb-3">
-                {Array.from({ length: t.rating }).map((_, j) => (
+                {Array.from({ length: s.rating }).map((_, j) => (
                   <svg key={j} className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
                 ))}
               </div>
-              <blockquote className="text-dark leading-relaxed mb-5 flex-1">&quot;{t.quote}&quot;</blockquote>
+              <blockquote className="text-dark leading-relaxed mb-4 flex-1 text-sm">&quot;{s.quote}&quot;</blockquote>
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-600 font-semibold text-sm shrink-0">
-                  {getInitials(t.name)}
+                  {getInitials(s.name)}
                 </div>
                 <div>
-                  <div className="font-bold text-dark text-sm">{t.name}</div>
-                  <div className="text-xs text-slate-500">{t.course}</div>
+                  <div className="font-bold text-dark text-sm">{s.name}</div>
+                  <div className="text-xs text-slate-500">{s.beforeRole} → {s.afterRole}</div>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-1.5 text-xs text-slate-500 mb-3">
-                <svg className="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                Verified Graduate
-              </div>
+              <div className="text-xs text-slate-500 mb-3">{s.whereNow}</div>
               <div className="pt-3 border-t border-slate-800/50 flex items-center gap-2 text-sm">
-                <span className="text-slate-400 line-through">{formatCurrency(t.beforeSalary)}</span>
+                <span className="text-slate-400 line-through">{s.beforeSalary > 0 ? formatCurrency(s.beforeSalary) : "Unemployed"}</span>
                 <span className="text-slate-400">→</span>
-                <span className="text-blue-600 font-bold">{formatCurrency(t.afterSalary)}</span>
+                <span className="text-blue-600 font-bold">{formatCurrency(s.afterSalary)}</span>
               </div>
             </div>
           ))}
@@ -683,7 +981,7 @@ function ComparisonSection() {
               <tr className="bg-slate-950">
                 <th className="text-left text-sm font-medium text-slate-400 px-6 py-4">Feature</th>
                 <th className="text-center text-sm font-bold text-blue-600 px-6 py-4 bg-blue-600/5">RoadReady</th>
-                <th className="text-center text-sm font-medium text-slate-400 px-6 py-4">Typical School</th>
+                <th className="text-center text-sm font-bold text-red-500 px-6 py-4 bg-red-500/8">Typical School</th>
               </tr>
             </thead>
             <tbody>
@@ -699,17 +997,17 @@ function ComparisonSection() {
                       row.us
                     )}
                   </td>
-                  <td className="px-6 py-3.5 text-sm text-center text-slate-400">
+                  <td className="px-6 py-3.5 text-sm text-center text-red-400 bg-red-500/3">
                     {row.themYes ? (
                       <span className="inline-flex items-center justify-center gap-1.5">
-                        <CheckIcon className="w-4 h-4 text-slate-400" /> {row.them}
+                        <CheckIcon className="w-4 h-4 text-red-400" /> {row.them}
                       </span>
-                    ) : ["Not offered", "Full upfront only", "Weekdays only"].includes(row.them) ? (
+                    ) : ["Not offered", "Weekdays only"].includes(row.them) ? (
                       <span className="inline-flex items-center justify-center gap-1.5">
-                        <XIcon className="w-4 h-4 text-red-500 shrink-0" /> {row.them}
+                        <XIcon className="w-4 h-4 text-red-500 shrink-0" /> <span className="text-red-500 font-medium">{row.them}</span>
                       </span>
                     ) : (
-                      row.them
+                      <span className="text-red-400">{row.them}</span>
                     )}
                   </td>
                 </tr>
@@ -730,17 +1028,20 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-blue-500/3 to-transparent" />
       <div ref={ref} className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-dark mb-4 tracking-tight">
-          Every Month Without Your Licence Costs You{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">£1,167</span>
+          This Licence Opens{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">An Entire Career</span>
         </h2>
-        <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
-          That&apos;s £14,000 per year you&apos;re leaving on the table. The question isn&apos;t whether you can afford it — it&apos;s whether you can afford to wait.
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-6">
+          It&apos;s not just a licence — it&apos;s the entry point to a whole new field. Our graduates have gone on to become long-haul drivers, fleet managers, owner-operators, and even driving instructors themselves.
+        </p>
+        <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-10">
+          If you&apos;re looking for a fresh start, a better income, or a career you can actually be proud of — <span className="font-semibold text-dark">this is where it begins</span>.
         </p>
         <button
           onClick={onEnquire}
           className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95"
         >
-          Enquire Now — It Takes 30 Seconds
+          Start Your New Chapter
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
           </svg>

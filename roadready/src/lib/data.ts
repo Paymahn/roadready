@@ -84,7 +84,7 @@ export const courses: Course[] = [
     title: "Forklift — Counterbalance",
     category: "Forklift",
     description:
-      "The most in-demand forklift licence. Qualify in just 3 days and open up warehouse, logistics, and construction roles.",
+      "The most in-demand forklift licence. Qualify in just 3 days and open up warehouse, logistics, and construction roles nationwide.",
     duration: "3 days",
     price: 650,
     weeklyFrom: 13,
@@ -242,7 +242,7 @@ export const faqItems: FAQItem[] = [
   {
     question: "I can't afford the full amount upfront — do you offer payment plans?",
     answer:
-      "Yes. We offer flexible payment plans over 3 or 6 months, starting from as little as £35/week for Cat C. That's less than a daily coffee and lunch. Check out our Spread the Cost calculator on the pricing page.",
+      "Yes. We offer flexible payment plans over 3 or 6 months, starting from as little as £35/week for Cat C. That's less than a daily coffee and lunch. Get in touch and we'll walk you through the options.",
   },
   {
     question: "Will I actually get a job after passing?",
@@ -289,11 +289,110 @@ export const howItWorksSteps = [
 
 // ── Comparison Data (usYes/themYes for check/x icons) ───
 export const comparisonRows = [
-  { feature: "Retest price", us: "£350", them: "£800+", usYes: false, themYes: false },
   { feature: "Job placement support", us: "Included", them: "Not offered", usYes: true, themYes: false },
-  { feature: "Online theory prep", us: "Included", them: "£50 extra", usYes: true, themYes: false },
+  { feature: "Online theory prep", us: "Included", them: "Extra cost", usYes: true, themYes: false },
   { feature: "Hidden fees", us: "None", them: "Medical, theory, etc.", usYes: false, themYes: false },
   { feature: "First-time pass rate", us: "94%", them: "Industry avg 55%", usYes: false, themYes: false },
-  { feature: "Payment plans", us: "From £35/week", them: "Full upfront only", usYes: true, themYes: false },
   { feature: "Weekend availability", us: "Yes", them: "Weekdays only", usYes: true, themYes: false },
+];
+
+// ── Driver Shortage Stats ─────────────────────────────
+export const shortageStats = [
+  { label: "Unfilled HGV positions in the UK", value: 60000, suffix: "+", prefix: "" },
+  { label: "Average HGV driver salary", value: 38, suffix: "k", prefix: "£" },
+  { label: "Graduates employed within 4 weeks", value: 89, suffix: "%", prefix: "" },
+  { label: "Industry growth forecast", value: 12, suffix: "%", prefix: "" },
+];
+
+// ── Training Locations ────────────────────────────────
+export interface TrainingLocation {
+  city: string;
+  region: string;
+  courses: string[];
+}
+
+export const trainingLocations: TrainingLocation[] = [
+  { city: "London", region: "South East", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Birmingham", region: "West Midlands", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Manchester", region: "North West", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Leeds", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Bristol", region: "South West", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
+  { city: "Liverpool", region: "North West", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Newcastle", region: "North East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
+  { city: "Edinburgh", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
+  { city: "Glasgow", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Cardiff", region: "Wales", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
+  { city: "Nottingham", region: "East Midlands", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Southampton", region: "South East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
+  { city: "Sheffield", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Cambridge", region: "East", courses: ["HGV Cat C", "Cat C+E"] },
+  { city: "Swindon", region: "South West", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Milton Keynes", region: "South East", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+];
+
+// ── Success Stories (enhanced testimonials) ───────────
+export interface SuccessStory {
+  name: string;
+  course: string;
+  beforeRole: string;
+  afterRole: string;
+  beforeSalary: number;
+  afterSalary: number;
+  graduateDate: string;
+  whereNow: string;
+  quote: string;
+  rating: number;
+  featured?: boolean;
+}
+
+export const successStories: SuccessStory[] = [
+  {
+    name: "Dave M.",
+    course: "HGV Cat C+E",
+    beforeRole: "Warehouse operative",
+    afterRole: "Class 1 HGV Driver",
+    beforeSalary: 24000,
+    afterSalary: 42000,
+    graduateDate: "March 2025",
+    whereNow: "Now driving for a major logistics firm with full benefits and pension. Recently bought his first house.",
+    quote: "Best money I ever spent. Passed first time, had a job within 2 weeks. I went from stacking shelves to earning nearly double. My only regret is not doing it sooner.",
+    rating: 5,
+    featured: true,
+  },
+  {
+    name: "Sarah K.",
+    course: "HGV Cat C",
+    beforeRole: "Retail assistant",
+    afterRole: "Rigid HGV Driver",
+    beforeSalary: 22000,
+    afterSalary: 36000,
+    graduateDate: "June 2025",
+    whereNow: "Driving for a supermarket chain on local routes. Better hours, better pay, and home every night.",
+    quote: "I was nervous about the cost, but it paid for itself in less than two months. The instructors were brilliant — they never made me feel stupid for asking questions.",
+    rating: 5,
+  },
+  {
+    name: "James T.",
+    course: "Forklift Counterbalance",
+    beforeRole: "Unemployed",
+    afterRole: "Forklift Operator",
+    beforeSalary: 0,
+    afterSalary: 28000,
+    graduateDate: "January 2025",
+    whereNow: "Working at a distribution centre with overtime available. Planning to do his HGV next year.",
+    quote: "Got my forklift licence on Tuesday, started a new warehouse job on Monday. It completely changed my life. I went from benefits to earning properly.",
+    rating: 5,
+  },
+  {
+    name: "Priya R.",
+    course: "HGV Cat C+E",
+    beforeRole: "Call centre worker",
+    afterRole: "Agency HGV Driver",
+    beforeSalary: 26000,
+    afterSalary: 44000,
+    graduateDate: "September 2025",
+    whereNow: "Working agency shifts with flexibility to choose her own hours. Earning more in 4 days than she used to in 5.",
+    quote: "The whole process was smooth from start to finish. RoadReady helped me with my CV and actually introduced me to agencies. No other school does that.",
+    rating: 5,
+  },
 ];
