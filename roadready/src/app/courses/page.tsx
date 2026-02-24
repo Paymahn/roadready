@@ -25,12 +25,12 @@ export default function CoursesPage() {
                         <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                         DVSA Approved
                     </span>
-                    <span className="flex items-center gap-1.5">No hidden fees · All-inclusive pricing</span>
+                    <span className="flex items-center gap-1.5">Everything included · All-inclusive</span>
                 </div>
                 <div className="text-center mb-12">
                     <h1 className="text-4xl sm:text-5xl font-bold text-dark mb-4 font-heading">Our Courses</h1>
                     <p className="text-lg text-slate-500 max-w-xl mx-auto">
-                        Everything included. No hidden fees. Every price you see is the full price.
+                        Everything included. Enquire for details on any course.
                     </p>
                 </div>
 
@@ -40,8 +40,8 @@ export default function CoursesPage() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${activeCategory === cat
-                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                                    : "bg-white text-slate-400 hover:text-dark border border-slate-800 hover:border-blue-600/30"
+                                ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                                : "bg-white text-slate-400 hover:text-dark border border-slate-800 hover:border-blue-600/30"
                                 }`}
                         >
                             {cat}
@@ -94,13 +94,7 @@ function CourseCard({
                 <p className="text-sm text-slate-400 mb-4 flex-1">{course.description}</p>
 
                 <div className="mb-4">
-                    <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-dark">{formatCurrency(course.price)}</span>
-                        {course.retestPrice > 0 && (
-                            <span className="text-xs text-slate-400">Retest: {formatCurrency(course.retestPrice)}</span>
-                        )}
-                    </div>
-                    <p className="text-xs text-slate-400 mt-1">From £{course.weeklyFrom}/week · {course.duration}</p>
+                    <p className="text-xs text-slate-400">All-inclusive · {course.duration}</p>
                 </div>
 
                 <button onClick={onToggle} className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-500 transition-colors mb-4">
