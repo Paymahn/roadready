@@ -6,6 +6,7 @@ import { useEnquiry } from "@/context/EnquiryContext";
 import { courses, stats, howItWorksSteps, comparisonRows, shortageStats, trainingLocations, successStories } from "@/lib/data";
 import { formatCurrency } from "@/lib/utils";
 import CourseCategoryIcon from "@/components/CourseCategoryIcon";
+import UkJobMap from "@/components/UkJobMap";
 
 // Animated counter hook
 function useCountUp(target: number, duration = 2000) {
@@ -66,7 +67,7 @@ export default function HomePage() {
       <CareerSupport />
       <StudyTools />
       <DriverShortage onEnquire={openEnquiry} />
-      <ROICalculator onEnquire={openEnquiry} />
+
       <CoursePreview onEnquire={openEnquiry} />
       <NationwideTraining />
       <HowItWorks />
@@ -166,10 +167,10 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
                 </svg>
               </button>
               <a
-                href="#roi-calculator"
+                href="#courses"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-white/10 border border-white/30 text-white text-lg font-medium rounded-full transition-all duration-200 backdrop-blur-sm min-h-[48px]"
               >
-                See The Numbers
+                View Courses
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -189,7 +190,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
       </div>
 
       {/* Scroll indicator */}
-      <a href="#roi-calculator" className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40 hover:text-white/80 transition-colors" aria-label="Scroll to calculator">
+      <a href="#courses" className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40 hover:text-white/80 transition-colors" aria-label="Scroll down">
         <span className="text-xs uppercase tracking-widest">Scroll</span>
         <svg className="w-5 h-5 animate-float" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
@@ -261,101 +262,6 @@ function TrustStrip() {
 }
 
 
-// ── ROI CALCULATOR ──────────────────────────────────────
-function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
-  const { ref, revealed } = useReveal();
-  const [currentSalary, setCurrentSalary] = useState(24000);
-
-  const hgvAvg = 38000;
-  const monthlyUplift = Math.max(0, Math.round((hgvAvg - currentSalary) / 12));
-  const yearOneExtra = Math.max(0, hgvAvg - currentSalary);
-  const fiveYearExtra = yearOneExtra * 5;
-
-  return (
-    <section id="roi-calculator" className="py-20 lg:py-28 relative overflow-hidden bg-slate-50 border-t border-slate-200/50">
-      <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
-        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
-          {/* Image side */}
-          <div className="w-full lg:w-1/2 relative lg:order-2">
-            <div className="relative h-[400px] lg:h-[550px] w-full rounded-[2rem] overflow-hidden shadow-xl ring-1 ring-slate-900/5">
-              {/* Unsplash Placeholder: Confident delivery/truck driver */}
-              <img src="https://images.unsplash.com/photo-1590496736636-ee25391c0ffc?auto=format&fit=crop&q=80&w=1000" alt="Confident driver" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-emerald-900/10 mix-blend-overlay" />
-            </div>
-          </div>
-
-          {/* Calculator side */}
-          <div className="w-full lg:w-1/2 lg:order-1">
-            <div className="mb-10 text-left">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-700 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
-                ROI Calculator
-              </span>
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4 tracking-tight">
-                What Could You Be{" "}
-                <span className="text-emerald-600">Earning?</span>
-              </h2>
-              <p className="text-lg text-slate-500 max-w-lg">
-                Slide to your current salary and see the potential uplift as a qualified HGV driver. The demand is high, and the pay reflects it.
-              </p>
-            </div>
-
-            <div className="bg-slate-800 border border-slate-700 rounded-2xl p-6 sm:p-8 shadow-sm">
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-medium text-dark">Your current salary</label>
-                  <span className="text-lg font-bold text-dark">{formatCurrency(currentSalary)}</span>
-                </div>
-                <input
-                  type="range"
-                  min={16000}
-                  max={40000}
-                  step={500}
-                  value={currentSalary}
-                  onChange={(e) => setCurrentSalary(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-emerald-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-emerald-500/30"
-                />
-                <div className="flex justify-between text-xs text-slate-400 mt-1">
-                  <span>£16,000</span>
-                  <span>£40,000</span>
-                </div>
-              </div>
-
-              <div className="bg-emerald-600/5 border border-emerald-600/15 rounded-xl p-4 mb-6 text-center">
-                <div className="text-sm text-slate-500 mb-1">Average HGV driver salary</div>
-                <div className="text-3xl font-extrabold text-emerald-600">£38,000</div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 mb-6">
-                <ResultCard label="Extra / month" value={formatCurrency(monthlyUplift)} highlight />
-                <ResultCard label="Extra in Year 1" value={formatCurrency(yearOneExtra)} />
-                <ResultCard label="Extra over 5 years" value={formatCurrency(fiveYearExtra)} />
-              </div>
-
-              <button
-                onClick={onEnquire}
-                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-[0.98] min-h-[48px]"
-              >
-                Start Earning More →
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ResultCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
-  return (
-    <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 text-center">
-      <div className={`text-xl sm:text-2xl font-bold mb-1 ${highlight ? "text-emerald-600" : "text-dark"}`}>
-        {value}
-      </div>
-      <div className="text-xs text-slate-400">{label}</div>
-    </div>
-  );
-}
-
 // ── COURSE PREVIEW ──────────────────────────────────────
 function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) {
   const { ref, revealed } = useReveal();
@@ -366,8 +272,8 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12">
           <div>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">Our Courses</h2>
-            <p className="text-slate-400">Everything included. Enquire for details on any course.</p>
+            <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight">Our Courses</h2>
+            <p className="text-lg text-slate-400">Everything included. Enquire for details on any course.</p>
           </div>
           <Link
             href="/courses"
@@ -391,8 +297,8 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
                   src={
                     course.slug === "hgv-cat-c" ? "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=800" :
                       course.slug === "hgv-cat-ce" ? "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800" :
-                        course.slug === "hgv-cat-c-ce-combo" ? "https://images.unsplash.com/photo-1519003722824-194d4455aeb7?auto=format&fit=crop&q=80&w=800" :
-                          "https://images.unsplash.com/photo-1587293852726-59116e9b469d?auto=format&fit=crop&q=80&w=800"
+                        course.slug === "hgv-cat-c-ce-combo" ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" :
+                          "https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&q=80&w=800"
                   }
                   alt={course.title}
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -413,7 +319,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
               </div>
 
               <div className="p-5">
-                <h3 className="text-lg font-bold text-dark mb-1 group-hover:text-emerald-600 transition-colors">
+                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">
                   {course.title}
                 </h3>
                 <p className="text-sm text-slate-400 mb-4 line-clamp-2">{course.description}</p>
@@ -424,7 +330,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
 
                 <button
                   onClick={() => onEnquire(course.slug)}
-                  className="w-full py-2.5 bg-emerald-600/10 hover:bg-emerald-600 text-emerald-600 hover:text-white text-sm font-semibold rounded-full border border-emerald-600/20 hover:border-transparent transition-all duration-200"
+                  className="w-full py-3 bg-emerald-600/10 hover:bg-emerald-600 text-emerald-400 hover:text-white text-base font-bold rounded-full border border-emerald-600/20 hover:border-transparent transition-all duration-200"
                 >
                   Enquire
                 </button>
@@ -584,6 +490,10 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
               <div className="text-sm text-slate-500">{stat.label}</div>
             </div>
           ))}
+        </div>
+
+        <div className="mb-12">
+          <UkJobMap />
         </div>
 
         <div className="text-center">
@@ -902,13 +812,6 @@ function StudyTools() {
 
           {/* Content side */}
           <div className="w-full lg:flex-1 order-1 lg:order-2">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 text-amber-400 text-sm font-semibold rounded-full border border-amber-500/20 mb-6">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-              </svg>
-              Built by us, constantly updated
-            </span>
-
             <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[3.5rem] font-bold text-white leading-[1.15] tracking-tight mb-6">
               We Create Our Own{" "}
               <span className="font-heading text-amber-400 block mt-2 text-5xl sm:text-6xl lg:text-7xl xl:text-[4rem]">
