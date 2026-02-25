@@ -1,37 +1,49 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Warm off-white backgrounds — premium, not minty */
-  --color-slate-950: #FAFBF9;
-  /* page bg */
-  --color-slate-900: #FFFFFF;
-  /* cards */
-  --color-slate-800: #E8EDEA;
-  /* borders — subtler, lighter */
-  --color-slate-700: #9BB8A8;
-  --color-slate-600: #6B9B81;
-  --color-slate-500: #5A8A70;
-  --color-slate-400: #5E7D6C;
-  /* body text */
-  --color-slate-300: #A8C5B5;
-  --color-slate-200: #E2EFE8;
+  /* ── GREEN THEME BACKGROUNDS ─────────────────────────── */
+  /* Page background: deep forest green */
+  --color-slate-950: #0D2B1F;
+  /* Section alternating: slightly lighter dark green */
+  --color-slate-900: #122E21;
+  /* Card backgrounds: medium dark green */
+  --color-slate-800: #1A3D2B;
+  /* Borders: muted green */
+  --color-slate-700: #2D5C40;
+  /* Subtle borders / dividers */
+  --color-slate-600: #3D7052;
+  /* Muted text on dark green */
+  --color-slate-500: #A8C5A0;
+  /* Body text */
+  --color-slate-400: #B8D4B0;
+  /* Very light text / placeholders */
+  --color-slate-300: #C8DEC0;
+  /* Light borders */
+  --color-slate-200: #2D5C40;
+  /* Faint overlays */
+  --color-slate-100: #1E4732;
+  /* Near white for card surfaces */
+  --color-slate-50: #F0FAF5;
 
-  /* Primary green accent — slightly darker for contrast */
-  --color-emerald-400: #2D9F47;
-  --color-emerald-500: #248F3E;
-  --color-emerald-600: #1B7A32;
-  --color-emerald-700: #15602D;
+  /* "dark" = white for heading text on dark backgrounds */
+  --color-dark: #FFFFFF;
 
-  /* Highlight / success */
-  --color-emerald-400: #2D9649;
-  --color-emerald-500: #248F3E;
+  /* ── EMERALD ACCENTS (CTAs, icons, badges) ───────────── */
+  --color-emerald-400: #6EE7B7;
+  --color-emerald-500: #34D399;
+  --color-emerald-600: #10B981;
+  --color-emerald-700: #059669;
+  --color-emerald-900: #064E3B;
 
-  /* Dark accent for headings and trust strip */
-  --color-dark: #0F1F17;
-  /* Gold/amber for trust badges and stars */
-  --color-amber-400: #D4A853;
-  --color-amber-500: #C49B3D;
-  --color-amber-600: #A67C2E;
+  /* ── AMBER / GOLD — highlight + CTA contrast colour ──── */
+  /* Amber sits beautifully against both dark and light green */
+  --color-amber-300: #FCD34D;
+  --color-amber-400: #FBBF24;
+  --color-amber-500: #F59E0B;
+  --color-amber-600: #D97706;
+
+  /* ── RED stays untouched (Driver Shortage) ───────────── */
+  /* Tailwind handles red-* natively */
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-display), Georgia, serif;
@@ -122,6 +134,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -133,15 +146,33 @@
       opacity: 0;
       transform: scale(0.97);
     }
+
     to {
       opacity: 1;
       transform: scale(1);
     }
   }
 
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
   @keyframes shimmer {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.85; }
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.85;
+    }
   }
 }
 
