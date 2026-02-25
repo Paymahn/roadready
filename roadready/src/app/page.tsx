@@ -172,24 +172,31 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           </div>
         </div>
 
-        {/* Frosted glass stats card — desktop */}
-        <div className="hidden lg:block w-full max-w-sm shrink-0">
-          <div className="bg-white/70 backdrop-blur-xl border border-slate-800/50 rounded-2xl p-6 shadow-xl shadow-slate-900/5 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-            <p className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-4">Why trainees choose us</p>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600">First-time pass rate</span>
-                <span className="text-2xl font-bold text-blue-600">94%</span>
-              </div>
-              <div className="h-px bg-slate-800/50" />
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600">Avg. salary uplift</span>
-                <span className="text-2xl font-bold text-dark">£14k</span>
-              </div>
-              <div className="h-px bg-slate-800/50" />
-              <div className="flex items-center justify-between">
-                <span className="text-slate-600">Payback period</span>
-                <span className="text-2xl font-bold text-blue-600">&lt;8 wks</span>
+        {/* Right Column: Hero Image with Stats overlay */}
+        <div className="hidden lg:block w-full max-w-lg shrink-0 relative animate-slide-up" style={{ animationDelay: "0.2s" }}>
+          <div className="relative h-[600px] w-full rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-slate-900/5">
+            {/* Unsplash Placeholder: Confident truck driver */}
+            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1000" alt="HGV Driver" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-transparent" />
+
+            {/* Frosted glass stats card positioned at bottom of image */}
+            <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+              <p className="text-sm font-medium text-white/80 uppercase tracking-wider mb-4">Why trainees choose us</p>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-white/90">First-time pass rate</span>
+                  <span className="text-2xl font-bold text-white">94%</span>
+                </div>
+                <div className="h-px bg-white/20" />
+                <div className="flex items-center justify-between">
+                  <span className="text-white/90">Avg. salary uplift</span>
+                  <span className="text-2xl font-bold text-white">£14k</span>
+                </div>
+                <div className="h-px bg-white/20" />
+                <div className="flex items-center justify-between">
+                  <span className="text-white/90">Payback period</span>
+                  <span className="text-2xl font-bold text-white">&lt;8 wks</span>
+                </div>
               </div>
             </div>
           </div>
@@ -263,56 +270,73 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
   const fiveYearExtra = yearOneExtra * 5;
 
   return (
-    <section id="roi-calculator" className="py-20 lg:py-28">
+    <section id="roi-calculator" className="py-20 lg:py-28 relative overflow-hidden bg-slate-50 border-t border-slate-200/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
-        <div className="text-center mb-12">
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
-            What Could You Be{" "}
-            <span className="text-blue-600">Earning?</span>
-          </h2>
-          <p className="text-slate-400 max-w-lg mx-auto">
-            Slide to your current salary and see the potential uplift as a qualified HGV driver.
-          </p>
-        </div>
-
-        <div className="max-w-2xl mx-auto bg-white border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-sm">
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-2">
-              <label className="text-sm font-medium text-dark">Your current salary</label>
-              <span className="text-lg font-bold text-dark">{formatCurrency(currentSalary)}</span>
-            </div>
-            <input
-              type="range"
-              min={16000}
-              max={40000}
-              step={500}
-              value={currentSalary}
-              onChange={(e) => setCurrentSalary(Number(e.target.value))}
-              className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-blue-500/30"
-            />
-            <div className="flex justify-between text-xs text-slate-400 mt-1">
-              <span>£16,000</span>
-              <span>£40,000</span>
+        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
+          {/* Image side */}
+          <div className="w-full lg:w-1/2 relative lg:order-2">
+            <div className="relative h-[400px] lg:h-[550px] w-full rounded-[2rem] overflow-hidden shadow-xl ring-1 ring-slate-900/5">
+              {/* Unsplash Placeholder: Confident delivery/truck driver */}
+              <img src="https://images.unsplash.com/photo-1590496736636-ee25391c0ffc?auto=format&fit=crop&q=80&w=1000" alt="Confident driver" className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
             </div>
           </div>
 
-          <div className="bg-blue-600/5 border border-blue-600/15 rounded-xl p-4 mb-6 text-center">
-            <div className="text-sm text-slate-500 mb-1">Average HGV driver salary</div>
-            <div className="text-3xl font-extrabold text-blue-600">£38,000</div>
-          </div>
+          {/* Calculator side */}
+          <div className="w-full lg:w-1/2 lg:order-1">
+            <div className="mb-10 text-left">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-700 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+                ROI Calculator
+              </span>
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4 tracking-tight">
+                What Could You Be{" "}
+                <span className="text-blue-600">Earning?</span>
+              </h2>
+              <p className="text-lg text-slate-500 max-w-lg">
+                Slide to your current salary and see the potential uplift as a qualified HGV driver. The demand is high, and the pay reflects it.
+              </p>
+            </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <ResultCard label="Extra / month" value={formatCurrency(monthlyUplift)} highlight />
-            <ResultCard label="Extra in Year 1" value={formatCurrency(yearOneExtra)} />
-            <ResultCard label="Extra over 5 years" value={formatCurrency(fiveYearExtra)} />
-          </div>
+            <div className="bg-white border border-slate-200/60 rounded-2xl p-6 sm:p-8 shadow-sm">
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium text-dark">Your current salary</label>
+                  <span className="text-lg font-bold text-dark">{formatCurrency(currentSalary)}</span>
+                </div>
+                <input
+                  type="range"
+                  min={16000}
+                  max={40000}
+                  step={500}
+                  value={currentSalary}
+                  onChange={(e) => setCurrentSalary(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-blue-500/30"
+                />
+                <div className="flex justify-between text-xs text-slate-400 mt-1">
+                  <span>£16,000</span>
+                  <span>£40,000</span>
+                </div>
+              </div>
 
-          <button
-            onClick={onEnquire}
-            className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.98] min-h-[48px]"
-          >
-            Start Earning More →
-          </button>
+              <div className="bg-blue-600/5 border border-blue-600/15 rounded-xl p-4 mb-6 text-center">
+                <div className="text-sm text-slate-500 mb-1">Average HGV driver salary</div>
+                <div className="text-3xl font-extrabold text-blue-600">£38,000</div>
+              </div>
+
+              <div className="grid grid-cols-3 gap-4 mb-6">
+                <ResultCard label="Extra / month" value={formatCurrency(monthlyUplift)} highlight />
+                <ResultCard label="Extra in Year 1" value={formatCurrency(yearOneExtra)} />
+                <ResultCard label="Extra over 5 years" value={formatCurrency(fiveYearExtra)} />
+              </div>
+
+              <button
+                onClick={onEnquire}
+                className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.98] min-h-[48px]"
+              >
+                Start Earning More →
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -360,15 +384,27 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
               key={course.slug}
               className="group bg-white border border-slate-800 rounded-2xl overflow-hidden hover:border-blue-600/30 hover:shadow-lg hover:shadow-blue-600/10 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="h-32 bg-gradient-to-br from-slate-100 to-slate-800/20 flex items-center justify-center relative">
-                <CourseCategoryIcon category={course.category} className="w-12 h-12 text-blue-600" />
+              <div className="h-44 relative flex items-center justify-center overflow-hidden">
+                <img
+                  src={
+                    course.slug === "hgv-cat-c" ? "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=800" :
+                      course.slug === "hgv-cat-ce" ? "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800" :
+                        course.slug === "hgv-cat-c-ce-combo" ? "https://images.unsplash.com/photo-1519003722824-194d4455aeb7?auto=format&fit=crop&q=80&w=800" :
+                          "https://images.unsplash.com/photo-1587293852726-59116e9b469d?auto=format&fit=crop&q=80&w=800"
+                  }
+                  alt={course.title}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors" />
+                <CourseCategoryIcon category={course.category} className="w-10 h-10 text-white relative z-10" />
+
                 {course.slug === "hgv-cat-c-ce-combo" && (
-                  <span className="absolute top-3 right-3 px-2 py-0.5 text-xs font-bold bg-amber-500/15 text-amber-600 rounded-full border border-amber-500/30">
+                  <span className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-500 text-white rounded-full shadow-md z-10">
                     Most Popular
                   </span>
                 )}
                 {course.slug !== "hgv-cat-c-ce-combo" && (
-                  <span className="absolute top-3 right-3 px-2 py-0.5 text-xs font-medium bg-blue-600/10 text-blue-600 rounded-full border border-blue-600/20">
+                  <span className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-dark rounded-full shadow-md z-10 backdrop-blur-sm">
                     {course.category}
                   </span>
                 )}
@@ -789,50 +825,69 @@ function StudyTools() {
   ];
 
   return (
-    <section id="study-tools" className="py-20 lg:py-28 bg-white/50">
+    <section id="study-tools" className="py-20 lg:py-28 bg-slate-50 border-t border-slate-200/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
-        <div className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
-            </svg>
-            Built by us, constantly updated
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
-            We Create Our Own{" "}
-            <span className="text-blue-600">Study Materials</span>
-          </h2>
-          <p className="text-slate-500 max-w-xl mx-auto">
-            Most schools hand you a textbook. We built AI-powered study tools backed by cognitive science — included free with every course, and we never stop improving them.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {tools.map((tool) => (
-            <div
-              key={tool.title}
-              className="group relative bg-white border border-slate-800 rounded-2xl p-6 lg:p-8 hover:border-blue-600/30 hover:shadow-lg hover:shadow-blue-600/5 hover:-translate-y-1 transition-all duration-300"
-            >
-              <span className={`absolute top-4 right-4 text-xs font-semibold px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
-                {tool.badge}
+        <div className="flex flex-col lg:flex-row gap-16 lg:items-center">
+          {/* Content side */}
+          <div className="w-full lg:w-1/2">
+            <div className="text-left mb-10">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
+                </svg>
+                Built by us, constantly updated
               </span>
-              <div className="w-14 h-14 rounded-xl bg-blue-600/10 flex items-center justify-center mb-5 group-hover:bg-blue-600/15 transition-colors">
-                {tool.icon}
-              </div>
-              <h3 className="text-lg font-bold text-dark mb-2 group-hover:text-blue-600 transition-colors">
-                {tool.title}
-              </h3>
-              <p className="text-sm text-slate-500 leading-relaxed">
-                {tool.description}
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4 tracking-tight">
+                We Create Our Own{" "}
+                <span className="text-blue-600">Study Materials</span>
+              </h2>
+              <p className="text-lg text-slate-500 max-w-xl">
+                Most schools hand you a textbook. We built AI-powered study tools backed by cognitive science — included free with every course, and we never stop improving them.
               </p>
             </div>
-          ))}
-        </div>
 
-        <div className="text-center mt-10">
-          <p className="text-sm text-slate-400">
-            Based on the Ebbinghaus forgetting curve — proven to improve long-term retention by up to 400% vs traditional study methods
-          </p>
+            <div className="space-y-8">
+              {tools.map((tool) => (
+                <div key={tool.title} className="flex gap-5">
+                  <div className="w-14 h-14 shrink-0 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center">
+                    {tool.icon}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <h3 className="text-xl font-bold text-dark">{tool.title}</h3>
+                      <span className={`text-[10px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
+                        {tool.badge}
+                      </span>
+                    </div>
+                    <p className="text-slate-500 leading-relaxed max-w-md">
+                      {tool.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 pt-8 border-t border-slate-200">
+              <p className="text-sm text-slate-400 max-w-md">
+                Based on the Ebbinghaus forgetting curve — proven to improve long-term retention by up to 400% vs traditional study methods.
+              </p>
+            </div>
+          </div>
+
+          {/* Image side - Phone Mockup */}
+          <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md">
+              {/* Decorative background blur */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 rounded-[3rem] blur-3xl transform rotate-3" />
+
+              {/* Unsplash Placeholder: App mockup */}
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800"
+                alt="RoadReady Study App Interface"
+                className="relative z-10 w-full h-auto rounded-[2.5rem] shadow-2xl border-8 border-slate-900 bg-slate-900"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -866,9 +921,7 @@ function SuccessStories() {
             <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-center">
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold text-lg shrink-0">
-                    {getInitials(featured.name)}
-                  </div>
+                  <img src={featured.image} alt={featured.name} className="w-16 h-16 rounded-full object-cover shadow-md shrink-0 border-2 border-white" />
                   <div>
                     <div className="font-bold text-dark text-lg">{featured.name}</div>
                     <div className="text-sm text-slate-500">{featured.course} · {featured.graduateDate}</div>
@@ -910,9 +963,7 @@ function SuccessStories() {
               </div>
               <blockquote className="text-dark leading-relaxed mb-4 flex-1 text-sm">&quot;{s.quote}&quot;</blockquote>
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600/10 flex items-center justify-center text-blue-600 font-semibold text-sm shrink-0">
-                  {getInitials(s.name)}
-                </div>
+                <img src={s.image} alt={s.name} className="w-12 h-12 rounded-full object-cover shadow-sm shrink-0" />
                 <div>
                   <div className="font-bold text-dark text-sm">{s.name}</div>
                   <div className="text-xs text-slate-500">{s.beforeRole} → {s.afterRole}</div>

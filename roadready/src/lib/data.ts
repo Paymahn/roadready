@@ -342,6 +342,7 @@ export interface SuccessStory {
   whereNow: string;
   quote: string;
   rating: number;
+  image: string;
   featured?: boolean;
 }
 
@@ -357,6 +358,7 @@ export const successStories: SuccessStory[] = [
     whereNow: "Now driving for a major logistics firm with full benefits and pension. Recently bought his first house.",
     quote: "Best money I ever spent. Passed first time, had a job within 2 weeks. I went from stacking shelves to earning nearly double. My only regret is not doing it sooner.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
     featured: true,
   },
   {
@@ -370,6 +372,7 @@ export const successStories: SuccessStory[] = [
     whereNow: "Driving for a supermarket chain on local routes. Better hours, better pay, and home every night.",
     quote: "I was nervous about the cost, but it paid for itself in less than two months. The instructors were brilliant — they never made me feel stupid for asking questions.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
   },
   {
     name: "James T.",
@@ -382,6 +385,7 @@ export const successStories: SuccessStory[] = [
     whereNow: "Working at a distribution centre with overtime available. Planning to do his HGV next year.",
     quote: "Got my forklift licence on Tuesday, started a new warehouse job on Monday. It completely changed my life. I went from benefits to earning properly.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
   },
   {
     name: "Priya R.",
@@ -394,5 +398,6 @@ export const successStories: SuccessStory[] = [
     whereNow: "Working agency shifts with flexibility to choose her own hours. Earning more in 4 days than she used to in 5.",
     quote: "The whole process was smooth from start to finish. RoadReady helped me with my CV and actually introduced me to agencies. No other school does that.",
     rating: 5,
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
   },
 ];
