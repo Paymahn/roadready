@@ -22,7 +22,7 @@ export default function CoursesPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-slate-500 mb-6">
                     <span className="flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                        <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                         DVSA Approved
                     </span>
                     <span className="flex items-center gap-1.5">Everything included · All-inclusive</span>
@@ -40,8 +40,8 @@ export default function CoursesPage() {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${activeCategory === cat
-                                ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                                : "bg-white text-slate-400 hover:text-dark border border-slate-800 hover:border-blue-600/30"
+                                ? "bg-emerald-600 text-white shadow-lg shadow-emerald-600/20"
+                                : "bg-white text-slate-400 hover:text-dark border border-slate-800 hover:border-emerald-600/30"
                                 }`}
                         >
                             {cat}
@@ -65,7 +65,7 @@ export default function CoursesPage() {
                     <p className="text-slate-400 mb-4">Not sure which course is right for you?</p>
                     <button
                         onClick={() => openEnquiry()}
-                        className="inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-95"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-95"
                     >
                         Talk To Us — We&apos;ll Help You Choose
                     </button>
@@ -81,10 +81,10 @@ function CourseCard({
     course: Course; isExpanded: boolean; onToggle: () => void; onEnquire: () => void;
 }) {
     return (
-        <div className="bg-white border border-slate-800 rounded-2xl overflow-hidden hover:border-blue-600/20 hover:shadow-lg hover:shadow-blue-600/5 hover:-translate-y-0.5 transition-all duration-300 flex flex-col shadow-sm">
+        <div className="bg-white border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-600/20 hover:shadow-lg hover:shadow-emerald-600/5 hover:-translate-y-0.5 transition-all duration-300 flex flex-col shadow-sm">
             <div className="h-28 bg-gradient-to-br from-slate-100 to-slate-800/20 flex items-center justify-center relative">
-                <CourseCategoryIcon category={course.category} className="w-11 h-11 text-blue-600" />
-                <span className="absolute top-3 right-3 px-2 py-0.5 text-xs font-medium bg-blue-600/10 text-blue-600 rounded-full border border-blue-600/20">
+                <CourseCategoryIcon category={course.category} className="w-11 h-11 text-emerald-600" />
+                <span className="absolute top-3 right-3 px-2 py-0.5 text-xs font-medium bg-emerald-600/10 text-emerald-600 rounded-full border border-emerald-600/20">
                     {course.category}
                 </span>
             </div>
@@ -97,7 +97,7 @@ function CourseCard({
                     <p className="text-xs text-slate-400">All-inclusive · {course.duration}</p>
                 </div>
 
-                <button onClick={onToggle} className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-500 transition-colors mb-4">
+                <button onClick={onToggle} className="flex items-center gap-1 text-sm text-emerald-600 hover:text-emerald-500 transition-colors mb-4">
                     {isExpanded ? "Hide details" : "View details"}
                     <svg className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
@@ -111,7 +111,7 @@ function CourseCard({
                             <ul className="space-y-1.5">
                                 {course.includes.map((item) => (
                                     <li key={item} className="flex items-start gap-2 text-sm text-slate-400">
-                                        <svg className="w-4 h-4 text-blue-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <svg className="w-4 h-4 text-emerald-600 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                         {item}
@@ -124,7 +124,7 @@ function CourseCard({
                             <ul className="space-y-1">
                                 {course.modules.map((mod) => (
                                     <li key={mod} className="text-sm text-slate-400 flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 bg-blue-600 rounded-full shrink-0" />
+                                        <span className="w-1.5 h-1.5 bg-emerald-600 rounded-full shrink-0" />
                                         {mod}
                                     </li>
                                 ))}
@@ -133,7 +133,7 @@ function CourseCard({
                     </div>
                 )}
 
-                <button onClick={onEnquire} className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.98] mt-auto min-h-[44px]">
+                <button onClick={onEnquire} className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-[0.98] mt-auto min-h-[44px]">
                     Enquire About This Course
                 </button>
             </div>

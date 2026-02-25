@@ -343,6 +343,8 @@ export interface SuccessStory {
   quote: string;
   rating: number;
   image: string;
+  imageLarge: string;
+  storyQA: { question: string; answer: string }[];
   featured?: boolean;
 }
 
@@ -359,6 +361,12 @@ export const successStories: SuccessStory[] = [
     quote: "Best money I ever spent. Passed first time, had a job within 2 weeks. I went from stacking shelves to earning nearly double. My only regret is not doing it sooner.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+    imageLarge: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600",
+    storyQA: [
+      { question: "What made you take the leap?", answer: "I'd been in a warehouse for 7 years and every year the pay barely moved. A mate got his HGV and within a month he was on nearly double. I thought \u2014 if he can do it, I can. Best decision I ever made." },
+      { question: "What was the training like?", answer: "Honestly, I was nervous on day one. But the instructors were dead patient. They explained everything in plain English, no jargon. By day three I was reversing an artic and couldn't believe it." },
+      { question: "What would you say to someone thinking about it?", answer: "Stop thinking and just do it. Seriously. I wasted years telling myself I'd do it 'next year'. The training's great, the support's there, and the jobs are literally waiting for you. You won't regret it." },
+    ],
     featured: true,
   },
   {
@@ -370,9 +378,15 @@ export const successStories: SuccessStory[] = [
     afterSalary: 36000,
     graduateDate: "June 2025",
     whereNow: "Driving for a supermarket chain on local routes. Better hours, better pay, and home every night.",
-    quote: "I was nervous about the cost, but it paid for itself in less than two months. The instructors were brilliant — they never made me feel stupid for asking questions.",
+    quote: "I was nervous about the cost, but it paid for itself in less than two months. The instructors were brilliant \u2014 they never made me feel stupid for asking questions.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
+    imageLarge: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600",
+    storyQA: [
+      { question: "Were you worried about being a woman in the industry?", answer: "A bit, yeah. But RoadReady made me feel completely comfortable from day one. The instructor was brilliant and there was actually another woman on my course too. Once you're behind the wheel, nobody cares \u2014 they just need good drivers." },
+      { question: "How did you find a job so quickly?", answer: "RoadReady actually helped with that. They gave me CV tips and told me which companies were actively hiring. I applied to three places the week I passed and had two offers by the following Monday." },
+      { question: "Any advice for women considering HGV?", answer: "Go for it. Honestly, the industry is crying out for drivers and they don't care if you're male or female. The pay is the same, the respect is the same. I wish I'd done it years ago instead of working retail for minimum wage." },
+    ],
   },
   {
     name: "James T.",
@@ -386,6 +400,12 @@ export const successStories: SuccessStory[] = [
     quote: "Got my forklift licence on Tuesday, started a new warehouse job on Monday. It completely changed my life. I went from benefits to earning properly.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+    imageLarge: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=600",
+    storyQA: [
+      { question: "What was your situation before training?", answer: "I'd been unemployed for about 8 months. No qualifications, no real experience. I felt stuck. A friend told me about the forklift course and said it was only 3 days. I thought there's no way that could actually work \u2014 but it did." },
+      { question: "How quickly did things change?", answer: "Literally within a week. I passed on Tuesday, updated my CV, applied to a few places on Wednesday, and had an interview Thursday. Started the following Monday. It was surreal how fast it happened." },
+      { question: "What's next for you?", answer: "I'm saving up beyond my forklift to do my HGV Cat C. The forklift got my foot in the door, but I can see drivers earning way more. RoadReady said they'd sort me out with a discount since I'm coming back. I can't wait." },
+    ],
   },
   {
     name: "Priya R.",
@@ -399,5 +419,11 @@ export const successStories: SuccessStory[] = [
     quote: "The whole process was smooth from start to finish. RoadReady helped me with my CV and actually introduced me to agencies. No other school does that.",
     rating: 5,
     image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200",
+    imageLarge: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600",
+    storyQA: [
+      { question: "Why did you choose agency work?", answer: "Freedom. After years in a call centre being told when I can eat lunch and when I can go home, I wanted to be in control. Agency driving lets me pick my shifts. Some weeks I do 4 days, some weeks 5. It's completely up to me." },
+      { question: "Was the training what you expected?", answer: "Better, honestly. I expected to just be thrown in a truck and told to figure it out. But it was really structured \u2014 theory, practicals, one-on-one time. They even helped me prep for the medical. Nothing was left to chance." },
+      { question: "What would you tell someone stuck in a job they hate?", answer: "Life is too short to dread Monday mornings. I used to cry on Sunday nights because I hated my job so much. Now I actually look forward to work. If you're thinking about it, stop overthinking and just enquire. That one step changes everything." },
+    ],
   },
 ];

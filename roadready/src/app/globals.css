@@ -17,10 +17,10 @@
   --color-slate-200: #E2EFE8;
 
   /* Primary green accent — slightly darker for contrast */
-  --color-blue-400: #2D9F47;
-  --color-blue-500: #248F3E;
-  --color-blue-600: #1B7A32;
-  --color-blue-700: #15602D;
+  --color-emerald-400: #2D9F47;
+  --color-emerald-500: #248F3E;
+  --color-emerald-600: #1B7A32;
+  --color-emerald-700: #15602D;
 
   /* Highlight / success */
   --color-emerald-400: #2D9649;
@@ -182,7 +182,7 @@ body {
 
 /* Selection */
 ::selection {
-  background: var(--color-blue-500);
+  background: var(--color-emerald-500);
   color: #fff;
 }
 

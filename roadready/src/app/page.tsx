@@ -83,8 +83,8 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 grain">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-white to-slate-200/50" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12">
@@ -92,7 +92,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           {/* Trust badge strip */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500 mb-6 animate-fade-in">
             <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
               DVSA Approved
@@ -102,21 +102,21 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
               4.9 Google Rating
             </span>
             <span className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
               10+ Years in the Industry
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600/10 backdrop-blur-sm border border-blue-600/20 rounded-full text-sm font-semibold text-blue-600 mb-6 animate-fade-in shadow-sm">
-            <span className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-pulse-soft" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600/10 backdrop-blur-sm border border-emerald-600/20 rounded-full text-sm font-semibold text-emerald-600 mb-6 animate-fade-in shadow-sm">
+            <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse-soft" />
             Now Accepting Bookings — Spring 2026
           </div>
 
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-dark leading-[1.08] tracking-tight mb-3 animate-slide-up">
             Your New Career{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">
               Starts With Us
             </span>
           </h1>
@@ -126,13 +126,13 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           </p>
 
           <p className="text-lg sm:text-xl text-slate-500 leading-relaxed mb-8 max-w-xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
-            You&apos;re not just a number here — you&apos;re someone building a better life, and we want that for you. With over a decade of industry experience, <a href="#study-tools" className="font-semibold text-blue-600 hover:text-blue-500 underline decoration-blue-600/30 hover:decoration-blue-600 transition-colors">our own free study materials</a>, and real career support, <span className="font-semibold text-dark">we&apos;re with you every step of the way</span> — from first enquiry to first day on the job.
+            You&apos;re not just a number here — you&apos;re someone building a better life, and we want that for you. With over a decade of industry experience, <a href="#study-tools" className="font-semibold text-emerald-600 hover:text-emerald-500 underline decoration-emerald-600/30 hover:decoration-emerald-600 transition-colors">our own free study materials</a>, and real career support, <span className="font-semibold text-dark">we&apos;re with you every step of the way</span> — from first enquiry to first day on the job.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.2s" }}>
             <button
               onClick={onEnquire}
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95 min-h-[48px]"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-emerald-600/25 active:scale-95 min-h-[48px]"
             >
               Start Your Journey
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -151,20 +151,20 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 mt-10 animate-slide-up" style={{ animationDelay: "0.3s" }}>
-            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm">
-              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-emerald-600/10 text-emerald-700 text-base font-bold rounded-full border border-emerald-600/25 shadow-sm">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               94% first-time pass rate
             </span>
-            <a href="#study-tools" className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm hover:bg-blue-600/20 transition-colors">
-              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <a href="#study-tools" className="inline-flex items-center gap-2.5 px-6 py-3 bg-emerald-600/10 text-emerald-700 text-base font-bold rounded-full border border-emerald-600/25 shadow-sm hover:bg-emerald-600/20 transition-colors">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               Free study materials
             </a>
-            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-blue-600/10 text-blue-700 text-base font-bold rounded-full border border-blue-600/25 shadow-sm">
-              <svg className="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <span className="inline-flex items-center gap-2.5 px-6 py-3 bg-emerald-600/10 text-emerald-700 text-base font-bold rounded-full border border-emerald-600/25 shadow-sm">
+              <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               Job placement support
@@ -278,19 +278,19 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
             <div className="relative h-[400px] lg:h-[550px] w-full rounded-[2rem] overflow-hidden shadow-xl ring-1 ring-slate-900/5">
               {/* Unsplash Placeholder: Confident delivery/truck driver */}
               <img src="https://images.unsplash.com/photo-1590496736636-ee25391c0ffc?auto=format&fit=crop&q=80&w=1000" alt="Confident driver" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-blue-900/10 mix-blend-overlay" />
+              <div className="absolute inset-0 bg-emerald-900/10 mix-blend-overlay" />
             </div>
           </div>
 
           {/* Calculator side */}
           <div className="w-full lg:w-1/2 lg:order-1">
             <div className="mb-10 text-left">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-700 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-700 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
                 ROI Calculator
               </span>
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4 tracking-tight">
                 What Could You Be{" "}
-                <span className="text-blue-600">Earning?</span>
+                <span className="text-emerald-600">Earning?</span>
               </h2>
               <p className="text-lg text-slate-500 max-w-lg">
                 Slide to your current salary and see the potential uplift as a qualified HGV driver. The demand is high, and the pay reflects it.
@@ -310,7 +310,7 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
                   step={500}
                   value={currentSalary}
                   onChange={(e) => setCurrentSalary(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-blue-500/30"
+                  className="w-full h-2 bg-slate-200 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-emerald-600 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg [&::-webkit-slider-thumb]:shadow-emerald-500/30"
                 />
                 <div className="flex justify-between text-xs text-slate-400 mt-1">
                   <span>£16,000</span>
@@ -318,9 +318,9 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
                 </div>
               </div>
 
-              <div className="bg-blue-600/5 border border-blue-600/15 rounded-xl p-4 mb-6 text-center">
+              <div className="bg-emerald-600/5 border border-emerald-600/15 rounded-xl p-4 mb-6 text-center">
                 <div className="text-sm text-slate-500 mb-1">Average HGV driver salary</div>
-                <div className="text-3xl font-extrabold text-blue-600">£38,000</div>
+                <div className="text-3xl font-extrabold text-emerald-600">£38,000</div>
               </div>
 
               <div className="grid grid-cols-3 gap-4 mb-6">
@@ -331,7 +331,7 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
 
               <button
                 onClick={onEnquire}
-                className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.98] min-h-[48px]"
+                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-[0.98] min-h-[48px]"
               >
                 Start Earning More →
               </button>
@@ -346,7 +346,7 @@ function ROICalculator({ onEnquire }: { onEnquire: () => void }) {
 function ResultCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
   return (
     <div className="bg-slate-950 border border-slate-800 rounded-xl p-4 text-center">
-      <div className={`text-xl sm:text-2xl font-bold mb-1 ${highlight ? "text-blue-600" : "text-dark"}`}>
+      <div className={`text-xl sm:text-2xl font-bold mb-1 ${highlight ? "text-emerald-600" : "text-dark"}`}>
         {value}
       </div>
       <div className="text-xs text-slate-400">{label}</div>
@@ -369,7 +369,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
           </div>
           <Link
             href="/courses"
-            className="mt-4 sm:mt-0 text-sm font-medium text-blue-600 hover:text-blue-500 transition-colors inline-flex items-center gap-1"
+            className="mt-4 sm:mt-0 text-sm font-medium text-emerald-600 hover:text-emerald-500 transition-colors inline-flex items-center gap-1"
           >
             View all courses
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -382,7 +382,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
           {topCourses.map((course) => (
             <div
               key={course.slug}
-              className="group bg-white border border-slate-800 rounded-2xl overflow-hidden hover:border-blue-600/30 hover:shadow-lg hover:shadow-blue-600/10 hover:-translate-y-1 transition-all duration-300"
+              className="group bg-white border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-600/30 hover:shadow-lg hover:shadow-emerald-600/10 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="h-44 relative flex items-center justify-center overflow-hidden">
                 <img
@@ -411,7 +411,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
               </div>
 
               <div className="p-5">
-                <h3 className="text-lg font-bold text-dark mb-1 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg font-bold text-dark mb-1 group-hover:text-emerald-600 transition-colors">
                   {course.title}
                 </h3>
                 <p className="text-sm text-slate-400 mb-4 line-clamp-2">{course.description}</p>
@@ -422,7 +422,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
 
                 <button
                   onClick={() => onEnquire(course.slug)}
-                  className="w-full py-2.5 bg-blue-600/10 hover:bg-blue-600 text-blue-600 hover:text-white text-sm font-semibold rounded-full border border-blue-600/20 hover:border-transparent transition-all duration-200"
+                  className="w-full py-2.5 bg-emerald-600/10 hover:bg-emerald-600 text-emerald-600 hover:text-white text-sm font-semibold rounded-full border border-emerald-600/20 hover:border-transparent transition-all duration-200"
                 >
                   Enquire
                 </button>
@@ -452,7 +452,7 @@ function XIcon({ className }: { className?: string }) {
 
 // Step icon SVG by key
 function StepIcon({ keyName, className }: { keyName: "phone" | "medical" | "train" | "drive"; className?: string }) {
-  const c = className ?? "w-8 h-8 text-blue-600";
+  const c = className ?? "w-8 h-8 text-emerald-600";
   switch (keyName) {
     case "phone":
       return (
@@ -504,11 +504,11 @@ function HowItWorks() {
               {i < howItWorksSteps.length - 1 && (
                 <div className="hidden lg:block absolute top-10 left-[60%] w-[80%] h-px bg-gradient-to-r from-slate-800 to-transparent" />
               )}
-              <div className="w-20 h-20 rounded-2xl bg-white border border-slate-800 flex items-center justify-center mx-auto mb-4 group-hover:border-blue-600/30 group-hover:shadow-lg group-hover:shadow-blue-600/5 transition-all duration-300">
-                <StepIcon keyName={step.iconKey} className="w-8 h-8 text-blue-600" />
+              <div className="w-20 h-20 rounded-2xl bg-white border border-slate-800 flex items-center justify-center mx-auto mb-4 group-hover:border-emerald-600/30 group-hover:shadow-lg group-hover:shadow-emerald-600/5 transition-all duration-300">
+                <StepIcon keyName={step.iconKey} className="w-8 h-8 text-emerald-600" />
               </div>
               <div className="inline-flex items-center gap-1.5 mb-2">
-                <span className="text-xs font-bold text-blue-600 bg-blue-600/10 px-2 py-0.5 rounded-full">Step {step.step}</span>
+                <span className="text-xs font-bold text-emerald-600 bg-emerald-600/10 px-2 py-0.5 rounded-full">Step {step.step}</span>
               </div>
               <h3 className="text-lg font-bold text-dark mb-1">{step.title}</h3>
               <p className="text-sm text-slate-400 leading-relaxed">{step.description}</p>
@@ -587,7 +587,7 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
         <div className="text-center">
           <button
             onClick={onEnquire}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-emerald-600/25 active:scale-95"
           >
             Start Your Journey
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -646,7 +646,7 @@ function CareerSupport() {
     <section className="py-20 lg:py-28 bg-white/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-14">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-600 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
@@ -654,7 +654,7 @@ function CareerSupport() {
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
             Not Just Qualified —{" "}
-            <span className="text-blue-600">Hireable</span>
+            <span className="text-emerald-600">Hireable</span>
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto">
             A licence gets you started. We make sure you&apos;re a candidate employers actually want. CV support, industry contacts, interview coaching — and we don&apos;t stop when you pass.
@@ -663,11 +663,11 @@ function CareerSupport() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card) => (
-            <div key={card.title} className="group bg-white border border-slate-800 rounded-2xl p-6 hover:border-blue-600/30 hover:shadow-lg hover:shadow-blue-600/5 hover:-translate-y-1 transition-all duration-300">
-              <div className="w-12 h-12 rounded-xl bg-blue-600/10 flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-600/15 transition-colors">
+            <div key={card.title} className="group bg-white border border-slate-800 rounded-2xl p-6 hover:border-emerald-600/30 hover:shadow-lg hover:shadow-emerald-600/5 hover:-translate-y-1 transition-all duration-300">
+              <div className="w-12 h-12 rounded-xl bg-emerald-600/10 flex items-center justify-center text-emerald-600 mb-4 group-hover:bg-emerald-600/15 transition-colors">
                 {card.icon}
               </div>
-              <h3 className="font-bold text-dark mb-2 group-hover:text-blue-600 transition-colors">{card.title}</h3>
+              <h3 className="font-bold text-dark mb-2 group-hover:text-emerald-600 transition-colors">{card.title}</h3>
               <p className="text-sm text-slate-500 leading-relaxed">{card.description}</p>
             </div>
           ))}
@@ -697,7 +697,7 @@ function NationwideTraining() {
     <section className="py-20 lg:py-28">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-10">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-600 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
@@ -706,7 +706,7 @@ function NationwideTraining() {
           </span>
           <h2 className="font-heading text-3xl sm:text-4xl font-bold text-dark mb-3 tracking-tight">
             Training Centres{" "}
-            <span className="text-blue-600">Across the UK</span>
+            <span className="text-emerald-600">Across the UK</span>
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto mb-8">
             Wherever you are, we&apos;re nearby. Search for your nearest centre or scroll through our nationwide network.
@@ -722,7 +722,7 @@ function NationwideTraining() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by city or region..."
-              className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-800 rounded-xl text-dark placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+              className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-800 rounded-xl text-dark placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all shadow-sm"
             />
             {search && (
               <button
@@ -740,19 +740,19 @@ function NationwideTraining() {
           {filtered.map((loc) => (
             <div
               key={loc.city}
-              className="snap-start shrink-0 w-56 bg-white border border-slate-800 rounded-2xl p-5 hover:border-blue-600/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
+              className="snap-start shrink-0 w-56 bg-white border border-slate-800 rounded-2xl p-5 hover:border-emerald-600/30 hover:shadow-lg transition-all duration-300 group cursor-pointer"
             >
               <div className="flex items-center gap-2 mb-3">
-                <svg className="w-5 h-5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                 </svg>
-                <h3 className="font-bold text-dark group-hover:text-blue-600 transition-colors">{loc.city}</h3>
+                <h3 className="font-bold text-dark group-hover:text-emerald-600 transition-colors">{loc.city}</h3>
               </div>
               <div className="text-xs text-slate-400 mb-3">{loc.region}</div>
               <div className="flex flex-wrap gap-1.5">
                 {loc.courses.map((c) => (
-                  <span key={c} className="text-[10px] font-medium px-2 py-0.5 bg-blue-600/8 text-blue-600 rounded-full border border-blue-600/15">{c}</span>
+                  <span key={c} className="text-[10px] font-medium px-2 py-0.5 bg-emerald-600/8 text-emerald-600 rounded-full border border-emerald-600/15">{c}</span>
                 ))}
               </div>
             </div>
@@ -772,8 +772,8 @@ function NationwideTraining() {
               key={r}
               onClick={() => setSearch(r)}
               className={`text-xs font-medium px-3 py-1.5 rounded-full border transition-all duration-200 ${search === r
-                ? "bg-blue-600 text-white border-blue-600"
-                : "bg-white text-slate-500 border-slate-800 hover:border-blue-600/30 hover:text-blue-600"
+                ? "bg-emerald-600 text-white border-emerald-600"
+                : "bg-white text-slate-500 border-slate-800 hover:border-emerald-600/30 hover:text-emerald-600"
                 }`}
             >
               {r}
@@ -793,18 +793,18 @@ function StudyTools() {
       title: "Spaced Repetition Study Tool",
       description: "Our AI-powered tool uses the Ebbinghaus forgetting curve and Leitner system — the same science behind Duolingo and Anki. Questions you struggle with come back more often. 15 minutes a day beats 5 hours of cramming. Included free with every course, forever.",
       icon: (
-        <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 0 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
         </svg>
       ),
       badge: "Free with every course",
-      badgeColor: "bg-blue-600/10 text-blue-600 border-blue-600/20",
+      badgeColor: "bg-emerald-600/10 text-emerald-600 border-emerald-600/20",
     },
     {
       title: "User Hub",
       description: "Your personal dashboard to track study progress, review weak areas, access all learning tools, and manage your entire training journey — from first enquiry to first day on the job.",
       icon: (
-        <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
         </svg>
       ),
@@ -815,7 +815,7 @@ function StudyTools() {
       title: "Driver Wellness Hub",
       description: "We\u2019re championing physical and mental health in the driving industry. Back care, nutrition on the road, sleep hygiene, mental health check-ins, and financial planning — because your wellbeing matters as much as your licence.",
       icon: (
-        <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
         </svg>
       ),
@@ -831,7 +831,7 @@ function StudyTools() {
           {/* Content side */}
           <div className="w-full lg:w-1/2">
             <div className="text-left mb-10">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-600 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456Z" />
                 </svg>
@@ -839,7 +839,7 @@ function StudyTools() {
               </span>
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-dark mb-4 tracking-tight">
                 We Create Our Own{" "}
-                <span className="text-blue-600">Study Materials</span>
+                <span className="text-emerald-600">Study Materials</span>
               </h2>
               <p className="text-lg text-slate-500 max-w-xl">
                 Most schools hand you a textbook. We built AI-powered study tools backed by cognitive science — included free with every course, and we never stop improving them.
@@ -878,7 +878,7 @@ function StudyTools() {
           <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md">
               {/* Decorative background blur */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 rounded-[3rem] blur-3xl transform rotate-3" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-600/20 to-purple-600/20 rounded-[3rem] blur-3xl transform rotate-3" />
 
               {/* Unsplash Placeholder: App mockup */}
               <img
@@ -899,12 +899,19 @@ function SuccessStories() {
   const { ref, revealed } = useReveal();
   const featured = successStories.find((s) => s.featured);
   const others = successStories.filter((s) => !s.featured);
+  const [expandedStory, setExpandedStory] = useState<string | null>(null);
+
+  const toggleStory = (name: string) => {
+    setExpandedStory((prev) => (prev === name ? null : name));
+  };
+
+  const firstName = (name: string) => name.split(" ")[0];
 
   return (
     <section id="success-stories" className="py-20 lg:py-28 bg-white/50">
       <div ref={ref} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-600/10 text-blue-600 text-sm font-semibold rounded-full border border-blue-600/20 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-600/10 text-emerald-600 text-sm font-semibold rounded-full border border-emerald-600/20 mb-4">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
@@ -916,8 +923,8 @@ function SuccessStories() {
 
         {/* Featured story */}
         {featured && (
-          <div className="bg-white border border-slate-800 rounded-2xl p-6 lg:p-10 shadow-sm mb-8 relative overflow-hidden">
-            <span className="absolute top-6 right-6 text-8xl font-heading text-slate-800/5 leading-none">&quot;</span>
+          <div className="bg-blue-50 border border-blue-200/60 rounded-2xl p-6 lg:p-10 shadow-sm mb-8 relative overflow-hidden">
+            <span className="absolute top-6 right-6 text-8xl font-heading text-blue-200/20 leading-none">&quot;</span>
             <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-center">
               <div>
                 <div className="flex items-center gap-3 mb-4">
@@ -926,22 +933,60 @@ function SuccessStories() {
                     <div className="font-bold text-dark text-lg">{featured.name}</div>
                     <div className="text-sm text-slate-500">{featured.course} · {featured.graduateDate}</div>
                   </div>
-                  <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-blue-600/10 text-blue-600 rounded-full border border-blue-600/20">
+                  <span className="ml-auto hidden sm:inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold bg-emerald-600/10 text-emerald-600 rounded-full border border-emerald-600/20">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
                     Verified Graduate
                   </span>
                 </div>
                 <blockquote className="text-dark text-lg leading-relaxed mb-5">&quot;{featured.quote}&quot;</blockquote>
                 <p className="text-sm text-slate-500 mb-5">{featured.whereNow}</p>
-                <div className="flex flex-wrap items-center gap-6">
+                <div className="flex flex-wrap items-center gap-6 mb-6">
                   <div>
                     <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Before</div>
                     <div className="text-sm text-slate-500">{featured.beforeRole} · <span className="line-through">{formatCurrency(featured.beforeSalary)}</span></div>
                   </div>
-                  <svg className="w-5 h-5 text-blue-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                  <svg className="w-5 h-5 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                   <div>
-                    <div className="text-xs text-blue-600 uppercase tracking-wider mb-1 font-semibold">After</div>
-                    <div className="text-sm font-bold text-dark">{featured.afterRole} · <span className="text-blue-600">{formatCurrency(featured.afterSalary)}</span></div>
+                    <div className="text-xs text-emerald-600 uppercase tracking-wider mb-1 font-semibold">After</div>
+                    <div className="text-sm font-bold text-dark">{featured.afterRole} · <span className="text-emerald-600">{formatCurrency(featured.afterSalary)}</span></div>
+                  </div>
+                </div>
+
+                {/* Story link — own line, bigger */}
+                <div className="pt-4 border-t border-blue-200/60">
+                  <button
+                    onClick={() => toggleStory(featured.name)}
+                    className="inline-flex items-center gap-2.5 text-base font-bold text-emerald-600 hover:text-emerald-500 transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                    </svg>
+                    {expandedStory === featured.name ? `Close ${firstName(featured.name)}'s Story` : `Read ${firstName(featured.name)}'s Story`}
+                    <svg className={`w-5 h-5 transition-transform duration-200 ${expandedStory === featured.name ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Expanded Q&A panel */}
+            <div className={`grid transition-all duration-500 ease-in-out ${expandedStory === featured.name ? "grid-rows-[1fr] opacity-100 mt-6" : "grid-rows-[0fr] opacity-0 mt-0"}`}>
+              <div className="overflow-hidden">
+                <div className="bg-white rounded-2xl p-6 lg:p-8 border border-blue-200/60">
+                  <div className="flex flex-col lg:flex-row gap-8">
+                    <img src={featured.imageLarge} alt={featured.name} className="w-full lg:w-48 h-48 lg:h-auto object-cover rounded-xl shadow-md shrink-0" />
+                    <div className="flex-1 space-y-6">
+                      {featured.storyQA.map((qa, i) => (
+                        <div key={i}>
+                          <h4 className="text-sm font-bold text-dark mb-1.5 flex items-center gap-2">
+                            <span className="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">Q</span>
+                            {qa.question}
+                          </h4>
+                          <p className="text-sm text-slate-500 leading-relaxed pl-7">{qa.answer}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -949,42 +994,96 @@ function SuccessStories() {
           </div>
         )}
 
-        {/* Other stories */}
+        {/* Other stories — cards only, no expansion inside grid */}
         <div className="grid md:grid-cols-3 gap-6">
-          {others.map((s) => (
-            <div key={s.name} className="bg-white border border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col relative overflow-hidden hover:border-blue-600/30 hover:shadow-lg transition-all duration-300">
-              <span className="absolute top-5 right-5 text-5xl font-heading text-slate-800/5 leading-none">&quot;</span>
-              <div className="flex items-center gap-1 mb-3">
-                {Array.from({ length: s.rating }).map((_, j) => (
-                  <svg key={j} className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          {others.map((s) => {
+            const isFemale = ["Sarah", "Priya"].some((n) => s.name.startsWith(n));
+            const cardBg = isFemale ? "bg-pink-50 border-pink-200/60" : "bg-blue-50 border-blue-200/60";
+            const quoteTint = isFemale ? "text-pink-200/20" : "text-blue-200/20";
+            const borderTint = isFemale ? "border-pink-200/60" : "border-blue-200/60";
+
+            return (
+              <div key={s.name} className={`${cardBg} border rounded-2xl p-6 shadow-sm flex flex-col relative overflow-hidden hover:shadow-lg transition-all duration-300`}>
+                <span className={`absolute top-5 right-5 text-5xl font-heading ${quoteTint} leading-none`}>&quot;</span>
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: s.rating }).map((_, j) => (
+                    <svg key={j} className="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-dark leading-relaxed mb-4 flex-1 text-sm">&quot;{s.quote}&quot;</blockquote>
+                <div className="flex items-center gap-3 mb-3">
+                  <img src={s.image} alt={s.name} className="w-12 h-12 rounded-full object-cover shadow-sm shrink-0" />
+                  <div>
+                    <div className="font-bold text-dark text-sm">{s.name}</div>
+                    <div className="text-xs text-slate-500">{s.beforeRole} → {s.afterRole}</div>
+                  </div>
+                </div>
+                <div className="text-xs text-slate-500 mb-3">{s.whereNow}</div>
+                <div className="pt-3 border-t ${borderTint} flex items-center gap-2 text-sm mb-4">
+                  <span className="text-slate-400 line-through">{s.beforeSalary > 0 ? formatCurrency(s.beforeSalary) : "Unemployed"}</span>
+                  <span className="text-slate-400">→</span>
+                  <span className="text-emerald-600 font-bold">{formatCurrency(s.afterSalary)}</span>
+                </div>
+
+                {/* Story link — own line, prominent */}
+                <button
+                  onClick={() => toggleStory(s.name)}
+                  className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-500 transition-colors"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                   </svg>
-                ))}
+                  {expandedStory === s.name ? `Close ${firstName(s.name)}'s Story` : `Read ${firstName(s.name)}'s Story`}
+                  <svg className={`w-4 h-4 transition-transform duration-200 ${expandedStory === s.name ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
               </div>
-              <blockquote className="text-dark leading-relaxed mb-4 flex-1 text-sm">&quot;{s.quote}&quot;</blockquote>
-              <div className="flex items-center gap-3 mb-3">
-                <img src={s.image} alt={s.name} className="w-12 h-12 rounded-full object-cover shadow-sm shrink-0" />
-                <div>
-                  <div className="font-bold text-dark text-sm">{s.name}</div>
-                  <div className="text-xs text-slate-500">{s.beforeRole} → {s.afterRole}</div>
+            );
+          })}
+        </div>
+
+        {/* Expanded Q&A — rendered OUTSIDE the grid so it doesn't affect other cards */}
+        {others.map((s) => {
+          const isExpanded = expandedStory === s.name;
+          return (
+            <div key={`story-${s.name}`} className={`grid transition-all duration-500 ease-in-out ${isExpanded ? "grid-rows-[1fr] opacity-100 mt-6" : "grid-rows-[0fr] opacity-0 mt-0"}`}>
+              <div className="overflow-hidden">
+                <div className="bg-white rounded-2xl p-6 lg:p-8 border border-slate-200 shadow-sm">
+                  <div className="flex flex-col lg:flex-row gap-8">
+                    <div className="flex flex-col items-center gap-3 shrink-0">
+                      <img src={s.imageLarge} alt={s.name} className="w-full lg:w-48 h-48 lg:h-auto object-cover rounded-xl shadow-md" />
+                      <div className="text-center">
+                        <div className="font-bold text-dark">{s.name}</div>
+                        <div className="text-xs text-slate-500">{s.course}</div>
+                      </div>
+                    </div>
+                    <div className="flex-1 space-y-6">
+                      {s.storyQA.map((qa, i) => (
+                        <div key={i}>
+                          <h4 className="text-sm font-bold text-dark mb-1.5 flex items-center gap-2">
+                            <span className="w-5 h-5 bg-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">Q</span>
+                            {qa.question}
+                          </h4>
+                          <p className="text-sm text-slate-500 leading-relaxed pl-7">{qa.answer}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="text-xs text-slate-500 mb-3">{s.whereNow}</div>
-              <div className="pt-3 border-t border-slate-800/50 flex items-center gap-2 text-sm">
-                <span className="text-slate-400 line-through">{s.beforeSalary > 0 ? formatCurrency(s.beforeSalary) : "Unemployed"}</span>
-                <span className="text-slate-400">→</span>
-                <span className="text-blue-600 font-bold">{formatCurrency(s.afterSalary)}</span>
-              </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
 
         <div className="text-center mt-10">
           <a
             href="https://www.google.com/maps/place/RoadReady"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-emerald-600 transition-colors"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1Z" />
@@ -1019,7 +1118,7 @@ function ComparisonSection() {
             <thead>
               <tr className="bg-slate-950">
                 <th className="text-left text-sm font-medium text-slate-400 px-6 py-4">Feature</th>
-                <th className="text-center text-sm font-bold text-blue-600 px-6 py-4 bg-blue-600/5">RoadReady</th>
+                <th className="text-center text-sm font-bold text-emerald-600 px-6 py-4 bg-emerald-600/5">RoadReady</th>
                 <th className="text-center text-sm font-bold text-red-500 px-6 py-4 bg-red-500/8">Typical School</th>
               </tr>
             </thead>
@@ -1027,10 +1126,10 @@ function ComparisonSection() {
               {comparisonRows.map((row, i) => (
                 <tr key={row.feature} className={i % 2 === 0 ? "bg-white" : "bg-slate-950"}>
                   <td className="px-6 py-3.5 text-sm text-dark">{row.feature}</td>
-                  <td className="px-6 py-3.5 text-sm text-center font-medium text-blue-600">
+                  <td className="px-6 py-3.5 text-sm text-center font-medium text-emerald-600">
                     {row.usYes ? (
                       <span className="inline-flex items-center justify-center gap-1.5">
-                        <CheckIcon className="w-4 h-4 text-blue-600" /> {row.us}
+                        <CheckIcon className="w-4 h-4 text-emerald-600" /> {row.us}
                       </span>
                     ) : (
                       row.us
@@ -1064,11 +1163,11 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
   const { ref, revealed } = useReveal();
   return (
     <section className="py-20 lg:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-blue-500/3 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-600/5 via-emerald-500/3 to-transparent" />
       <div ref={ref} className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-dark mb-4 tracking-tight">
           This Licence Opens{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">An Entire Career</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">An Entire Career</span>
         </h2>
         <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-8">
           It&apos;s not just a licence — it&apos;s the entry point to a whole new field. Our graduates have gone on to build careers including:
@@ -1088,7 +1187,7 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
         </p>
         <button
           onClick={onEnquire}
-          className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 hover:bg-blue-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-blue-600/25 active:scale-95"
+          className="inline-flex items-center gap-2 px-10 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-emerald-600/25 active:scale-95"
         >
           Start Your New Chapter
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

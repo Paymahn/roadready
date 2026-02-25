@@ -87,8 +87,8 @@ export default function EnquiryModal() {
                 <div className="p-6">
                     {submitted ? (
                         <div className="text-center py-12 animate-fade-in">
-                            <div className="w-16 h-16 rounded-full bg-blue-600/10 flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-8 h-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <div className="w-16 h-16 rounded-full bg-emerald-600/10 flex items-center justify-center mx-auto mb-4">
+                                <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
@@ -115,7 +115,7 @@ export default function EnquiryModal() {
                                     required
                                     value={form.name}
                                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all min-h-[44px]"
+                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
                                     placeholder="Your name"
                                 />
                             </div>
@@ -130,7 +130,7 @@ export default function EnquiryModal() {
                                     required
                                     value={form.phone}
                                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all min-h-[44px]"
+                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
                                     placeholder="07XXX XXXXXX"
                                 />
                             </div>
@@ -144,7 +144,7 @@ export default function EnquiryModal() {
                                     type="email"
                                     value={form.email}
                                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all min-h-[44px]"
+                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
                                     placeholder="you@email.com"
                                 />
                             </div>
@@ -157,7 +157,7 @@ export default function EnquiryModal() {
                                     id="eq-course"
                                     value={form.course}
                                     onChange={(e) => setForm({ ...form, course: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all min-h-[44px]"
+                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
                                 >
                                     <option value="">Select a course...</option>
                                     {courses.map((c) => (
@@ -178,7 +178,7 @@ export default function EnquiryModal() {
                                     rows={3}
                                     value={form.message}
                                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none"
                                     placeholder="Any questions?"
                                 />
                             </div>
@@ -187,14 +187,14 @@ export default function EnquiryModal() {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.98] min-h-[48px]"
+                                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-[0.98] min-h-[48px]"
                             >
                                 {loading ? "Sending..." : "Send Enquiry"}
                             </button>
 
                             <p className="text-xs text-center text-slate-500">
                                 Or call us directly:{" "}
-                                <a href="tel:+4401234567890" className="text-blue-600 hover:text-blue-500">
+                                <a href="tel:+4401234567890" className="text-emerald-600 hover:text-emerald-500">
                                     01234 567 890
                                 </a>
                             </p>
