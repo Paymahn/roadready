@@ -79,7 +79,50 @@ export default function HomePage() {
 }
 
 // ── HERO ────────────────────────────────────────────────
+// ── HERO ADVANTAGE TABS DATA ────────────────────────────
+const ADVANTAGES = [
+  {
+    keyword: "Affordable",
+    subheading: "Transparent pricing. No hidden fees.",
+    detail: "We leverage our industry networks and long-standing contacts to negotiate the best rates — and pass those savings directly to you. Every quote is upfront, fully itemised, and includes everything you need. No surprise charges, no 'extras' at the end. What we quote is what you pay.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200",
+    accent: "emerald",
+  },
+  {
+    keyword: "Full Support",
+    subheading: "From first enquiry to first payday.",
+    detail: "We have a proven track record of guiding people from their very first phone call to becoming fully qualified, paid drivers. We handle the paperwork, book your medicals, schedule your training, and stay by your side through every test and milestone. You're never left figuring it out alone.",
+    image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200",
+    accent: "amber",
+  },
+  {
+    keyword: "Customer Service",
+    subheading: "You're starting a new chapter — we make it seamless.",
+    detail: "Changing careers can feel overwhelming, but it doesn't have to be. Our team is available 7 days a week, responds within hours, and treats every trainee like family. Real people, real answers, real care — from your first question to your hundredth.",
+    image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=1200",
+    accent: "white",
+  },
+  {
+    keyword: "Job Placement",
+    subheading: "Your licence is just the beginning.",
+    detail: "We don't disappear once you pass. Our career team helps you build a professional CV tailored to logistics, connects you with our network of haulage firms and agencies, and coaches you through interviews. We stay until you're employed — and even after.",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
+    accent: "slate",
+  },
+] as const;
+
+const ACCENT_STYLES: Record<string, { active: string; idle: string; text: string; indicator: string }> = {
+  emerald: { active: "border-emerald-400 bg-emerald-500/10", idle: "border-transparent hover:border-emerald-500/30 hover:bg-emerald-500/5", text: "text-emerald-400", indicator: "bg-emerald-400" },
+  amber: { active: "border-amber-400 bg-amber-500/10", idle: "border-transparent hover:border-amber-500/30 hover:bg-amber-500/5", text: "text-amber-400", indicator: "bg-amber-400" },
+  white: { active: "border-white/50 bg-white/10", idle: "border-transparent hover:border-white/20 hover:bg-white/5", text: "text-white", indicator: "bg-white" },
+  slate: { active: "border-slate-400 bg-slate-400/10", idle: "border-transparent hover:border-slate-400/30 hover:bg-slate-400/5", text: "text-slate-300", indicator: "bg-slate-400" },
+};
+
 function HeroSection({ onEnquire }: { onEnquire: () => void }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const active = ADVANTAGES[activeIdx];
+  const accentStyle = ACCENT_STYLES[active.accent];
+
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div className="absolute inset-0 grain">
@@ -99,93 +142,101 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           </h1>
         </div>
 
-        {/* 2-Column Layout below the header */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-20">
-          <div className="max-w-2xl lg:w-1/2">
+        {/* Section title */}
+        <div className="flex items-center gap-5 justify-center mb-12 animate-slide-up" style={{ animationDelay: "0.05s" }}>
+          <div className="h-px bg-gradient-to-r from-transparent to-white/20 w-24 sm:w-40" />
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-amber-400 tracking-wide text-center uppercase">
+            The RoadReady Advantage
+          </h2>
+          <div className="h-px bg-gradient-to-l from-transparent to-white/20 w-24 sm:w-40" />
+        </div>
 
-            <div className="mb-10 animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-px bg-gradient-to-r from-transparent to-white/20 flex-1" />
-                <h2 className="font-heading text-xl sm:text-2xl font-bold text-amber-400 tracking-wide text-center">
-                  The RoadReady Advantage
-                </h2>
-                <div className="h-px bg-gradient-to-l from-transparent to-white/20 flex-1" />
+        {/* Interactive tabbed layout */}
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+
+          {/* Left Column: Keyword Tabs */}
+          {/* Mobile: horizontal scroll row  |  Desktop: vertical stack */}
+          <div className="w-full lg:w-[38%] shrink-0">
+            <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory lg:snap-none scrollbar-hide">
+              {ADVANTAGES.map((adv, idx) => {
+                const isActive = activeIdx === idx;
+                const style = ACCENT_STYLES[adv.accent];
+                return (
+                  <button
+                    key={adv.keyword}
+                    type="button"
+                    onClick={() => setActiveIdx(idx)}
+                    className={`group relative text-left rounded-2xl border-2 p-5 sm:p-6 transition-all duration-300 snap-start shrink-0 w-[75vw] sm:w-auto outline-none ${isActive ? style.active : style.idle}`}
+                  >
+                    {/* Active indicator bar */}
+                    {isActive && (
+                      <div className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 rounded-r-full ${style.indicator} hidden lg:block`} />
+                    )}
+                    <h3 className={`font-heading text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight leading-tight mb-1 transition-colors ${isActive ? style.text : "text-white/50 group-hover:text-white/80"}`}>
+                      {adv.keyword}
+                    </h3>
+                    <p className={`text-sm sm:text-base font-medium leading-snug transition-colors ${isActive ? "text-white/70" : "text-white/30 group-hover:text-white/50"}`}>
+                      {adv.subheading}
+                    </p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right Column: Image + Glass Text Overlay */}
+          <div className="w-full lg:flex-1 relative">
+            <div className="relative w-full rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-white/10 aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
+              {/* Swappable Image */}
+              {ADVANTAGES.map((adv, idx) => (
+                <img
+                  key={adv.keyword}
+                  src={adv.image}
+                  alt={adv.keyword}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${activeIdx === idx ? "opacity-100" : "opacity-0"}`}
+                />
+              ))}
+              {/* Dark gradient for readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
+
+              {/* Glass Text Panel — pinned to bottom */}
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8">
+                <div className="backdrop-blur-xl bg-white/[0.07] border border-white/[0.12] rounded-2xl p-5 sm:p-7 shadow-xl">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className={`w-2 h-2 rounded-full ${accentStyle.indicator}`} />
+                    <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-white/50">
+                      The RoadReady Promise
+                    </span>
+                  </div>
+                  <p className="text-white/90 text-base sm:text-lg lg:text-xl leading-relaxed font-medium">
+                    {active.detail}
+                  </p>
+                </div>
               </div>
-
-              <ul className="space-y-4">
-                {/* Card 1 */}
-                <li className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-white/5 to-transparent border border-white/10 backdrop-blur-sm">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-white/10 border border-white/20 flex items-center justify-center mt-1">
-                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                  </div>
-                  <div>
-                    <span className="font-bold text-white/80 block mb-1 uppercase tracking-wide text-xs">Who we are</span>
-                    <span className="text-white font-medium leading-snug block text-lg sm:text-lg">Industry veterans with over 10 years of experience, guiding you from your first lesson to your first job.</span>
-                  </div>
-                </li>
-                {/* Card 2 */}
-                <li className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/20 backdrop-blur-sm">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mt-1">
-                    <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                  </div>
-                  <div>
-                    <span className="font-bold text-emerald-400 block mb-1 uppercase tracking-wide text-xs">How we care</span>
-                    <span className="text-white font-medium leading-snug block text-lg sm:text-lg">Free premium study materials & dedicated job placement support.</span>
-                  </div>
-                </li>
-                {/* Card 3 */}
-                <li className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-amber-500/10 to-transparent border border-amber-500/20 backdrop-blur-sm">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mt-1">
-                    <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                  </div>
-                  <div>
-                    <span className="font-bold text-amber-400 block mb-1 uppercase tracking-wide text-xs">Who you are</span>
-                    <span className="text-white font-medium leading-snug block text-lg sm:text-lg">Someone seeking genuine ownership and freedom in their daily work. Someone ready for rapid career progression in a high-demand, underpopulated field.</span>
-                  </div>
-                </li>
-                {/* Card 4 */}
-                <li className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-400/10 to-transparent border border-slate-400/20 backdrop-blur-sm">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-slate-400/20 border border-slate-400/30 flex items-center justify-center mt-1">
-                    <svg className="w-4 h-4 text-slate-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                  </div>
-                  <div>
-                    <span className="font-bold text-slate-300 block mb-1 uppercase tracking-wide text-xs">What you want</span>
-                    <span className="text-white font-medium leading-snug block text-lg sm:text-lg">A secure, high-paying career with a license that pays for itself.</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <button
-                onClick={onEnquire}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-emerald-600/25 active:scale-95 min-h-[48px]"
-              >
-                Start Your Journey
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </button>
-              <a
-                href="#courses"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-white/10 border border-white/30 text-white text-lg font-medium rounded-full transition-all duration-200 backdrop-blur-sm min-h-[48px]"
-              >
-                View Courses
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </a>
             </div>
           </div>
+        </div>
 
-          {/* Right Column: BIG Hero Image (no stats overlay) */}
-          <div className="w-full lg:w-1/2 shrink-0 relative animate-slide-up" style={{ animationDelay: "0.3s" }}>
-            <div className="relative aspect-[4/5] sm:aspect-[4/3] lg:aspect-[3/4] xl:aspect-[4/5] w-full rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-white/10">
-              {/* Unsplash Placeholder: Confident truck driver */}
-              <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1200" alt="HGV Driver" className="absolute inset-0 w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
-            </div>
-          </div>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-14 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+          <button
+            onClick={onEnquire}
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white text-lg font-semibold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-emerald-600/25 active:scale-95 min-h-[48px]"
+          >
+            Start Your Journey
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </button>
+          <a
+            href="#courses"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-white/10 border border-white/30 text-white text-lg font-medium rounded-full transition-all duration-200 backdrop-blur-sm min-h-[48px]"
+          >
+            View Courses
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
         </div>
       </div>
 

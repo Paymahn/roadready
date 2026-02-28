@@ -3,11 +3,11 @@
 @theme inline {
   /* ── GREEN THEME BACKGROUNDS ─────────────────────────── */
   /* Page background: deep forest green */
-  --color-slate-950: #0D2B1F;
-  /* Section alternating: slightly lighter dark green */
-  --color-slate-900: #122E21;
-  /* Card backgrounds: medium dark green */
-  --color-slate-800: #1A3D2B;
+  --color-slate-950: #0B2419;
+  /* Section alternating: a touch warmer to contrast with 950 */
+  --color-slate-900: #132E22;
+  /* Card backgrounds: medium dark green, slightly lighter */
+  --color-slate-800: #1C4030;
   /* Borders: muted green */
   --color-slate-700: #2D5C40;
   /* Subtle borders / dividers */
@@ -182,11 +182,32 @@ html {
 }
 
 body {
-  background: var(--color-slate-950);
+  /* Subtle directional gradient: lighter warm-green top-left, deeper cool-green bottom-right */
+  background:
+    radial-gradient(ellipse 110% 55% at 18% 0%,   #173B2A 0%, transparent 58%),
+    radial-gradient(ellipse  80% 45% at 88% 100%,  #071A10 0%, transparent 55%),
+    radial-gradient(ellipse  60% 35% at 55% 50%,   #0B231A 0%, transparent 65%),
+    #0D2B1F;
   color: var(--color-dark);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fixed page-wide depth overlay: fine grain + edge vignette blended softly over every section */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  /* Vignette darkens the outer edges; grain adds a subtle organic texture */
+  background-image:
+    radial-gradient(ellipse at 50% 48%, transparent 28%, rgba(0, 0, 0, 0.28) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: cover, 512px 512px;
+  mix-blend-mode: soft-light;
+  opacity: 0.38;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .font-heading {
