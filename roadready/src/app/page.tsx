@@ -170,7 +170,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
           {/* Left Column: Keyword Tabs */}
           {/* Mobile: horizontal scroll row  |  Desktop: vertical stack */}
           <div className="w-full lg:w-[38%] shrink-0">
-            <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory lg:snap-none scrollbar-hide">
+            <div className="flex flex-col lg:flex-col gap-3">
               {ADVANTAGES.map((adv, idx) => {
                 const isActive = activeIdx === idx;
                 const style = ACCENT_STYLES[adv.accent];
@@ -179,7 +179,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
                     key={adv.keyword}
                     type="button"
                     onClick={() => setActiveIdx(idx)}
-                    className={`group relative text-left rounded-2xl border-2 p-5 sm:p-6 transition-all duration-300 snap-start shrink-0 w-[75vw] sm:w-auto outline-none ${isActive ? style.active : style.idle}`}
+                    className={`group relative text-left rounded-2xl border-2 p-5 sm:p-6 transition-all duration-300 w-full outline-none ${isActive ? style.active : style.idle}`}
                   >
                     {isActive && (
                       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-10 rounded-r-full bg-amber-400 hidden lg:block" />
