@@ -287,6 +287,18 @@ export const howItWorksSteps = [
   { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", iconKey: "drive" as const },
 ];
 
+// ── Extra Step Board (full journey: standard + where we go further) ─────────
+export const extraStepBoardSteps = [
+  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll call you back within 2 hours.", shortDescription: "We'll call you back within 2 hours.", iconKey: "phone" as const, isExtra: false },
+  { step: 2, title: "Medical", description: "Book your D4 medical — we'll tell you exactly where and how.", shortDescription: "We guide you through the D4.", iconKey: "medical" as const, isExtra: false },
+  { step: 3, title: "Train", description: "Complete your theory and practical training with expert instructors.", shortDescription: "Expert instructors, every time.", iconKey: "train" as const, isExtra: false },
+  { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", shortDescription: "Pass your test, get your licence.", iconKey: "drive" as const, isExtra: false },
+  { step: 5, title: "CV & Application Support", description: "Professional CV templates tailored to logistics, application coaching, and help writing cover letters that actually get read.", shortDescription: "CV templates and cover letters that get read.", iconKey: "cv" as const, isExtra: true },
+  { step: 6, title: "Industry Contacts", description: "We've built relationships with major haulage firms, agencies, and logistics companies. We don't just train you — we introduce you.", shortDescription: "We introduce you to employers.", iconKey: "contacts" as const, isExtra: true },
+  { step: 7, title: "Interview Preparation", description: "Know what employers look for. We'll coach you on industry-specific questions, what to wear, what to bring, and how to stand out.", shortDescription: "Industry-specific interview coaching.", iconKey: "interview" as const, isExtra: true },
+  { step: 8, title: "Ongoing Support", description: "Your relationship with us doesn't end when you pass. Need advice 6 months in? We're still here. That's what 'every step of the way' actually means.", shortDescription: "We're still here after you pass.", iconKey: "support" as const, isExtra: true },
+];
+
 // ── Comparison Data (usYes/themYes for check/x icons) ───
 export const comparisonRows = [
   { feature: "Job placement support", us: "Included", them: "Not offered", usYes: true, themYes: false },
