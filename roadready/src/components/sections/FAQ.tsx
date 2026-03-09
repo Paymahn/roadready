@@ -58,7 +58,7 @@ function FAQ() {
           <p className="text-amber-400 font-semibold uppercase tracking-widest text-sm mb-3">We've heard it all before</p>
           <h2 className="font-heading text-4xl sm:text-5xl font-extrabold text-white leading-tight">
             Finance worries?{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">We've got you.</span>
+            <span className="text-amber-400 bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 sm:text-transparent">We've got you.</span>
           </h2>
           <p className="mt-4 text-slate-400 max-w-xl mx-auto text-base sm:text-lg">
             Our team has helped people in every financial situation. Bad credit, low income, prior rejections — none of it is a dealbreaker.

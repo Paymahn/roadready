@@ -35,12 +35,11 @@
   --color-emerald-700: #059669;
   --color-emerald-900: #064E3B;
 
-  /* ── AMBER / GOLD — highlight + CTA contrast colour ──── */
-  /* Amber sits beautifully against both dark and light green */
-  --color-amber-300: #FCD34D;
-  --color-amber-400: #FBBF24;
-  --color-amber-500: #F59E0B;
-  --color-amber-600: #D97706;
+  /* ── BRAND GREEN — highlight + CTA accent colour ──────── */
+  --color-amber-300: #9DD44F;
+  --color-amber-400: #76B828;
+  --color-amber-500: #5F9420;
+  --color-amber-600: #4A7318;
 
   /* ── RED stays untouched (Driver Shortage) ───────────── */
   /* Tailwind handles red-* natively */
