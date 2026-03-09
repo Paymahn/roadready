@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 const navLinks = [
     { href: "/", label: "Home" },
     { href: "/courses", label: "Courses" },
-    { href: "/#study-tools", label: "Driver Hub" },
     { href: "/#success-stories", label: "Success Stories" },
     { href: "/contact", label: "Contact" },
 ];
@@ -30,7 +29,7 @@ export default function Navbar() {
                 className={cn(
                     "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
                     scrolled
-                        ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-800/20"
+                        ? "bg-slate-950/95 backdrop-blur-xl shadow-sm border-b border-white/10"
                         : "bg-transparent"
                 )}
             >
@@ -41,8 +40,8 @@ export default function Navbar() {
                             <div className="w-9 h-9 flex items-center justify-center text-white font-bold text-sm group-hover:opacity-90 transition-opacity" style={{ clipPath: "polygon(50% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%)", background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>
                                 RR
                             </div>
-                            <span className="text-xl font-bold text-dark">
-                                Road<span className="text-emerald-600">Ready</span>
+                            <span className="text-xl font-bold text-white">
+                                Road<span className="text-emerald-400">Ready</span>
                             </span>
                         </Link>
 
@@ -52,7 +51,7 @@ export default function Navbar() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="px-4 py-2 text-sm font-medium text-slate-500 hover:text-emerald-600 rounded-lg hover:bg-emerald-600/5 transition-all duration-200"
+                                    className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-white/5 transition-all duration-200"
                                 >
                                     {link.label}
                                 </Link>
@@ -61,7 +60,7 @@ export default function Navbar() {
 
                         {/* Phone + CTA + Mobile Toggle */}
                         <div className="flex items-center gap-3">
-                            <a href="tel:+4401234567890" className="hidden lg:inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-emerald-600 transition-colors">
+                            <a href="tel:+4401234567890" className="hidden lg:inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-white transition-colors">
                                 <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                                 <span>01234 567 890</span>
                             </a>

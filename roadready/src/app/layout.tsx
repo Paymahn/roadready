@@ -1,33 +1,58 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { EnquiryProvider } from "@/context/EnquiryContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EnquiryModal from "@/components/EnquiryModal";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 
-const inter = Inter({
+const nunito = Nunito({
   subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-display",
-  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-nunito",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "RoadReady — HGV & Forklift Training | Your Licence Pays For Itself",
+  metadataBase: new URL("https://roadready.co.uk"),
+  title: {
+    default: "RoadReady — HGV & Forklift Training | Your Licence Pays For Itself",
+    template: "%s | RoadReady",
+  },
   description:
     "Ethical, transparent HGV and forklift training. 94% first-time pass rate, no hidden fees, job placement support. From £35/week. Enquire today.",
-  keywords: "HGV training, forklift training, HGV licence, CPC training, driver training UK",
+  keywords: [
+    "HGV training",
+    "forklift training",
+    "HGV licence",
+    "CPC training",
+    "driver training UK",
+    "HGV Class C",
+    "HGV Class CE",
+    "lorry driver training",
+    "Cat C licence",
+    "Cat CE licence",
+  ],
   openGraph: {
     title: "RoadReady — HGV & Forklift Training",
     description:
       "Your licence pays for itself. 94% pass rate, no hidden fees, job placement included.",
     type: "website",
+    siteName: "RoadReady",
+    locale: "en_GB",
+    url: "https://roadready.co.uk",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "RoadReady — HGV & Forklift Training",
+    description: "94% pass rate, no hidden fees, job placement included. Enquire today.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  other: {
+    "theme-color": "#0B2419",
   },
 };
 
@@ -38,12 +63,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+      <body className={`${nunito.variable} font-sans antialiased`}>
         <EnquiryProvider>
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
           <EnquiryModal />
+          <StickyMobileCTA />
         </EnquiryProvider>
       </body>
     </html>

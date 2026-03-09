@@ -10,6 +10,7 @@ export interface Course {
   retestPrice: number;
   includes: string[];
   modules: string[];
+  careers?: string[];
 }
 
 export interface Testimonial {
@@ -52,6 +53,7 @@ export const courses: Course[] = [
       "Motorway and dual carriageway",
       "Test preparation",
     ],
+    careers: ["Local Delivery", "Tipper Operations", "Removals"],
   },
   {
     slug: "hgv-cat-ce",
@@ -78,6 +80,7 @@ export const courses: Course[] = [
       "Manoeuvring with articulated vehicle",
       "Test preparation",
     ],
+    careers: ["Trunking", "Supermarket Logistics", "International Haulage"],
   },
   {
     slug: "forklift-counterbalance",
@@ -102,6 +105,7 @@ export const courses: Course[] = [
       "Loading & unloading",
       "Practical assessment",
     ],
+    careers: ["Warehouse Operations", "Builders Merchants", "Manufacturing"],
   },
   {
     slug: "forklift-reach",
@@ -126,6 +130,7 @@ export const courses: Course[] = [
       "Stock rotation techniques",
       "Practical assessment",
     ],
+    careers: ["High-Bay Warehousing", "Cold Storage", "Retail Distribution"],
   },
   {
     slug: "cpc-periodic-training",
@@ -150,6 +155,7 @@ export const courses: Course[] = [
       "Security & counter-terrorism",
       "Customer service & professionalism",
     ],
+    careers: ["Valid CPC Maintenance", "Legal Compliance"],
   },
   {
     slug: "hgv-cat-c-ce-combo",
@@ -175,6 +181,7 @@ export const courses: Course[] = [
       "Extended road driving",
       "Combined test preparation",
     ],
+    careers: ["Any HGV Role", "Maximum Earning Potential", "Heavy Haulage"],
   },
 ];
 

@@ -4,22 +4,17 @@ import { useState, useEffect, type FormEvent } from "react";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { courses } from "@/lib/data";
 
+const inputClass = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm";
+const labelClass = "block text-sm font-semibold text-slate-700 mb-1.5";
+
 export default function EnquiryModal() {
     const { isOpen, preselectedCourse, closeEnquiry } = useEnquiry();
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState({
-        name: "",
-        phone: "",
-        email: "",
-        course: "",
-        message: "",
-    });
+    const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", message: "" });
 
     useEffect(() => {
-        if (preselectedCourse) {
-            setForm((f) => ({ ...f, course: preselectedCourse }));
-        }
+        if (preselectedCourse) setForm((f) => ({ ...f, course: preselectedCourse }));
     }, [preselectedCourse]);
 
     useEffect(() => {
@@ -42,9 +37,7 @@ export default function EnquiryModal() {
                 body: JSON.stringify(form),
             });
             setSubmitted(true);
-        } catch {
-            // silent for now
-        }
+        } catch { /* silent */ }
         setLoading(false);
     };
 
@@ -52,22 +45,19 @@ export default function EnquiryModal() {
 
     return (
         <div className="fixed inset-0 z-[60]">
-            <div
-                className="absolute inset-0 bg-dark/30 backdrop-blur-sm"
-                onClick={closeEnquiry}
-            />
+            <div className="absolute inset-0 bg-slate-950/50 backdrop-blur-sm" onClick={closeEnquiry} />
 
-            <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white border-l border-slate-800 shadow-2xl animate-slide-right overflow-y-auto">
+            <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl animate-slide-right overflow-y-auto">
                 {/* Header */}
-                <div className="sticky top-0 z-10 bg-white border-b border-slate-800 px-6 py-4">
-                    <div className="flex items-center justify-between">
+                <div className="sticky top-0 z-10 bg-white border-b border-slate-100 px-6 py-5">
+                    <div className="flex items-start justify-between gap-4">
                         <div>
-                            <h2 className="text-lg font-bold text-dark">Get Started</h2>
-                            <p className="text-sm text-slate-500">We&apos;ll call you back within 2 hours</p>
+                            <h2 className="text-xl font-bold text-slate-900">Get Your Free Quote</h2>
+                            <p className="text-sm text-slate-600 mt-0.5">We&apos;ll call you back within 2 hours</p>
                         </div>
                         <button
                             onClick={closeEnquiry}
-                            className="p-2 text-slate-400 hover:text-dark hover:bg-slate-200/50 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+                            className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
                             aria-label="Close"
                         >
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -75,126 +65,109 @@ export default function EnquiryModal() {
                             </svg>
                         </button>
                     </div>
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 pt-3 border-t border-slate-800/50 text-xs text-slate-500">
-                        <span className="flex items-center gap-1">DVSA Approved</span>
-                        <span>·</span>
-                        <span>No hidden fees</span>
-                        <span>·</span>
-                        <span>2hr callback</span>
+                    <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-slate-100">
+                        {["DVSA Approved", "No hidden fees", "2hr callback"].map((t) => (
+                            <span key={t} className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full">
+                                <svg className="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                </svg>
+                                {t}
+                            </span>
+                        ))}
                     </div>
                 </div>
 
                 <div className="p-6">
                     {submitted ? (
-                        <div className="text-center py-12 animate-fade-in">
-                            <div className="w-16 h-16 rounded-full bg-emerald-600/10 flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-8 h-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <div className="text-center py-14 animate-fade-in">
+                            <div className="w-16 h-16 rounded-full bg-slate-50 border border-slate-200 flex items-center justify-center mx-auto mb-5">
+                                <svg className="w-8 h-8 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl font-bold text-dark mb-2">Enquiry Sent!</h3>
-                            <p className="text-slate-500 mb-6">
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Enquiry Sent!</h3>
+                            <p className="text-slate-700 mb-8 max-w-xs mx-auto font-medium">
                                 We&apos;ll be in touch within 2 hours. Check your phone for our call.
                             </p>
                             <button
                                 onClick={closeEnquiry}
-                                className="px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-dark text-sm font-medium rounded-full transition-colors min-h-[44px]"
+                                className="px-6 py-2.5 bg-slate-900 hover:bg-slate-700 text-white text-sm font-semibold rounded-full transition-colors min-h-[44px]"
                             >
                                 Close
                             </button>
                         </div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="space-y-4">
+                        <form onSubmit={handleSubmit} className="space-y-5">
                             <div>
-                                <label htmlFor="eq-name" className="block text-sm font-medium text-dark mb-1.5">
-                                    Full Name *
-                                </label>
+                                <label htmlFor="eq-name" className={labelClass}>Full Name *</label>
                                 <input
-                                    id="eq-name"
-                                    type="text"
-                                    required
+                                    id="eq-name" type="text" required
                                     value={form.name}
                                     onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
-                                    placeholder="Your name"
+                                    className={inputClass} placeholder="Your name"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="eq-phone" className="block text-sm font-medium text-dark mb-1.5">
-                                    Phone Number *
-                                </label>
+                                <label htmlFor="eq-phone" className={labelClass}>Phone Number *</label>
                                 <input
-                                    id="eq-phone"
-                                    type="tel"
-                                    required
+                                    id="eq-phone" type="tel" required
                                     value={form.phone}
                                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
-                                    placeholder="07XXX XXXXXX"
+                                    className={inputClass} placeholder="07XXX XXXXXX"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="eq-email" className="block text-sm font-medium text-dark mb-1.5">
-                                    Email
-                                </label>
+                                <label htmlFor="eq-email" className={labelClass}>Email</label>
                                 <input
-                                    id="eq-email"
-                                    type="email"
+                                    id="eq-email" type="email"
                                     value={form.email}
                                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
-                                    placeholder="you@email.com"
+                                    className={inputClass} placeholder="you@email.com"
                                 />
                             </div>
 
                             <div>
-                                <label htmlFor="eq-course" className="block text-sm font-medium text-dark mb-1.5">
-                                    Interested In
-                                </label>
+                                <label htmlFor="eq-course" className={labelClass}>Interested In</label>
                                 <select
                                     id="eq-course"
                                     value={form.course}
                                     onChange={(e) => setForm({ ...form, course: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all min-h-[44px]"
+                                    className={inputClass}
                                 >
                                     <option value="">Select a course...</option>
                                     {courses.map((c) => (
-                                        <option key={c.slug} value={c.slug}>
-                                            {c.title}
-                                        </option>
+                                        <option key={c.slug} value={c.slug}>{c.title}</option>
                                     ))}
                                     <option value="other">Not sure yet</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label htmlFor="eq-message" className="block text-sm font-medium text-dark mb-1.5">
-                                    Message (optional)
-                                </label>
+                                <label htmlFor="eq-message" className={labelClass}>Message (optional)</label>
                                 <textarea
-                                    id="eq-message"
-                                    rows={3}
+                                    id="eq-message" rows={3}
                                     value={form.message}
                                     onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                    className="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-dark placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all resize-none"
+                                    className={`${inputClass} resize-none`}
                                     placeholder="Any questions?"
                                 />
                             </div>
 
-                            <p className="text-xs text-center text-slate-500">Takes 30 seconds. No obligation.</p>
+                            <p className="text-xs text-center text-slate-600 font-medium">Takes 30 seconds. No obligation.</p>
+
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/25 active:scale-[0.98] min-h-[48px]"
+                                className="w-full py-4 bg-slate-900 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg active:scale-[0.98] min-h-[48px] text-base"
                             >
                                 {loading ? "Sending..." : "Send Enquiry"}
                             </button>
 
-                            <p className="text-xs text-center text-slate-500">
-                                Or call us directly:{" "}
-                                <a href="tel:+4401234567890" className="text-emerald-600 hover:text-emerald-500">
+                            <p className="text-xs text-center text-slate-600 font-medium">
+                                Or call us:{" "}
+                                <a href="tel:+4401234567890" className="text-slate-800 font-bold hover:text-slate-900">
                                     01234 567 890
                                 </a>
                             </p>
