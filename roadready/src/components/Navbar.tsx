@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const navLinks = [
     { href: "/", label: "Home" },
     { href: "/courses", label: "Courses" },
-    { href: "/#success-stories", label: "Success Stories" },
+    // { href: "/#success-stories", label: "Success Stories" }, // restore when SuccessStories section is live
     { href: "/contact", label: "Contact" },
 ];
 

@@ -33,19 +33,23 @@ const STEP_ICONS: Record<number, React.ReactNode> = {
 const STEP_BENEFITS: Record<number, { description: string; roadreadyShine: string }> = {
   1: {
     description: "You tell us which licence you need. We take it from there — no endless forms, no waiting in the dark.",
-    roadreadyShine: "We call you back within 2 hours. A real person, every time. You're not a number; you're the start of a career we care about.",
+    roadreadyShine:
+      "We'll call you back the same day. A real person, every time — you're not a number. We care about your progression from first call through training and into work, not just closing a sale.",
   },
   2: {
     description: "Booking your D4 medical is a requirement. Knowing where to go, what to bring, and what to expect shouldn't be a puzzle.",
-    roadreadyShine: "We tell you exactly where to go and how to prepare. One less thing to worry about — so you can focus on getting ready to drive.",
+    roadreadyShine:
+      "We're easy to work with: we tell you exactly where to go and how to prepare, and we move quickly to get your medical booked so you're not left chasing dates. Less admin, less stress — so you can focus on getting ready to drive.",
   },
   3: {
     description: "Theory and practical training with instructors who know the test and the industry. This is where your licence is won.",
-    roadreadyShine: "Expert instructors and a 94% first-time pass rate. We prepare you properly so you pass once and move on.",
+    roadreadyShine:
+      "We take every placement seriously — the right learner and the right instructor matter. Alongside quality instruction, you get extra learning resources and study help so you're supported preparing for theory and practical tests, not just turning up on the day.",
   },
   4: {
     description: "Pass your test, get your licence. For many providers, that's where the story ends.",
-    roadreadyShine: "With us it's just the beginning. Job placement support, CV help, and industry contacts — we help you get into work, not just get a certificate.",
+    roadreadyShine:
+      "With us, your licence isn't where we leave you. We offer support with job search, CV guidance, and useful industry contacts where we can — practical next steps toward work, not only handing over a certificate. Hiring is always down to employers and the roles available; we focus on honest guidance and backup, not promises we can't keep.",
   },
 };
 
@@ -178,24 +182,30 @@ function CareerSupport() {
           {/* Right — detail panel */}
           <div className="bg-gradient-to-br from-amber-500 to-amber-400 text-black p-8 sm:p-10 lg:p-12 flex flex-col justify-center min-h-[380px]">
             {selectedStep && benefit && (
-              <div key={selectedStepNum} className="animate-reveal-up">
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-black/10 rounded-full text-sm font-bold uppercase tracking-widest mb-6">
-                  Step {selectedStep.step} of 4
+              <div key={selectedStepNum} className="animate-reveal-up text-center">
+                {/* Step label — inline: Step + number + of 4 */}
+                <div className="mb-6 flex justify-center w-full px-2">
+                  <div className="flex flex-wrap items-baseline justify-center gap-x-2 gap-y-1">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-black/55">
+                      Step
+                    </span>
+                    <span className="font-heading text-2xl font-black text-black/90 tabular-nums leading-none">
+                      {selectedStep.step}
+                    </span>
+                    <span className="text-xs font-semibold text-black/70">of 4 total</span>
+                  </div>
                 </div>
-                <h3 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight mb-4">
+                <h3 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight mb-4 px-2">
                   {selectedStep.title}
                 </h3>
-                <p className="text-black/75 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+                <p className="text-black/75 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto px-2">
                   {benefit.description}
                 </p>
-                <div className="pt-6 border-t-2 border-amber-600/30">
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg className="w-5 h-5 text-amber-900" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-                    </svg>
-                    <p className="text-sm font-bold uppercase tracking-widest text-slate-900/85">Where RoadReady shines</p>
-                  </div>
-                  <p className="text-black font-semibold text-lg sm:text-xl leading-relaxed">
+                <div className="pt-6 border-t-2 border-amber-600/30 px-2">
+                  <p className="text-xs sm:text-sm font-black uppercase tracking-[0.18em] sm:tracking-[0.22em] text-slate-900 mb-4">
+                    THE ROADREADY DIFFERENCE
+                  </p>
+                  <p className="text-black font-semibold text-base sm:text-lg lg:text-xl leading-relaxed max-w-xl mx-auto">
                     {benefit.roadreadyShine}
                   </p>
                 </div>

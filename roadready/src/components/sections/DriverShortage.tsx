@@ -31,28 +31,44 @@ const PLACEMENT_ITEMS = [
       </svg>
     ),
     label: "Interview Preparation",
-    body: "We coach you on exactly what employers ask, what to wear, what to bring, and how to stand out. 89% of our graduates land a role within 4 weeks.",
+    body: "We coach you on what employers tend to ask, what to wear, what to bring, and how to present yourself clearly. We focus on practical prep — not promises about timelines.",
   },
 ];
 
-const MARQUEE_ITEMS = [
-  { text: "CRITICAL DRIVER SHORTAGE", color: "text-red-500" },
-  { text: "60,000+ UNFILLED POSITIONS", color: "text-white" },
-  { text: "RAPID INDUSTRY EXPANSION", color: "text-emerald-400" },
-  { text: "UNPRECEDENTED OPPORTUNITY", color: "text-amber-400" },
-];
+const CONTEXT_BLOCKS = [
+  {
+    title: "Driver shortage",
+    titleClass: "text-red-400",
+    body: "Higher energy demand and a growing population mean more goods and services need to move. Skilled drivers have never been more in demand.",
+  },
+  {
+    title: "60,000+ unfilled roles",
+    titleClass: "text-sky-300",
+    body: "Industry estimates put unfilled HGV vacancies in the tens of thousands nationwide. Employers are competing for qualified drivers — the right licence opens real options.",
+  },
+  {
+    title: "Logistics is growing",
+    titleClass: "text-emerald-400",
+    body: "While many sectors slow down, logistics keeps expanding. The tech boom relies on hardware, data centres, and complex supply chains — and those resources move on roads and through warehouses. Few industries sit closer to sustained growth.",
+  },
+  {
+    title: "Truck driving won’t be automated anytime soon",
+    titleClass: "text-amber-400",
+    body: "The industry is safe from near-term AI disruption: fully driverless HGVs on UK roads aren’t a realistic prospect yet. The work demands judgement, awareness, and responsibility in live traffic — skills that keep professional drivers essential for the foreseeable future.",
+  },
+] as const;
 
 function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
   const { ref, revealed } = useReveal();
   const stat1 = useCountUp(60000, 2500);
-  const stat2 = useCountUp(89, 2000);
+  const stat2 = useCountUp(60, 2000);
   const stat3 = useCountUp(12, 1800);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
   const statItems = [
-    { ...stat1, label: "Unfilled HGV positions across the UK", suffix: "+", prefix: "", color: "text-red-500" },
-    { ...stat2, label: "Graduates employed within 4 weeks", suffix: "%", prefix: "", color: "text-emerald-500" },
-    { ...stat3, label: "Year-on-year industry growth", suffix: "%", prefix: "", color: "text-emerald-500" },
+    { ...stat1, label: "Unfilled HGV positions across the UK (industry figures)", suffix: "+", prefix: "", color: "text-red-500" },
+    { ...stat2, label: "Partner training locations we can place you with", suffix: "+", prefix: "", color: "text-emerald-600" },
+    { ...stat3, label: "Illustrative year-on-year sector growth context", suffix: "%", prefix: "", color: "text-emerald-600" },
   ];
 
   return (
@@ -69,41 +85,37 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
       </div>
       <div className="absolute inset-0 bg-slate-950/90" />
 
-      {/* Marquee banner */}
-      <div className="relative bg-slate-950/80 border-y border-slate-800 overflow-hidden py-3 backdrop-blur-sm z-10">
-        <div className="animate-marquee whitespace-nowrap flex items-center">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="flex items-center">
-              {MARQUEE_ITEMS.map((item, index) => (
-                <div key={index} className="flex items-center">
-                  <span className={`text-sm font-black tracking-[0.2em] uppercase mx-6 ${item.color}`}>
-                    {item.text}
-                  </span>
-                  <span className="text-slate-700 text-lg mx-2">·</span>
-                </div>
-              ))}
+      {/* Context — headline + supporting copy */}
+      <div className="relative bg-slate-950/90 border-y border-slate-800 py-8 sm:py-10 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-x-12 lg:gap-y-10">
+          {CONTEXT_BLOCKS.map((block) => (
+            <div key={block.title}>
+              <h3 className={`font-heading text-base sm:text-lg font-bold tracking-tight mb-2 ${block.titleClass}`}>
+                {block.title}
+              </h3>
+              <p className="text-sm sm:text-base text-slate-400 leading-relaxed">{block.body}</p>
             </div>
           ))}
         </div>
       </div>
 
       <div ref={ref} className={`relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 ${!revealed ? "opacity-0 translate-y-5" : "animate-reveal-up"}`}>
-        {/* Header with backdrop */}
-        <div className="relative text-center mb-16 rounded-2xl overflow-hidden py-14 px-6">
+        {/* Full-bleed header band — matches other edge-to-edge imagery */}
+        <div className="relative mb-16 w-screen max-w-[100vw] left-1/2 -translate-x-1/2 overflow-hidden py-14 px-4 sm:py-16 sm:px-6 lg:py-20 lg:px-8 min-h-[280px] sm:min-h-[320px] flex items-center">
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1920"
-              alt=""
+              src="/images/hgvdepot.jpg"
+              alt="RoadReady HGV depot and logistics yard"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="100vw"
             />
             <div className="absolute inset-0 bg-slate-950/80" />
           </div>
-          <div className="relative">
+          <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
             <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-5 tracking-tight">
               The UK Needs{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">60,000+ Drivers</span>
+              <span className="text-amber-400">60,000+ Drivers</span>
             </h2>
             <p className="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
               The logistics industry can&apos;t find enough qualified drivers. Companies are raising salaries, signing bonuses, and benefits to attract talent. If you&apos;ve ever thought about a career change — this is the window. Get qualified now, and you&apos;ll enter a market where employers compete for <span className="text-white font-semibold">you</span>.
@@ -117,17 +129,17 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
             <div
               key={i}
               ref={stat.ref}
-              className="flex-1 bg-white rounded-2xl p-6 sm:p-8 text-center shadow-lg border border-slate-100"
+              className="flex-1 bg-white rounded-xl p-6 sm:p-7 text-center shadow-sm border border-slate-200"
             >
-              <div className={`text-5xl sm:text-6xl font-black tracking-tight mb-2 ${stat.color}`}>
+              <div className={`text-4xl sm:text-5xl font-bold tracking-tight mb-2 ${stat.color}`}>
                 {stat.prefix}{stat.count >= 1000 ? Math.round(stat.count).toLocaleString() : Math.round(stat.count)}{stat.suffix}
                 {i === 2 && (
-                  <svg className="w-7 h-7 text-emerald-500 animate-bounce inline-block ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                  <svg className="w-6 h-6 text-emerald-600 inline-block ml-1 align-middle" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                   </svg>
                 )}
               </div>
-              <div className="text-xs sm:text-sm text-slate-500 font-medium uppercase tracking-wider">{stat.label}</div>
+              <div className="text-xs sm:text-sm text-slate-600 font-medium leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -185,7 +197,7 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
             </div>
             <div className="flex items-center gap-2 text-white/60">
               <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>
-              <span className="text-xs font-medium">DVSA-Compliant Infrastructure</span>
+              <span className="text-xs font-medium">Training aligned with DVSA standards</span>
             </div>
             <div className="flex items-center gap-2 text-white/60">
               <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" /><path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" /></svg>

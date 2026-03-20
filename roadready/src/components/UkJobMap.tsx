@@ -150,6 +150,9 @@ export default function UkJobMap() {
             {REGIONS.reduce((s, r) => s + r.vacancies, 0).toLocaleString()}+
           </span> unfilled HGV positions
         </p>
+        <p className="text-slate-500 text-xs mt-3 leading-relaxed max-w-xl">
+          Regional figures are illustrative for comparison — not live vacancy data. Official labour-market stats vary by source and date.
+        </p>
       </div>
     </div>
   );

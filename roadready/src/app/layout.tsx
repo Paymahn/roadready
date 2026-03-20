@@ -16,14 +16,14 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   metadataBase: new URL("https://roadready.co.uk"),
   title: {
-    default: "RoadReady — HGV & Forklift Training | Your Licence Pays For Itself",
+    default: "RoadReady — HGV & ADR Training | Your Licence Pays For Itself",
     template: "%s | RoadReady",
   },
   description:
-    "Ethical, transparent HGV and forklift training. 94% first-time pass rate, no hidden fees, job placement support. From £35/week. Enquire today.",
+    "Ethical, transparent HGV and ADR training. No hidden fees, job placement support. From £35/week. Enquire today.",
   keywords: [
     "HGV training",
-    "forklift training",
+    "ADR training",
     "HGV licence",
     "CPC training",
     "driver training UK",
@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     "Cat CE licence",
   ],
   openGraph: {
-    title: "RoadReady — HGV & Forklift Training",
+    title: "RoadReady — HGV & ADR Training",
     description:
-      "Your licence pays for itself. 94% pass rate, no hidden fees, job placement included.",
+      "Your licence pays for itself. No hidden fees, job placement included.",
     type: "website",
     siteName: "RoadReady",
     locale: "en_GB",
@@ -44,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "RoadReady — HGV & Forklift Training",
-    description: "94% pass rate, no hidden fees, job placement included. Enquire today.",
+    title: "RoadReady — HGV & ADR Training",
+    description: "No hidden fees, job placement included. Enquire today.",
   },
   robots: {
     index: true,

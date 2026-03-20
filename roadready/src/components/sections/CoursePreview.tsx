@@ -1,21 +1,33 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { courses } from "@/lib/data";
 import { useReveal } from "@/lib/hooks";
-import CourseCategoryIcon from "@/components/CourseCategoryIcon";
 
-const COURSE_BADGES: Record<string, { label: string; color: string; textColor: string }> = {
-  "hgv-cat-c": { label: "Beginner Friendly", color: "bg-sky-500", textColor: "text-white" },
-  "hgv-cat-ce": { label: "Career Upgrade", color: "bg-emerald-600", textColor: "text-white" },
-  "forklift-counterbalance": { label: "Fast Track", color: "bg-violet-600", textColor: "text-white" },
-  "hgv-cat-c-ce-combo": { label: "Most Popular", color: "bg-amber-500", textColor: "text-slate-950" },
+/** Homepage course cards — images in public/images */
+const PREVIEW_IMAGES: Record<string, string> = {
+  "hgv-cat-c": "/images/hgvcatc.jpg",
+  "hgv-cat-ce": "/images/hgvcatce.jpg",
+  "adr-dangerous-goods": "/images/hgvadr.jpg",
+  "hgv-cat-c-ce-combo": "/images/hgvcatcce.jpg",
+};
+
+/** Short label shown in the top bar (no pill UI) */
+const COURSE_TAGS: Record<string, string> = {
+  "hgv-cat-c": "Beginner friendly",
+  "hgv-cat-ce": "Career upgrade",
+  "adr-dangerous-goods": "Enrolling now · booming sector",
+  "hgv-cat-c-ce-combo": "Most popular",
 };
 
 function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) {
   const { ref, revealed } = useReveal();
-  const topCourses = courses.filter((c) => ["hgv-cat-c", "hgv-cat-ce", "forklift-counterbalance", "hgv-cat-c-ce-combo"].includes(c.slug));
+  const [descExpanded, setDescExpanded] = useState<Record<string, boolean>>({});
+  const topCourses = courses.filter((c) =>
+    ["hgv-cat-c", "hgv-cat-ce", "adr-dangerous-goods", "hgv-cat-c-ce-combo"].includes(c.slug),
+  );
 
   return (
     <section className="py-20 lg:py-28 bg-slate-900">
@@ -38,51 +50,82 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {topCourses.map((course) => {
-            const badge = COURSE_BADGES[course.slug];
+            const tag = COURSE_TAGS[course.slug];
             const isCombo = course.slug === "hgv-cat-c-ce-combo";
+            const isAdr = course.slug === "adr-dangerous-goods";
+            const descOpen = descExpanded[course.slug] ?? false;
             return (
               <div
                 key={course.slug}
-                className={`group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full ${isCombo ? "ring-2 ring-amber-400" : "border border-slate-200"
-                  }`}
+                className={`group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col h-full ${
+                  isAdr
+                    ? "border-2 border-amber-400 ring-2 ring-amber-400/60 shadow-[0_0_24px_rgba(234,179,8,0.25)]"
+                    : isCombo
+                      ? "ring-2 ring-amber-400"
+                      : "border border-slate-200"
+                }`}
               >
-                <div className="h-44 relative flex items-center justify-center overflow-hidden shrink-0">
+                {/* Full-width meta bar — tag only (no category row) so all cards align; indigo vs amber */}
+                <div
+                  className={`w-full shrink-0 border-b px-3 py-3 sm:px-4 sm:py-3.5 ${
+                    isAdr
+                      ? "border-amber-900/50 bg-amber-950 text-amber-50"
+                      : "border-indigo-900/60 bg-indigo-950 text-indigo-50"
+                  }`}
+                >
+                  <div className="flex w-full flex-col items-center justify-center text-center">
+                    {tag && (
+                      <span
+                        className={`text-sm sm:text-base font-semibold leading-snug ${
+                          isAdr ? "text-amber-200" : "text-indigo-200"
+                        }`}
+                      >
+                        {tag}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="h-44 relative overflow-hidden shrink-0">
                   <Image
-                    src={
-                      course.slug === "hgv-cat-c" ? "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80&w=800" :
-                        course.slug === "hgv-cat-ce" ? "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=800" :
-                          course.slug === "hgv-cat-c-ce-combo" ? "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800" :
-                            "https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&q=80&w=800"
-                    }
+                    src={PREVIEW_IMAGES[course.slug] ?? "/images/unnamed.jpg"}
                     alt={course.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors" />
-                  <CourseCategoryIcon category={course.category} className="w-10 h-10 text-white relative z-10" />
-
-                  {badge && (
-                    <span className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${badge.color} ${badge.textColor} rounded-full shadow-lg z-10 flex items-center gap-1`}>
-                      {isCombo && (
-                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      )}
-                      {badge.label}
-                    </span>
-                  )}
-
-                  <span className="absolute top-3 right-3 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-slate-900 rounded-full shadow-md z-10">
-                    {course.category}
-                  </span>
                 </div>
 
                 <div className="p-5 flex flex-col flex-1">
                   <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">
                     {course.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">{course.description}</p>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setDescExpanded((prev) => ({
+                        ...prev,
+                        [course.slug]: !prev[course.slug],
+                      }))
+                    }
+                    aria-expanded={descOpen}
+                    className="mb-4 w-full rounded-lg px-1 py-2.5 text-left transition-colors hover:bg-slate-50 active:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:py-1.5 min-h-[44px] sm:min-h-0 flex flex-col justify-center"
+                  >
+                    <span
+                      className={`text-sm text-gray-600 leading-relaxed ${descOpen ? "" : "line-clamp-3"}`}
+                    >
+                      {course.description}
+                    </span>
+                    <span className="mt-2 text-xs font-semibold text-indigo-600 underline decoration-indigo-600/40 underline-offset-2 sm:mt-1.5">
+                      {descOpen ? "Show less" : "Read full description"}
+                    </span>
+                  </button>
+                  {isAdr && (
+                    <p className="text-xs font-semibold text-amber-800 mb-4 -mt-1 leading-relaxed">
+                      ADR is one of the fastest-growing areas in UK logistics — specialist loads and compliance needs mean qualified drivers are in short supply. Get ahead while training places are available.
+                    </p>
+                  )}
 
                   {course.careers && (
                     <div className="mb-4">

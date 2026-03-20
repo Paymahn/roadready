@@ -9,7 +9,7 @@ import CareerSupport from "@/components/sections/CareerSupport";
 import DriverShortage from "@/components/sections/DriverShortage";
 import CoursePreview from "@/components/sections/CoursePreview";
 
-import SuccessStories from "@/components/sections/SuccessStories";
+// import SuccessStories from "@/components/sections/SuccessStories"; // Re-enable when real references / reviews are ready
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 
@@ -19,7 +19,7 @@ export default function HomePage() {
     <>
       <HeroSection onEnquire={openEnquiry} />
       <InlineEnquiryForm />
-      <SuccessStories />
+      {/* <SuccessStories /> — hidden until real graduate references are available */}
       <CareerSupport />
       <DriverShortage onEnquire={openEnquiry} />
 

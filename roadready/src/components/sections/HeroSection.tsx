@@ -3,30 +3,40 @@
 import Image from "next/image";
 
 const USP_ITEMS = [
-  "10+ years training industry experience",
-  "Rated 4.9/5 by over 2,000 graduates",
-  "60+ training centres nationwide",
-  "Unrivalled customer service & support",
-  "Flexible finance for every situation",
+  "Experienced team across HGV & ADR training",
+  "Straightforward advice — no hard sell",
+  "Nationwide partner network for practical training",
+  "Support from enquiry through to test day",
+  "Finance options discussed on a case-by-case basis",
 ];
 
 function HeroSection({ onEnquire }: { onEnquire: () => void }) {
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <Image
-        src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1920"
-        alt=""
+        src="/images/unnamed.jpg"
+        alt="RoadReady HGV on the motorway"
         fill
         priority
-        className="object-cover"
+        className="object-cover object-center"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-slate-950/60" />
+      {/* Base dim for headline contrast */}
+      <div className="absolute inset-0 bg-slate-950/50" aria-hidden />
+      {/* Stronger fade toward bottom (and bottom-right) to soften AI tool watermark */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent from-[8%] via-[42%]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_70%_at_100%_100%,rgb(2_6_23/0.97)_0%,rgb(2_6_23/0.45)_45%,transparent_72%)]"
+        aria-hidden
+      />
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
         <div className="flex flex-col gap-6 lg:gap-8 flex-1">
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
             Your New Career Starts With{" "}
-            <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 font-black uppercase">RoadReady</span>
+            <span className="block mt-1 text-amber-400 font-black uppercase">RoadReady</span>
           </h1>
 
           {/* USP box — shows between headline and button on mobile, beside on desktop */}

@@ -2,7 +2,7 @@
 export interface Course {
   slug: string;
   title: string;
-  category: "HGV" | "Forklift" | "CPC";
+  category: "HGV" | "CPC" | "ADR";
   description: string;
   duration: string;
   price: number;
@@ -83,54 +83,35 @@ export const courses: Course[] = [
     careers: ["Trunking", "Supermarket Logistics", "International Haulage"],
   },
   {
-    slug: "forklift-counterbalance",
-    title: "Forklift — Counterbalance",
-    category: "Forklift",
+    slug: "adr-dangerous-goods",
+    title: "ADR — Dangerous Goods",
+    category: "ADR",
     description:
-      "The most in-demand forklift licence. Qualify in just 3 days and open up warehouse, logistics, and construction roles nationwide.",
-    duration: "3 days",
+      "Dangerous goods by road is a burgeoning field: tanker, fuel, chemical, and specialist logistics all need ADR-qualified drivers, and demand is climbing. Training is available now — enquire for class options and dates that suit you.",
+    duration: "Flexible dates — enquire",
     price: 650,
-    weeklyFrom: 13,
-    retestPrice: 150,
+    weeklyFrom: 18,
+    retestPrice: 0,
     includes: [
-      "3 days hands-on training",
-      "RTITB accredited certification",
-      "Theory & practical assessment",
-      "PPE provided during training",
+      "ADR core modules (class-dependent)",
+      "Security awareness where required",
+      "Course materials & certification guidance",
+      "Support booking your SQA / accredited exam",
+      "Advice on which classes suit your goals",
     ],
     modules: [
-      "Pre-use inspection",
-      "Basic manoeuvring",
-      "Stacking at height",
-      "Loading & unloading",
-      "Practical assessment",
+      "ADR fundamentals & legal framework",
+      "Classification, packaging & labelling",
+      "Vehicle equipment & operational rules",
+      "Tunnel codes & transport documents",
+      "Exam preparation",
     ],
-    careers: ["Warehouse Operations", "Builders Merchants", "Manufacturing"],
-  },
-  {
-    slug: "forklift-reach",
-    title: "Forklift — Reach Truck",
-    category: "Forklift",
-    description:
-      "Specialise in reach trucks used in narrow-aisle warehousing. Highly sought after by Amazon, DHL, and major distributors.",
-    duration: "3 days",
-    price: 650,
-    weeklyFrom: 13,
-    retestPrice: 150,
-    includes: [
-      "3 days hands-on training",
-      "RTITB accredited certification",
-      "Theory & practical assessment",
-      "PPE provided during training",
+    careers: [
+      "Maximum Earning Potential",
+      "Fuel & energy transport",
+      "Chemical logistics",
+      "Tanker operations",
     ],
-    modules: [
-      "Reach truck controls",
-      "Narrow-aisle operation",
-      "High-level racking",
-      "Stock rotation techniques",
-      "Practical assessment",
-    ],
-    careers: ["High-Bay Warehousing", "Cold Storage", "Retail Distribution"],
   },
   {
     slug: "cpc-periodic-training",
@@ -181,7 +162,7 @@ export const courses: Course[] = [
       "Extended road driving",
       "Combined test preparation",
     ],
-    careers: ["Any HGV Role", "Maximum Earning Potential", "Heavy Haulage"],
+    careers: ["Any HGV Role", "Heavy Haulage", "Long-distance & trunking"],
   },
 ];
 
@@ -331,22 +312,22 @@ export interface TrainingLocation {
 }
 
 export const trainingLocations: TrainingLocation[] = [
-  { city: "London", region: "South East", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
-  { city: "Birmingham", region: "West Midlands", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
-  { city: "Manchester", region: "North West", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
-  { city: "Leeds", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "London", region: "South East", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
+  { city: "Birmingham", region: "West Midlands", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
+  { city: "Manchester", region: "North West", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
+  { city: "Leeds", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
   { city: "Bristol", region: "South West", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Liverpool", region: "North West", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Liverpool", region: "North West", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
   { city: "Newcastle", region: "North East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
   { city: "Edinburgh", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Glasgow", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Glasgow", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
   { city: "Cardiff", region: "Wales", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Nottingham", region: "East Midlands", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Nottingham", region: "East Midlands", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
   { city: "Southampton", region: "South East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Sheffield", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
+  { city: "Sheffield", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
   { city: "Cambridge", region: "East", courses: ["HGV Cat C", "Cat C+E"] },
-  { city: "Swindon", region: "South West", courses: ["HGV Cat C", "Cat C+E", "Forklift"] },
-  { city: "Milton Keynes", region: "South East", courses: ["HGV Cat C", "Cat C+E", "Forklift", "CPC"] },
+  { city: "Swindon", region: "South West", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
+  { city: "Milton Keynes", region: "South East", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
 ];
 
 // ── Success Stories (enhanced testimonials) ───────────

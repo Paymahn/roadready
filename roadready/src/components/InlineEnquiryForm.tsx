@@ -34,31 +34,22 @@ export default function InlineEnquiryForm() {
                         </svg>
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Received!</h3>
-                    <p className="text-slate-600 font-medium">We'll be in touch within 2 hours to discuss your training.</p>
+                    <p className="text-slate-600 font-medium">We&apos;ll be in touch as soon as we can.</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <section className="relative mx-4 sm:mx-8 lg:mx-auto max-w-6xl bg-gradient-to-br from-white via-slate-50 to-emerald-50/50 rounded-2xl sm:rounded-[2rem] border-2 border-emerald-500/20 shadow-2xl p-8 sm:p-12 my-12 overflow-hidden">
-            {/* Top accent line */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-amber-400 to-emerald-500" />
-
+        <section className="relative mx-4 sm:mx-8 lg:mx-auto max-w-6xl bg-white rounded-2xl border border-slate-200 shadow-md p-8 sm:p-12 my-12 overflow-hidden">
             <div className="relative">
                 <div className="text-center mb-8">
-                    <div className="flex items-center justify-center gap-2 mb-3">
-                        <svg className="w-5 h-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                        </svg>
-                        <span className="text-emerald-700 font-extrabold uppercase tracking-widest text-sm">Nationwide Training</span>
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-2 font-heading tracking-tight">
-                        We Train <span className="text-emerald-600">Everywhere</span>. Start Today.
+                    <p className="text-slate-500 text-sm font-medium mb-2">Training across the UK</p>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 mb-2 font-heading tracking-tight">
+                        Get a <span className="text-emerald-700">free quote</span>
                     </h2>
-                    <p className="text-slate-600 font-medium text-sm sm:text-base max-w-2xl mx-auto">
-                        We have 60+ training centres across the UK. Leave your details below and our team will get back to you within 2 hours to get you booked in.
+                    <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+                        Leave your name, number, and course interest. We&apos;ll call or email with next steps — no obligation.
                     </p>
                 </div>
 
@@ -105,8 +96,8 @@ export default function InlineEnquiryForm() {
                             {loading ? "Sending..." : "Get Free Quote"}
                         </button>
                     </div>
-                    <p className="text-center text-sm text-slate-800 mt-5 font-extrabold tracking-wide uppercase drop-shadow-sm">
-                        Takes 30 seconds. No obligation to book.
+                    <p className="text-center text-sm text-slate-500 mt-5">
+                        Quick form. You choose whether to go ahead.
                     </p>
                 </form>
             </div>

@@ -33,7 +33,7 @@ function SuccessStories() {
         <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
           <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight">
             Real Results with{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 font-black uppercase">RoadReady</span>
+            <span className="text-amber-400 font-black uppercase">RoadReady</span>
           </h2>
           <p className="mt-4 text-slate-300 max-w-lg text-base sm:text-lg">Real people who changed their lives. Here&apos;s where they are now.</p>
         </div>
@@ -220,7 +220,5 @@ function SuccessStories() {
     </section>
   );
 }
-
-
 
 export default SuccessStories;

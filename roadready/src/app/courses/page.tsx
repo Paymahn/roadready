@@ -4,16 +4,22 @@ import { useState } from "react";
 import Image from "next/image";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { courses, type Course } from "@/lib/data";
-import { formatCurrency } from "@/lib/utils";
-import CourseCategoryIcon from "@/components/CourseCategoryIcon";
+const categories = ["All", "HGV", "CPC", "ADR"] as const;
 
-const categories = ["All", "HGV", "Forklift", "CPC"] as const;
+/** Course card hero thumbnails — files in public/images */
+const COURSE_CARD_IMAGES: Record<string, string> = {
+    "hgv-cat-c": "/images/hgvcatc.jpg",
+    "hgv-cat-ce": "/images/hgvcatce.jpg",
+    "adr-dangerous-goods": "/images/hgvadr.jpg",
+    "hgv-cat-c-ce-combo": "/images/hgvcatcce.jpg",
+    "cpc-periodic-training": "/images/unnamed.jpg",
+};
 
 const COURSE_BADGES: Record<string, { text: string; color: string }> = {
     "hgv-cat-c-ce-combo": { text: "Most Popular", color: "bg-amber-400 text-slate-950" },
-    "hgv-cat-c": { text: "94% Pass Rate", color: "bg-emerald-500 text-white" },
-    "hgv-cat-ce": { text: "Highest Earner", color: "bg-emerald-600 text-white" },
-    "forklift-counterbalance": { text: "Fast Track", color: "bg-violet-500 text-white" },
+    "hgv-cat-c": { text: "Core licence", color: "bg-emerald-600 text-white" },
+    "hgv-cat-ce": { text: "Artic upgrade", color: "bg-emerald-700 text-white" },
+    "adr-dangerous-goods": { text: "Enrolling", color: "bg-amber-500 text-slate-950" },
 };
 
 export default function CoursesPage() {
@@ -40,7 +46,7 @@ export default function CoursesPage() {
 
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
                 {/* Hero Banner with Background Image */}
-                <div className="relative rounded-[2.5rem] overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-2xl border border-slate-700/50">
+                <div className="relative rounded-2xl overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-md border border-slate-700/50">
                     {/* Dark gradient overlay on top of the image */}
                     <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply z-10" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-slate-900/40 z-10" />
@@ -62,31 +68,31 @@ export default function CoursesPage() {
                             Start Your Journey
                         </span>
 
-                        <h1 className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-6 font-heading tracking-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
-                            Our Premium <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 drop-shadow-[0_0_20px_rgba(251,191,36,0.5)]">Courses</span>
+                        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 font-heading tracking-tight">
+                            Our <span className="text-amber-400">Courses</span>
                         </h1>
 
-                        <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-14 drop-shadow-md">
+                        <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-14">
                             Everything included. No hidden fees. Enquire for details on any course to get started on your new career path today.
                         </p>
 
                         {/* 4 Big Selling Points Grid */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full max-w-6xl mx-auto">
                             {/* DVSA Approved */}
-                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900/60 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-xl hover:-translate-y-1 hover:bg-slate-900/80 hover:border-emerald-500/30 transition-all duration-300">
+                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-sm hover:border-slate-600 transition-colors duration-200">
                                 <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 mb-1">
                                     <svg className="w-6 h-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">DVSA Approved</span>
-                                    <span className="block text-sm text-slate-400 font-medium">Highest standard training</span>
+                                    <span className="block text-lg font-bold text-white tracking-wide mb-1">DVSA-focused training</span>
+                                    <span className="block text-sm text-slate-400 font-medium">Geared to test requirements</span>
                                 </div>
                             </div>
 
                             {/* All-Inclusive */}
-                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900/60 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-xl hover:-translate-y-1 hover:bg-slate-900/80 hover:border-amber-400/30 transition-all duration-300">
+                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-sm hover:border-slate-600 transition-colors duration-200">
                                 <div className="w-12 h-12 rounded-full bg-amber-400/20 flex items-center justify-center border border-amber-400/30 mb-1">
                                     <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -99,23 +105,23 @@ export default function CoursesPage() {
                             </div>
 
                             {/* Unrivalled Support */}
-                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900/60 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-xl hover:-translate-y-1 hover:bg-slate-900/80 hover:border-blue-400/30 transition-all duration-300">
+                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-sm hover:border-slate-600 transition-colors duration-200">
                                 <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center border border-blue-500/30 mb-1">
                                     <svg className="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">Unrivalled Support</span>
-                                    <span className="block text-sm text-slate-400 font-medium">We're with you 24/7</span>
+                                    <span className="block text-lg font-bold text-white tracking-wide mb-1">Human support</span>
+                                    <span className="block text-sm text-slate-400 font-medium">Office hours — we respond as soon as we can</span>
                                 </div>
                             </div>
 
-                            {/* We handle everything */}
-                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900/60 border border-white/10 rounded-2xl p-6 backdrop-blur-md shadow-xl hover:-translate-y-1 hover:bg-slate-900/80 hover:border-violet-400/30 transition-all duration-300">
-                                <div className="w-12 h-12 rounded-full bg-violet-500/20 flex items-center justify-center border border-violet-500/30 mb-1">
-                                    <svg className="w-6 h-6 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m9-6h-6m6 0a2 2 0 012 2v10a2 2 0 01-2 2h-6m6-0H9m12-10V4h-6m-6 0v2m0 8h6m-6-0v6" />
+                            {/* We handle everything — calm / rest (less stress) */}
+                            <div className="flex flex-col items-center text-center gap-3 bg-slate-900 border border-slate-700 rounded-xl p-6 shadow-sm hover:border-slate-600 transition-colors duration-200">
+                                <div className="w-12 h-12 rounded-full bg-sky-500/15 flex items-center justify-center border border-sky-400/35 mb-1">
+                                    <svg className="w-6 h-6 text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                                     </svg>
                                 </div>
                                 <div>
@@ -128,22 +134,56 @@ export default function CoursesPage() {
                 </div>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-14">
-                {categories.map((cat) => (
-                    <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={`px-6 py-2.5 text-sm font-bold rounded-full transition-all duration-300 shadow-md ${activeCategory === cat
-                            ? "bg-amber-400 text-slate-950 shadow-amber-400/20 scale-105"
-                            : "bg-slate-800 text-slate-300 hover:text-white border border-slate-700 hover:border-amber-400/50 hover:bg-slate-700"
-                            }`}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+                <div className="flex flex-col gap-4 border-b border-slate-800 pb-4 md:pb-0 md:flex-row md:items-end md:justify-between">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
+                        Browse by category
+                    </p>
+                    <div className="md:hidden">
+                        <label htmlFor="course-category" className="sr-only">
+                            Course category
+                        </label>
+                        <select
+                            id="course-category"
+                            value={activeCategory}
+                            onChange={(e) => setActiveCategory(e.target.value)}
+                            className="w-full rounded-lg border border-slate-700 bg-slate-900 px-3 py-2.5 text-sm font-semibold text-white shadow-sm focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/30"
+                        >
+                            {categories.map((cat) => (
+                                <option key={cat} value={cat}>
+                                    {cat === "All" ? "All categories" : cat}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div
+                        role="radiogroup"
+                        aria-label="Course category"
+                        className="hidden md:flex gap-0 -mb-px min-w-0 overflow-x-auto pb-px [scrollbar-width:thin]"
                     >
-                        {cat}
-                    </button>
-                ))}
+                        {categories.map((cat) => {
+                            const selected = activeCategory === cat;
+                            return (
+                                <button
+                                    key={cat}
+                                    type="button"
+                                    role="radio"
+                                    aria-checked={selected}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`relative shrink-0 px-1 py-2.5 mr-8 last:mr-0 text-sm font-semibold transition-colors border-b-2 -mb-px ${selected
+                                        ? "text-white border-amber-400"
+                                        : "text-slate-500 border-transparent hover:text-slate-200 hover:border-slate-600"
+                                        }`}
+                                >
+                                    {cat}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filtered.map((course) => (
                     <CourseCard
                         key={course.slug}
@@ -177,9 +217,17 @@ function CourseCard({
     course: Course; isExpanded: boolean; onToggle: () => void; onEnquire: () => void;
 }) {
     const badge = COURSE_BADGES[course.slug];
+    const isAdr = course.slug === "adr-dangerous-goods";
+    const headerImage = COURSE_CARD_IMAGES[course.slug] ?? "/images/unnamed.jpg";
 
     return (
-        <div className="relative bg-slate-900/80 backdrop-blur-xl border border-slate-700/60 rounded-3xl overflow-hidden hover:border-amber-400/50 hover:shadow-2xl hover:shadow-emerald-900/20 hover:-translate-y-1.5 transition-all duration-300 flex flex-col group">
+        <div
+            className={`relative rounded-2xl overflow-hidden transition-colors duration-200 flex flex-col group bg-gradient-to-b from-emerald-900/25 via-slate-900 to-slate-950 ${
+                isAdr
+                    ? "border-2 border-amber-400 ring-2 ring-amber-400/50 shadow-[0_0_28px_rgba(234,179,8,0.2)] hover:border-amber-300"
+                    : "border border-slate-700 hover:border-slate-600"
+            }`}
+        >
 
             {/* Corner Ribbon */}
             {badge && (
@@ -190,14 +238,22 @@ function CourseCard({
                 </div>
             )}
 
-            <div className="h-32 bg-gradient-to-br from-slate-800 to-slate-900/40 flex flex-col items-center justify-center relative border-b border-slate-700/50">
-                <CourseCategoryIcon category={course.category} className="w-12 h-12 text-emerald-400 mb-2 group-hover:scale-110 group-hover:text-amber-400 transition-all duration-300" />
-                <span className="px-3.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-950/50 text-emerald-400 rounded-full border border-emerald-500/30">
+            <div className="relative h-36 sm:h-40 shrink-0 border-b border-slate-700/50 overflow-hidden">
+                <Image
+                    src={headerImage}
+                    alt=""
+                    aria-hidden
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/35 to-emerald-950/20 pointer-events-none" />
+                <span className="absolute bottom-2.5 left-2.5 sm:bottom-3 sm:left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-slate-950/75 text-emerald-300 rounded-full border border-emerald-500/40 backdrop-blur-[2px]">
                     {course.category}
                 </span>
             </div>
 
-            <div className="p-6 sm:p-8 flex flex-col flex-1">
+            <div className="p-6 sm:p-8 flex flex-col flex-1 bg-gradient-to-b from-emerald-950/15 to-transparent">
                 <h2 className="text-2xl font-extrabold text-white mb-3 group-hover:text-emerald-400 transition-colors">{course.title}</h2>
                 <p className="text-sm text-slate-400 mb-6 leading-relaxed flex-1">{course.description}</p>
 

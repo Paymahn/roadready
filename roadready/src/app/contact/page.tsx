@@ -42,11 +42,11 @@ export default function ContactPage() {
 
             <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h1 className="inline-block px-10 py-5 text-4xl sm:text-5xl lg:text-6xl font-black text-white border-b-4 border-amber-400 bg-slate-900/40 backdrop-blur-md rounded-3xl shadow-2xl mb-6 font-heading tracking-tight drop-shadow-md">
-                        We're Here To <span className="text-amber-400 bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200 sm:text-transparent">Help</span>
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 font-heading tracking-tight">
+                        Contact <span className="text-amber-400">RoadReady</span>
                     </h1>
-                    <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto drop-shadow-md font-medium leading-relaxed">
-                        Ready to start your journey? Send us an enquiry and our friendly team will call you back within 2 hours to get everything sorted.
+                    <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+                        Send an enquiry and we&apos;ll get back to you as soon as we can — usually the same working day.
                     </p>
                 </div>
 

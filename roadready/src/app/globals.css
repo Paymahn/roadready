@@ -194,22 +194,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fixed page-wide depth overlay: fine grain + edge vignette blended softly over every section */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  /* Vignette darkens the outer edges; grain adds a subtle organic texture */
-  background-image:
-    radial-gradient(ellipse at 50% 48%, transparent 28%, rgba(0, 0, 0, 0.28) 100%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: cover, 512px 512px;
-  mix-blend-mode: soft-light;
-  opacity: 0.38;
-  pointer-events: none;
-  z-index: 1;
-}
-
 .font-heading {
   font-family: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 }
