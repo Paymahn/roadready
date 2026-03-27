@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { cn } from "@/lib/utils";
 
@@ -35,13 +36,15 @@ export default function Navbar() {
             >
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16 lg:h-20">
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <div className="w-9 h-9 flex items-center justify-center text-white font-bold text-sm group-hover:opacity-90 transition-opacity" style={{ clipPath: "polygon(50% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%)", background: "linear-gradient(135deg, var(--color-emerald-500), var(--color-emerald-700))" }}>
-                                RR
-                            </div>
-                            <span className="text-xl font-bold text-white">
-                                Road<span className="text-emerald-400">Ready</span>
-                            </span>
+                        <Link href="/" className="flex items-center group">
+                            <Image
+                                src="/images/roadready-logo.png"
+                                alt="RoadReady HGV"
+                                width={240}
+                                height={72}
+                                className="h-16 sm:h-20 w-auto group-hover:opacity-90 transition-opacity invert hue-rotate-180"
+                                priority
+                            />
                         </Link>
 
                         <div className="hidden md:flex items-center gap-1">
