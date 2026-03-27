@@ -123,23 +123,22 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
           </div>
         </div>
 
-        {/* Stats — vertical premium stack */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 max-w-3xl mx-auto mb-16">
+        {/* Stats — industrial brutalist grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 max-w-4xl mx-auto mb-16 border-4 border-emerald-400/60">
           {statItems.map((stat, i) => (
             <div
               key={i}
               ref={stat.ref}
-              className="flex-1 bg-white rounded-xl p-6 sm:p-7 text-center shadow-sm border border-slate-200"
+              className={`p-6 sm:p-8 text-center bg-slate-950 ${
+                i === 1 ? "border-y-4 sm:border-y-0 sm:border-x-4 border-emerald-400/60" : ""
+              }`}
             >
-              <div className={`text-4xl sm:text-5xl font-bold tracking-tight mb-2 ${stat.color}`}>
-                {stat.prefix}{stat.count >= 1000 ? Math.round(stat.count).toLocaleString() : Math.round(stat.count)}{stat.suffix}
-                {i === 2 && (
-                  <svg className="w-6 h-6 text-emerald-600 inline-block ml-1 align-middle" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                  </svg>
-                )}
+              <div className="text-5xl sm:text-6xl font-black tracking-tighter mb-3 text-white leading-none">
+                {stat.prefix}
+                {stat.count >= 1000 ? Math.round(stat.count).toLocaleString() : Math.round(stat.count)}
+                <span className="text-amber-400">{stat.suffix}</span>
               </div>
-              <div className="text-xs sm:text-sm text-slate-600 font-medium leading-snug">{stat.label}</div>
+              <div className="text-xs sm:text-sm text-slate-400 font-bold uppercase tracking-wider leading-snug">{stat.label}</div>
             </div>
           ))}
         </div>
