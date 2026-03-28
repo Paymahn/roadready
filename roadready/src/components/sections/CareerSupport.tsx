@@ -28,6 +28,11 @@ const STEP_ICONS: Record<number, React.ReactNode> = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
   ),
+  5: (
+    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+    </svg>
+  ),
 };
 
 const STEP_BENEFITS: Record<number, { description: string; roadreadyShine: string }> = {
@@ -51,13 +56,18 @@ const STEP_BENEFITS: Record<number, { description: string; roadreadyShine: strin
     roadreadyShine:
       "With us, your licence isn't where we leave you. We offer support with job search, CV guidance, and useful industry contacts where we can — practical next steps toward work, not only handing over a certificate. Hiring is always down to employers and the roles available; we focus on honest guidance and backup, not promises we can't keep.",
   },
+  5: {
+    description: "Your licence is the beginning. Getting into work means CVs, interviews, and knowing where the opportunities are — we help with all of it.",
+    roadreadyShine:
+      "We offer hands-on CV support tailored to logistics, connections to an experienced recruiter with links across the industry, and we actively keep an eye on new driver schemes and employer programmes that could benefit you. We do this because we know what you've invested to get here — and we want to see it pay off. Final hiring decisions always sit with employers; our job is to put you in the strongest position we can.",
+  },
 };
 
 function CareerSupport() {
   const { ref, revealed } = useReveal();
   const [selectedStepNum, setSelectedStepNum] = useState<number>(1);
-  const firstFourSteps = extraStepBoardSteps.filter((s) => s.step <= 4);
-  const selectedStep = firstFourSteps.find((s) => s.step === selectedStepNum);
+  const steps = extraStepBoardSteps.filter((s) => s.step <= 5);
+  const selectedStep = steps.find((s) => s.step === selectedStepNum);
   const benefit = STEP_BENEFITS[selectedStepNum];
 
   return (
@@ -77,8 +87,8 @@ function CareerSupport() {
         </div>
 
         {/* Progress bar */}
-        <div className="hidden sm:flex items-center justify-center max-w-xl mx-auto mb-14">
-          {firstFourSteps.map((step, i) => (
+        <div className="hidden sm:flex items-center justify-center max-w-2xl mx-auto mb-14">
+          {steps.map((step, i) => (
             <div key={step.step} className="flex items-center flex-1 last:flex-none">
               <button
                 onClick={() => setSelectedStepNum(step.step)}
@@ -98,7 +108,7 @@ function CareerSupport() {
                   step.step
                 )}
               </button>
-              {i < firstFourSteps.length - 1 && (
+              {i < steps.length - 1 && (
                 <div className="flex-1 h-1 mx-1">
                   <div
                     className={`h-full rounded-full transition-colors duration-300 ${
@@ -124,7 +134,7 @@ function CareerSupport() {
               <div className="absolute left-7 top-8 bottom-8 w-px bg-gray-200" />
 
               <div className="space-y-1">
-                {firstFourSteps.map((step) => {
+                {steps.map((step) => {
                   const isSelected = selectedStepNum === step.step;
                   const isPast = step.step < selectedStepNum;
                   return (
@@ -192,7 +202,7 @@ function CareerSupport() {
                     <span className="font-heading text-2xl font-black text-black/90 tabular-nums leading-none">
                       {selectedStep.step}
                     </span>
-                    <span className="text-xs font-semibold text-black/70">of 4 total</span>
+                    <span className="text-xs font-semibold text-black/70">of 5</span>
                   </div>
                 </div>
                 <h3 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-black tracking-tight mb-4 px-2">

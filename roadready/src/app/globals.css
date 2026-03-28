@@ -41,6 +41,10 @@
   --color-amber-500: #5F9420;
   --color-amber-600: #4A7318;
 
+  /* Semantic tokens — match brand lime + light surfaces (no tailwind.config.js) */
+  --color-primary: #76B828;
+  --color-surface: #F0FAF5;
+
   /* ── RED stays untouched (Driver Shortage) ───────────── */
   /* Tailwind handles red-* natively */
 

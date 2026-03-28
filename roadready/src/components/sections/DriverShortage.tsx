@@ -1,39 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import { useReveal, useCountUp } from "@/lib/hooks";
 import UkJobMap from "@/components/UkJobMap";
-
-const PLACEMENT_ITEMS = [
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-      </svg>
-    ),
-    label: "Industry Contacts",
-    body: "We have direct relationships with major haulage firms, logistics companies, and agencies across the UK. When you're ready, we make introductions.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-      </svg>
-    ),
-    label: "CV Reviews",
-    body: "Logistics employers look for specific things. Our team reviews your CV to make sure it speaks their language — and gets you to interview.",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-      </svg>
-    ),
-    label: "Interview Preparation",
-    body: "We coach you on what employers tend to ask, what to wear, what to bring, and how to present yourself clearly. We focus on practical prep — not promises about timelines.",
-  },
-];
 
 const CONTEXT_BLOCKS = [
   {
@@ -63,7 +32,6 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
   const stat1 = useCountUp(60000, 2500);
   const stat2 = useCountUp(60, 2000);
   const stat3 = useCountUp(12, 1800);
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
 
   const statItems = [
     { ...stat1, label: "Unfilled HGV positions across the UK (industry figures)", suffix: "+", prefix: "", color: "text-red-500" },
@@ -146,36 +114,6 @@ function DriverShortage({ onEnquire }: { onEnquire: () => void }) {
         {/* Map */}
         <div className="mb-14">
           <UkJobMap />
-        </div>
-
-        {/* Industry Placement — expandable cards */}
-        <div className="mb-14 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {PLACEMENT_ITEMS.map(({ icon, label, body }) => {
-            const isOpen = expandedCard === label;
-            return (
-              <button
-                key={label}
-                type="button"
-                onClick={() => setExpandedCard(isOpen ? null : label)}
-                className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 text-left shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                    {icon}
-                  </div>
-                  <span className="font-bold text-slate-900 text-lg flex-1">{label}</span>
-                  <svg className={`w-5 h-5 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
-                <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0"}`}>
-                  <div className="overflow-hidden">
-                    <p className="text-slate-600 leading-relaxed text-sm">{body}</p>
-                  </div>
-                </div>
-              </button>
-            );
-          })}
         </div>
 
         <div className="text-center">

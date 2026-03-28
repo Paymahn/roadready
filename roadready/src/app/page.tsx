@@ -7,6 +7,7 @@ import InlineEnquiryForm from "@/components/InlineEnquiryForm";
 import CareerSupport from "@/components/sections/CareerSupport";
 
 import DriverShortage from "@/components/sections/DriverShortage";
+import RecruitmentSupport from "@/components/sections/RecruitmentSupport";
 import CoursePreview from "@/components/sections/CoursePreview";
 
 // import SuccessStories from "@/components/sections/SuccessStories"; // Re-enable when real references / reviews are ready
@@ -22,6 +23,7 @@ export default function HomePage() {
       {/* <SuccessStories /> — hidden until real graduate references are available */}
       <CareerSupport />
       <DriverShortage onEnquire={openEnquiry} />
+      <RecruitmentSupport />
 
       <CoursePreview onEnquire={openEnquiry} />
 
