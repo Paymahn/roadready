@@ -2,20 +2,22 @@
 
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
+import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [formStartedAt] = useState(() => Date.now());
     const [form, setForm] = useState({
-        name: "", phone: "", email: "", course: "", message: "", hearAbout: "",
+        name: "", phone: "", email: "", course: "", message: "", hearAbout: "", website: "",
     });
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
         try {
-            await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(form) });
+            await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, formStartedAt }) });
             setSubmitted(true);
         } catch { /* silent */ }
         setLoading(false);
@@ -65,6 +67,15 @@ export default function ContactPage() {
                             <form onSubmit={handleSubmit} className="bg-slate-900/60 backdrop-blur-2xl border border-slate-700/50 rounded-[2.5rem] p-8 sm:p-12 space-y-7 shadow-[0_0_40px_rgba(0,0,0,0.3)] relative overflow-hidden">
                                 {/* Subtle glowing gradient circle behind form */}
                                 <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
+                                <input
+                                    type="text"
+                                    value={form.website}
+                                    onChange={(e) => setForm({ ...form, website: e.target.value })}
+                                    className="hidden"
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                />
 
                                 <div className="relative z-10 border-b border-slate-700/50 pb-6 mb-2">
                                     <h2 className="text-3xl font-black text-white tracking-tight mb-2">Send Us an Enquiry</h2>
@@ -132,7 +143,7 @@ export default function ContactPage() {
                                     <p className="text-sm font-semibold text-slate-400">Mon–Sat, 8am–6pm</p>
                                 </div>
                             </div>
-                            <a href="tel:+4401234567890" className="text-3xl font-black text-emerald-400 hover:text-amber-400 transition-colors block mt-3 drop-shadow-md">01234 567 890</a>
+                            <a href={`tel:${CONTACT.phone.raw}`} className="text-3xl font-black text-emerald-400 hover:text-amber-400 transition-colors block mt-3 drop-shadow-md">{CONTACT.phone.display}</a>
                         </div>
 
                         {/* Callback */}

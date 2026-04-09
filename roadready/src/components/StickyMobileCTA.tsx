@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useEnquiry } from "@/context/EnquiryContext";
+import { CONTACT } from "@/lib/contact";
 
 export default function StickyMobileCTA() {
     const [visible, setVisible] = useState(false);
@@ -28,7 +29,7 @@ export default function StickyMobileCTA() {
                     Enquire Now
                 </button>
                 <a
-                    href="tel:+4401234567890"
+                    href={`tel:${CONTACT.phone.raw}`}
                     className="shrink-0 w-12 h-12 rounded-full border-2 border-emerald-600 flex items-center justify-center text-emerald-600 hover:bg-emerald-50 transition-colors"
                     aria-label="Call us"
                 >

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CONTACT } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -22,8 +23,8 @@ export default function PrivacyPage() {
               <span className="text-emerald-400">roadready.co.uk</span>. We act as the data controller
               for personal information collected through this site and our enquiry processes. If you have
               questions about this policy, contact us at{" "}
-              <a href="mailto:hello@roadready.co.uk" className="text-emerald-400 hover:underline">
-                hello@roadready.co.uk
+              <a href={`mailto:${CONTACT.email}`} className="text-emerald-400 hover:underline">
+                {CONTACT.email}
               </a>.
             </p>
           </section>
@@ -116,8 +117,8 @@ export default function PrivacyPage() {
             </ul>
             <p className="mt-3">
               To exercise any of these rights, email us at{" "}
-              <a href="mailto:hello@roadready.co.uk" className="text-emerald-400 hover:underline">
-                hello@roadready.co.uk
+              <a href={`mailto:${CONTACT.email}`} className="text-emerald-400 hover:underline">
+                {CONTACT.email}
               </a>. We will respond within 30 days.
             </p>
           </section>
@@ -149,8 +150,8 @@ export default function PrivacyPage() {
             <ul className="list-none mt-3 space-y-1">
               <li>
                 Email:{" "}
-                <a href="mailto:hello@roadready.co.uk" className="text-emerald-400 hover:underline">
-                  hello@roadready.co.uk
+                <a href={`mailto:${CONTACT.email}`} className="text-emerald-400 hover:underline">
+                  {CONTACT.email}
                 </a>
               </li>
               <li>Website: roadready.co.uk</li>

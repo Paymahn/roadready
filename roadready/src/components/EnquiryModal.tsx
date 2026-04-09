@@ -2,6 +2,7 @@
 
 import { useState, useEffect, type FormEvent } from "react";
 import { useEnquiry } from "@/context/EnquiryContext";
+import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 
 const inputClass = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm";
@@ -11,17 +12,22 @@ export default function EnquiryModal() {
     const { isOpen, preselectedCourse, closeEnquiry } = useEnquiry();
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", message: "" });
+    const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
+    const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", message: "", website: "" });
 
     useEffect(() => {
         if (preselectedCourse) setForm((f) => ({ ...f, course: preselectedCourse }));
     }, [preselectedCourse]);
 
     useEffect(() => {
+        if (isOpen) setFormStartedAt(Date.now());
+    }, [isOpen]);
+
+    useEffect(() => {
         if (!isOpen) {
             const t = setTimeout(() => {
                 setSubmitted(false);
-                setForm({ name: "", phone: "", email: "", course: "", message: "" });
+                setForm({ name: "", phone: "", email: "", course: "", message: "", website: "" });
             }, 350);
             return () => clearTimeout(t);
         }
@@ -34,7 +40,7 @@ export default function EnquiryModal() {
             await fetch("/api/enquiry", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, formStartedAt }),
             });
             setSubmitted(true);
         } catch { /* silent */ }
@@ -98,6 +104,15 @@ export default function EnquiryModal() {
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-5">
+                            <input
+                                type="text"
+                                value={form.website}
+                                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                                className="hidden"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                            />
                             <div>
                                 <label htmlFor="eq-name" className={labelClass}>Full Name *</label>
                                 <input
@@ -167,8 +182,8 @@ export default function EnquiryModal() {
 
                             <p className="text-xs text-center text-slate-600 font-medium">
                                 Or call us:{" "}
-                                <a href="tel:+4401234567890" className="text-slate-800 font-bold hover:text-slate-900">
-                                    01234 567 890
+                                <a href={`tel:${CONTACT.phone.raw}`} className="text-slate-800 font-bold hover:text-slate-900">
+                                    {CONTACT.phone.display}
                                 </a>
                             </p>
                         </form>

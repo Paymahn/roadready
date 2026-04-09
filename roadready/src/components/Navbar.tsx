@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useEnquiry } from "@/context/EnquiryContext";
+import { CONTACT } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -60,9 +61,9 @@ export default function Navbar() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <a href="tel:+4401234567890" className="hidden lg:inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-white transition-colors">
+                            <a href={`tel:${CONTACT.phone.raw}`} className="hidden lg:inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-white transition-colors">
                                 <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                                <span>01234 567 890</span>
+                                <span>{CONTACT.phone.display}</span>
                             </a>
                             <button
                                 onClick={() => openEnquiry()}
@@ -106,9 +107,9 @@ export default function Navbar() {
                                 {link.label}
                             </Link>
                         ))}
-                        <a href="tel:+4401234567890" className="py-3.5 text-lg font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2">
+                        <a href={`tel:${CONTACT.phone.raw}`} className="py-3.5 text-lg font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-2">
                             <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                            01234 567 890
+                            {CONTACT.phone.display}
                         </a>
                         <button
                             onClick={() => { setMobileOpen(false); openEnquiry(); }}

@@ -8,7 +8,8 @@ const inputClass = "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl
 export default function InlineEnquiryForm() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState({ name: "", phone: "", course: "" });
+    const [formStartedAt] = useState(() => Date.now());
+    const [form, setForm] = useState({ name: "", phone: "", course: "", website: "" });
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -17,7 +18,7 @@ export default function InlineEnquiryForm() {
             await fetch("/api/enquiry", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, formStartedAt }),
             });
             setSubmitted(true);
         } catch { /* silent */ }
@@ -96,6 +97,15 @@ export default function InlineEnquiryForm() {
                             {loading ? "Sending..." : "Get Free Quote"}
                         </button>
                     </div>
+                    <input
+                        type="text"
+                        value={form.website}
+                        onChange={(e) => setForm({ ...form, website: e.target.value })}
+                        className="hidden"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                    />
                     <p className="text-center text-sm text-slate-500 mt-5">
                         Quick form. You choose whether to go ahead.
                     </p>
