@@ -4,6 +4,7 @@ import { useState, useEffect, type FormEvent } from "react";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
+import { postEnquiry } from "@/lib/submit-enquiry";
 
 const inputClass = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm";
 const labelClass = "block text-sm font-semibold text-slate-700 mb-1.5";
@@ -12,6 +13,7 @@ export default function EnquiryModal() {
     const { isOpen, preselectedCourse, closeEnquiry } = useEnquiry();
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
     const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", message: "", website: "" });
 
@@ -36,15 +38,23 @@ export default function EnquiryModal() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setSubmitError(null);
         try {
-            await fetch("/api/enquiry", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...form, formStartedAt }),
+            const result = await postEnquiry({
+                body: { ...form, formStartedAt },
+                formType: "modal",
+                courseSlug: form.course || undefined,
             });
+            if (!result.ok) {
+                setSubmitError(result.error);
+                return;
+            }
             setSubmitted(true);
-        } catch { /* silent */ }
-        setLoading(false);
+        } catch {
+            setSubmitError("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (!isOpen) return null;
@@ -171,6 +181,10 @@ export default function EnquiryModal() {
                             </div>
 
                             <p className="text-xs text-center text-slate-600 font-medium">Takes 30 seconds. No obligation.</p>
+
+                            {submitError ? (
+                                <p className="text-sm text-center text-red-600 font-medium" role="alert">{submitError}</p>
+                            ) : null}
 
                             <button
                                 type="submit"

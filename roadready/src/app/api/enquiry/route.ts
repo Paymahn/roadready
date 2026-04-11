@@ -1,5 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "node:crypto";
+import { sendMetaLeadCapi } from "@/lib/meta-capi";
+
+type AttributionPayload = {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+    utm_term?: string;
+    utm_content?: string;
+    fbclid?: string;
+};
 
 type EnquiryPayload = {
     name?: string;
@@ -10,6 +20,9 @@ type EnquiryPayload = {
     hearAbout?: string;
     website?: string;
     formStartedAt?: number;
+    eventId?: string;
+    formType?: string;
+    attribution?: AttributionPayload;
 };
 
 const CRM_ENQUIRY_URL = process.env.CRM_ENQUIRY_URL;
@@ -45,11 +58,28 @@ function cleanupMaps(nowMs: number) {
     }
 }
 
+function sanitizeAttribution(raw: AttributionPayload | undefined): AttributionPayload {
+    if (!raw || typeof raw !== "object") return {};
+    const out: AttributionPayload = {};
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid"] as const;
+    for (const k of keys) {
+        const v = raw[k];
+        if (typeof v === "string" && v.length > 0 && v.length < 2048) {
+            out[k] = v;
+        }
+    }
+    return out;
+}
+
 export async function POST(request: NextRequest) {
     try {
         const nowMs = Date.now();
         cleanupMaps(nowMs);
         const clientIp = getClientIp(request);
+        const userAgent = request.headers.get("user-agent") || "";
+        const eventSourceUrl =
+            request.headers.get("referer") || request.nextUrl?.origin || "https://www.roadreadyhgv.com";
+
         const ipState = recentByIp.get(clientIp);
         if (!ipState) {
             recentByIp.set(clientIp, { count: 1, windowStartMs: nowMs });
@@ -71,6 +101,13 @@ export async function POST(request: NextRequest) {
         const hearAbout = normalize(body.hearAbout);
         const website = normalize(body.website);
         const formStartedAt = Number(body.formStartedAt || 0);
+        const eventId = normalize(body.eventId);
+        const formTypeRaw = normalize(body.formType);
+        const formType =
+            formTypeRaw === "inline" || formTypeRaw === "modal" || formTypeRaw === "contact"
+                ? formTypeRaw
+                : undefined;
+        const attribution = sanitizeAttribution(body.attribution);
 
         // Basic validation
         if (!name || !phone) {
@@ -82,7 +119,7 @@ export async function POST(request: NextRequest) {
 
         // Honeypot field should always be empty for real users.
         if (website) {
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true, leadStored: false });
         }
 
         if (formStartedAt && nowMs - formStartedAt < MIN_FORM_FILL_MS) {
@@ -93,11 +130,15 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid enquiry payload" }, { status: 400 });
         }
 
+        if (eventId.length > 200) {
+            return NextResponse.json({ error: "Invalid enquiry payload" }, { status: 400 });
+        }
+
         const fingerprint = createHash("sha256")
             .update(`${name}|${phone}|${email}|${course}|${message}`)
             .digest("hex");
         if (recentPayloads.has(fingerprint)) {
-            return NextResponse.json({ success: true });
+            return NextResponse.json({ success: true, leadStored: false });
         }
         recentPayloads.set(fingerprint, nowMs);
 
@@ -119,6 +160,25 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        const leadAttributionPayload = {
+            eventId: eventId || undefined,
+            formType: formType || undefined,
+            ...attribution,
+        };
+        const leadAttributionJson =
+            Object.keys(leadAttributionPayload).length > 0
+                ? JSON.stringify(leadAttributionPayload)
+                : undefined;
+
+        const metadata: Record<string, string | undefined> = {
+            ip: clientIp,
+            userAgent,
+            submittedAt: new Date(nowMs).toISOString(),
+            eventId: eventId || undefined,
+            formType: formType || undefined,
+            ...attribution,
+        };
+
         const upstream = await fetch(CRM_ENQUIRY_URL, {
             method: "POST",
             headers: {
@@ -133,18 +193,26 @@ export async function POST(request: NextRequest) {
                 message: message || undefined,
                 hearAbout: hearAbout || undefined,
                 source: "roadready-website",
-                metadata: {
-                    ip: clientIp,
-                    userAgent: request.headers.get("user-agent") || "",
-                    submittedAt: new Date(nowMs).toISOString(),
-                },
+                leadAttribution: leadAttributionJson,
+                metadata,
             }),
         });
         if (!upstream.ok) {
             return NextResponse.json({ error: "Failed to submit enquiry" }, { status: 502 });
         }
 
-        return NextResponse.json({ success: true });
+        if (eventId) {
+            await sendMetaLeadCapi({
+                eventId,
+                eventSourceUrl,
+                email: email || undefined,
+                phone,
+                clientIp,
+                userAgent,
+            }).catch((err) => console.error("Meta CAPI error", err));
+        }
+
+        return NextResponse.json({ success: true, leadStored: true });
     } catch {
         return NextResponse.json(
             { error: "Failed to process enquiry" },

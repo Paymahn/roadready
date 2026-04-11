@@ -4,7 +4,9 @@ import "./globals.css";
 import { EnquiryProvider } from "@/context/EnquiryContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AttributionCapture from "@/components/AttributionCapture";
 import EnquiryModal from "@/components/EnquiryModal";
+import MetaPixel from "@/components/MetaPixel";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 
 const nunito = Nunito({
@@ -64,7 +66,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${nunito.variable} font-sans antialiased`}>
+        <MetaPixel />
         <EnquiryProvider>
+          <AttributionCapture />
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />

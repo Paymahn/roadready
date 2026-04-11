@@ -1,0 +1,73 @@
+import { createHash } from "node:crypto";
+
+type SendLeadEventArgs = {
+  eventId: string;
+  eventSourceUrl: string;
+  email?: string;
+  phone: string;
+  clientIp: string;
+  userAgent: string;
+};
+
+function hashSha256(value: string): string {
+  return createHash("sha256").update(value, "utf8").digest("hex");
+}
+
+function normalizePhoneDigits(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return "";
+  if (digits.startsWith("0") && digits.length >= 10) {
+    return `44${digits.slice(1)}`;
+  }
+  return digits;
+}
+
+export async function sendMetaLeadCapi(args: SendLeadEventArgs): Promise<void> {
+  const token = process.env.META_CAPI_ACCESS_TOKEN;
+  const pixelId = process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  if (!token || !pixelId) return;
+
+  const userData: Record<string, string | string[]> = {};
+  if (args.clientIp && args.clientIp !== "unknown") {
+    userData.client_ip_address = args.clientIp;
+  }
+  if (args.userAgent) {
+    userData.client_user_agent = args.userAgent;
+  }
+
+  if (args.email) {
+    userData.em = [hashSha256(args.email.trim().toLowerCase())];
+  }
+  const phoneDigits = normalizePhoneDigits(args.phone);
+  if (phoneDigits) {
+    userData.ph = [hashSha256(phoneDigits)];
+  }
+
+  const eventTime = Math.floor(Date.now() / 1000);
+  const payload = {
+    data: [
+      {
+        event_name: "Lead",
+        event_time: eventTime,
+        event_id: args.eventId,
+        event_source_url: args.eventSourceUrl,
+        action_source: "website",
+        user_data: userData,
+      },
+    ],
+  };
+
+  const url = new URL(`https://graph.facebook.com/v21.0/${pixelId}/events`);
+  url.searchParams.set("access_token", token);
+
+  const res = await fetch(url.toString(), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Meta CAPI Lead failed", res.status, text);
+  }
+}

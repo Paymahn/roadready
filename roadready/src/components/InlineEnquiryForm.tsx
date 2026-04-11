@@ -2,27 +2,37 @@
 
 import { useState, type FormEvent } from "react";
 import { courses } from "@/lib/data";
+import { postEnquiry } from "@/lib/submit-enquiry";
 
 const inputClass = "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm shadow-sm";
 
 export default function InlineEnquiryForm() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt] = useState(() => Date.now());
     const [form, setForm] = useState({ name: "", phone: "", course: "", website: "" });
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setSubmitError(null);
         try {
-            await fetch("/api/enquiry", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...form, formStartedAt }),
+            const result = await postEnquiry({
+                body: { ...form, formStartedAt },
+                formType: "inline",
+                courseSlug: form.course || undefined,
             });
+            if (!result.ok) {
+                setSubmitError(result.error);
+                return;
+            }
             setSubmitted(true);
-        } catch { /* silent */ }
-        setLoading(false);
+        } catch {
+            setSubmitError("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (submitted) {
@@ -106,6 +116,11 @@ export default function InlineEnquiryForm() {
                         autoComplete="off"
                         aria-hidden="true"
                     />
+                    {submitError ? (
+                        <p className="text-center text-sm text-red-600 font-medium mt-4" role="alert">
+                            {submitError}
+                        </p>
+                    ) : null}
                     <p className="text-center text-sm text-slate-500 mt-5">
                         Quick form. You choose whether to go ahead.
                     </p>

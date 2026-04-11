@@ -4,10 +4,12 @@ import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
+import { postEnquiry } from "@/lib/submit-enquiry";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt] = useState(() => Date.now());
     const [form, setForm] = useState({
         name: "", phone: "", email: "", course: "", message: "", hearAbout: "", website: "",
@@ -16,11 +18,23 @@ export default function ContactPage() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
+        setSubmitError(null);
         try {
-            await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, formStartedAt }) });
+            const result = await postEnquiry({
+                body: { ...form, formStartedAt },
+                formType: "contact",
+                courseSlug: form.course || undefined,
+            });
+            if (!result.ok) {
+                setSubmitError(result.error);
+                return;
+            }
             setSubmitted(true);
-        } catch { /* silent */ }
-        setLoading(false);
+        } catch {
+            setSubmitError("Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const inputClass = "w-full px-4 py-3 bg-slate-950 border border-slate-700 rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent transition-all min-h-[44px] shadow-inner";
@@ -124,6 +138,9 @@ export default function ContactPage() {
                                     <textarea id="ct-message" rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none min-h-[120px]`} placeholder="Any questions or specific requirements?" />
                                 </div>
 
+                                {submitError ? (
+                                    <p className="text-sm text-red-400 font-semibold text-center" role="alert">{submitError}</p>
+                                ) : null}
                                 <button type="submit" disabled={loading} className="w-full mt-4 py-4 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black text-lg rounded-xl transition-all duration-200 shadow-xl shadow-emerald-900/50 hover:shadow-emerald-500/30 active:scale-[0.98] border-2 border-emerald-500">
                                     {loading ? "Sending..." : "Send Enquiry"}
                                 </button>
