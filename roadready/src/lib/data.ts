@@ -22,11 +22,6 @@ export interface Testimonial {
   rating: number;
 }
 
-export interface FAQItem {
-  question: string;
-  answer: string;
-}
-
 // ── Courses ────────────────────────────────────────────
 export const courses: Course[] = [
   {
@@ -34,7 +29,7 @@ export const courses: Course[] = [
     title: "HGV Category C",
     category: "HGV",
     description:
-      "Get your rigid truck licence and unlock thousands of driving jobs across the UK. Ideal for career changers looking to earn more.",
+      "Get your rigid truck licence and open up a wide range of driving work across the UK — a practical first step for career changers.",
     duration: "5 days practical + theory",
     price: 1800,
     weeklyFrom: 35,
@@ -60,7 +55,7 @@ export const courses: Course[] = [
     title: "HGV Category C+E",
     category: "HGV",
     description:
-      "Upgrade to articulated trucks and access the highest-paying driving roles. Average salaries exceed £42,000.",
+      "Upgrade to articulated trucks and move into some of the best-paid, most in-demand driving work.",
     duration: "5 days practical + theory",
     price: 2200,
     weeklyFrom: 42,
@@ -107,7 +102,7 @@ export const courses: Course[] = [
       "Exam preparation",
     ],
     careers: [
-      "Maximum Earning Potential",
+      "Specialist work, higher rates",
       "Fuel & energy transport",
       "Chemical logistics",
       "Tanker operations",
@@ -143,7 +138,7 @@ export const courses: Course[] = [
     title: "HGV Cat C + C+E Combo",
     category: "HGV",
     description:
-      "The complete package — go from car licence to fully articulated in one booking. Our most popular course with the best value.",
+      "The complete package — go from car licence to full articulated in one booking, designed for people who want to get qualified at every level in one go.",
     duration: "10 days practical + theory",
     price: 3500,
     weeklyFrom: 67,
@@ -215,58 +210,6 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-// ── FAQ ────────────────────────────────────────────────
-export const faqItems: FAQItem[] = [
-  {
-    question: "Is HGV training worth the money?",
-    answer:
-      "Absolutely. The average HGV driver earns £14,000 more per year than the UK median salary. Most of our students break even on their investment within 8 weeks of passing. Use our ROI calculator on the homepage to see your personalised numbers.",
-  },
-  {
-    question: "What if I fail my test?",
-    answer:
-      "Our first-time pass rate is 94%, so it's unlikely — but if it happens, our retest fee is just £350, compared to £800+ at most schools. We don't penalise you for needing another go.",
-  },
-  {
-    question: "I can't afford the full amount upfront — do you offer payment plans?",
-    answer:
-      "Yes. We offer flexible payment plans over 3 or 6 months, starting from as little as £35/week for Cat C. That's less than a daily coffee and lunch. Get in touch and we'll walk you through the options.",
-  },
-  {
-    question: "Will I actually get a job after passing?",
-    answer:
-      "There are currently over 60,000 unfilled HGV driver positions in the UK. We provide job placement support, employer introductions, and CV help. 89% of our graduates find driving work within 4 weeks of passing.",
-  },
-  {
-    question: "How long does the whole process take?",
-    answer:
-      "From first enquiry to driving licence, the typical timeline is 6–10 weeks. This includes your medical, theory test, practical training, and DVSA test. We help you book everything in the right order.",
-  },
-  {
-    question: "Are there any hidden fees?",
-    answer:
-      "None whatsoever. Our prices include everything: theory prep, practical training, DVSA test fees, and medical referral. What you see is what you pay.",
-  },
-  {
-    question: "Do I need any prior experience?",
-    answer:
-      "No. You just need a full UK car driving licence and to pass a medical (D4). We guide you through every step, from booking your medical to walking into the test centre.",
-  },
-  {
-    question: "What's the difference between Cat C and C+E?",
-    answer:
-      "Cat C covers rigid trucks (up to 32 tonnes). Cat C+E adds articulated vehicles (tractor and trailer). C+E unlocks the highest-paying roles and is our most popular course. We recommend the combo package for the best value.",
-  },
-];
-
-// ── Stats ──────────────────────────────────────────────
-export const stats = [
-  { label: "First-Time Pass Rate", value: 94, suffix: "%" },
-  { label: "Students Trained", value: 1240, suffix: "+" },
-  { label: "Google Rating", value: 4.9, suffix: "★" },
-  { label: "Avg. Salary Uplift", value: 14, suffix: "k" },
-];
-
 // ── How It Works Steps (icon key for SVG render) ─────────
 export const howItWorksSteps = [
   { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll call you back within 2 hours.", iconKey: "phone" as const },
@@ -285,49 +228,6 @@ export const extraStepBoardSteps = [
   { step: 6, title: "Industry Contacts", description: "We've built relationships with major haulage firms, agencies, and logistics companies. We don't just train you — we introduce you.", shortDescription: "We introduce you to employers.", iconKey: "contacts" as const, isExtra: true },
   { step: 7, title: "Interview Preparation", description: "Know what employers look for. We'll coach you on industry-specific questions, what to wear, what to bring, and how to stand out.", shortDescription: "Industry-specific interview coaching.", iconKey: "interview" as const, isExtra: true },
   { step: 8, title: "Ongoing Support", description: "Your relationship with us doesn't end when you pass. Need advice 6 months in? We're still here. That's what 'every step of the way' actually means.", shortDescription: "We're still here after you pass.", iconKey: "support" as const, isExtra: true },
-];
-
-// ── Comparison Data (usYes/themYes for check/x icons) ───
-export const comparisonRows = [
-  { feature: "Job placement support", us: "Included", them: "Not offered", usYes: true, themYes: false },
-  { feature: "Online theory prep", us: "Included", them: "Extra cost", usYes: true, themYes: false },
-  { feature: "Hidden fees", us: "None", them: "Medical, theory, etc.", usYes: false, themYes: false },
-  { feature: "First-time pass rate", us: "94%", them: "Industry avg 55%", usYes: false, themYes: false },
-  { feature: "Weekend availability", us: "Yes", them: "Weekdays only", usYes: true, themYes: false },
-];
-
-// ── Driver Shortage Stats ─────────────────────────────
-export const shortageStats = [
-  { label: "Unfilled HGV positions in the UK", value: 60000, suffix: "+", prefix: "" },
-  { label: "Average HGV driver salary", value: 38, suffix: "k", prefix: "£" },
-  { label: "Graduates employed within 4 weeks", value: 89, suffix: "%", prefix: "" },
-  { label: "Industry growth forecast", value: 12, suffix: "%", prefix: "" },
-];
-
-// ── Training Locations ────────────────────────────────
-export interface TrainingLocation {
-  city: string;
-  region: string;
-  courses: string[];
-}
-
-export const trainingLocations: TrainingLocation[] = [
-  { city: "London", region: "South East", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
-  { city: "Birmingham", region: "West Midlands", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
-  { city: "Manchester", region: "North West", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
-  { city: "Leeds", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
-  { city: "Bristol", region: "South West", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Liverpool", region: "North West", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
-  { city: "Newcastle", region: "North East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Edinburgh", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Glasgow", region: "Scotland", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
-  { city: "Cardiff", region: "Wales", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Nottingham", region: "East Midlands", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
-  { city: "Southampton", region: "South East", courses: ["HGV Cat C", "Cat C+E", "CPC"] },
-  { city: "Sheffield", region: "Yorkshire", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
-  { city: "Cambridge", region: "East", courses: ["HGV Cat C", "Cat C+E"] },
-  { city: "Swindon", region: "South West", courses: ["HGV Cat C", "Cat C+E", "ADR"] },
-  { city: "Milton Keynes", region: "South East", courses: ["HGV Cat C", "Cat C+E", "ADR", "CPC"] },
 ];
 
 // ── Success Stories (enhanced testimonials) ───────────

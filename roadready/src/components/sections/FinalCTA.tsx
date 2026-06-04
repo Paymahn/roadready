@@ -7,12 +7,12 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
   const { ref, revealed } = useReveal();
 
   const careerPaths = [
-    { role: "Owner-Operator", earnings: "£50k - £85k+" },
-    { role: "Heavy Haulage Driver", earnings: "£50k - £75k+" },
-    { role: "Specialist / ADR Driver", earnings: "£45k - £65k+" },
-    { role: "Fleet Manager", earnings: "£40k - £60k+" },
-    { role: "International Haulage", earnings: "£45k - £60k+" },
-    { role: "Long-Haul Trunking", earnings: "£40k - £55k+" },
+    { role: "Owner-Operator", descriptor: "Build your own business, set your routes, take home what you earn" },
+    { role: "Heavy Haulage Driver", descriptor: "Specialist loads, top-end driving, pay reflects the skill" },
+    { role: "Specialist / ADR Driver", descriptor: "Dangerous goods and tanker work — niche, in demand, well rewarded" },
+    { role: "Fleet Manager", descriptor: "Step out of the cab into operational leadership" },
+    { role: "International Haulage", descriptor: "Cross-border routes, varied work, premium rates" },
+    { role: "Long-Haul Trunking", descriptor: "Steady long-distance work, predictable income" },
   ];
 
   return (
@@ -48,7 +48,7 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
           <h2 className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight text-center leading-tight">
             A pathway to{" "}
             <span className="block mt-2 sm:mt-3 text-amber-400 uppercase tracking-[0.12em] sm:tracking-[0.16em]">
-              LIFE CHANGING PROGRESSION
+              real career progression
             </span>
           </h2>
         </div>
@@ -76,9 +76,9 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
                 </div>
                 <h3 className="font-bold text-white text-lg">{path.role}</h3>
               </div>
-              <div className="inline-flex items-center gap-1.5 bg-amber-400/10 border border-amber-400/20 text-amber-400 font-bold text-sm px-3.5 py-1.5 rounded-full shadow-inner">
-                Est. earnings: {path.earnings}
-              </div>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                {path.descriptor}
+              </p>
             </div>
           ))}
         </div>
@@ -90,7 +90,7 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
               Ready for a fresh start?
             </h3>
             <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              If you want a career with real progression and financial security — <span className="text-white font-semibold flex-1">this is where it begins</span>.
+              If you want a career with real progression and a stable income in an industry that needs you — <span className="text-white font-semibold flex-1">this is where it begins</span>.
             </p>
             <button
               onClick={onEnquire}
