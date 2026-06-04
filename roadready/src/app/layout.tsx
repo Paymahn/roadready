@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | RoadReady",
   },
   description:
-    "Ethical, transparent HGV and ADR training. No hidden fees, job placement support. Enquire today.",
+    "HGV and ADR training that gets you licensed and into work. Honest advice on courses, finance, and what comes next. UK-wide partner network, no hard sell.",
   keywords: [
     "HGV training",
     "ADR training",
