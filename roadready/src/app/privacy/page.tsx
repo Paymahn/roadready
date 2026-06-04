@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-bold text-white mb-3">1. Who we are</h2>
             <p>
               RoadReady HGV (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) operates the website{" "}
-              <span className="text-emerald-400">roadready.co.uk</span>. We act as the data controller
+              <span className="text-emerald-400">roadreadyhgv.com</span>. We act as the data controller
               for personal information collected through this site and our enquiry processes. If you have
               questions about this policy, contact us at{" "}
               <a href={`mailto:${CONTACT.email}`} className="text-emerald-400 hover:underline">
@@ -154,7 +154,7 @@ export default function PrivacyPage() {
                   {CONTACT.email}
                 </a>
               </li>
-              <li>Website: roadready.co.uk</li>
+              <li>Website: roadreadyhgv.com</li>
             </ul>
           </section>
         </div>

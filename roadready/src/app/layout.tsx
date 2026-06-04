@@ -16,7 +16,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://roadready.co.uk"),
+  metadataBase: new URL("https://roadreadyhgv.com"),
   title: {
     default: "RoadReady — HGV & ADR Training | Your Licence Pays For Itself",
     template: "%s | RoadReady",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "RoadReady",
     locale: "en_GB",
-    url: "https://roadready.co.uk",
+    url: "https://roadreadyhgv.com",
   },
   twitter: {
     card: "summary_large_image",
