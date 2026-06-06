@@ -58,11 +58,20 @@ Pixel screenshots are **OS-dependent** — a baseline made on macOS will not mat
 renderer (different font anti-aliasing). So baselines are generated in the official Playwright
 Linux container and committed to the repo. Do **not** commit `*-darwin.png` baselines.
 
-Generate / update Linux baselines locally via Docker (needs Docker Desktop):
+Generate / update Linux baselines locally via Docker (Docker Desktop must be running).
+
+Docker Desktop only bind-mounts paths it shares (Settings → Resources → File Sharing).
+This repo lives under `/Applications`, which Docker doesn't share by default, so copy it to
+a shared path under `~`, generate there, and copy the PNGs back (this also keeps the
+container's Linux `node_modules` out of your macOS tree):
 
 ```bash
-docker run --rm -v "$PWD":/work -w /work mcr.microsoft.com/playwright:v1.60.0-noble \
+SRC="$PWD"; TMP=~/rr-visual-bootstrap
+rsync -a --exclude node_modules --exclude .next "$SRC"/ "$TMP"/
+docker run --rm -v "$TMP":/work -w /work mcr.microsoft.com/playwright:v1.60.0-noble \
   bash -lc "npm ci && npm run test:visual:update"
+cp "$TMP"/e2e/visual.spec.ts-snapshots/*.png e2e/visual.spec.ts-snapshots/
+rm -rf "$TMP"
 git add e2e/visual.spec.ts-snapshots
 ```
 
