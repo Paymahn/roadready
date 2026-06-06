@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# The Next.js app lives in the roadready/ subdirectory of this repo, so every
+# run step executes there. (GitHub Actions only reads workflows from the repo
+# root, which is why this file is here and not under roadready/.)
+defaults:
+  run:
+    working-directory: roadready
+
+jobs:
+  quality:
+    name: Lint · Typecheck · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: roadready/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+
+  e2e:
+    name: E2E + a11y (Playwright)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: roadready/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      # webServer in playwright.config.ts builds + starts the production app.
+      - run: npm run test
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: roadready/playwright-report/
+          retention-days: 7
+
+  visual:
+    name: Visual regression
+    runs-on: ubuntu-latest
+    # Runs in the official Playwright container so screenshots render identically to
+    # the committed Linux baselines. Informational until baselines exist in
+    # roadready/e2e/visual.spec.ts-snapshots/ — remove continue-on-error to gate merges.
+    continue-on-error: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.60.0-noble
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: npm run test:visual
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: visual-snapshots
+          path: |
+            roadready/playwright-report/
+            roadready/test-results/
+          retention-days: 7
+
+  lighthouse:
+    name: Lighthouse (mobile budgets)
+    runs-on: ubuntu-latest
+    # Most budgets are warnings; only egregious LCP/CLS fail. Informational for now —
+    # remove continue-on-error once the budgets reflect the site's real numbers.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: roadready/package-lock.json
+      - run: npm ci
+      - run: npm run test:lighthouse
