@@ -73,7 +73,7 @@ export default function ContactPage() {
                                 <div className="w-24 h-24 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-8 border-2 border-emerald-500/50 shadow-lg shadow-emerald-500/20">
                                     <svg className="w-12 h-12 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                                 </div>
-                                <h2 className="text-4xl font-black text-white mb-4">You're On Your Way!</h2>
+                                <h2 className="text-4xl font-black text-white mb-4">You&apos;re On Your Way!</h2>
                                 <p className="text-emerald-400 font-bold text-xl mb-3">Your enquiry has been received securely.</p>
                                 <p className="text-slate-300 text-lg">One of our experts will call you back within 2 business hours to discuss your next steps.</p>
                             </div>
@@ -93,7 +93,7 @@ export default function ContactPage() {
 
                                 <div className="relative z-10 border-b border-slate-700/50 pb-6 mb-2">
                                     <h2 className="text-3xl font-black text-white tracking-tight mb-2">Send Us an Enquiry</h2>
-                                    <p className="text-base text-slate-400 font-medium tracking-wide">Leave your details and we'll handle the rest.</p>
+                                    <p className="text-base text-slate-400 font-medium tracking-wide">Leave your details and we&apos;ll handle the rest.</p>
                                 </div>
 
                                 <div className="grid sm:grid-cols-2 gap-5">

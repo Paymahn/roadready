@@ -16,7 +16,10 @@ export function EnquiryProvider({ children }: { children: ReactNode }) {
     const [preselectedCourse, setPreselectedCourse] = useState("");
 
     const openEnquiry = useCallback((course?: string) => {
-        setPreselectedCourse(course ?? "");
+        // Guard: several CTAs wire this directly as onClick={openEnquiry}, so React
+        // passes the click event as `course`. Only accept real string slugs — otherwise
+        // the event object lands in form state and breaks JSON.stringify on submit.
+        setPreselectedCourse(typeof course === "string" ? course : "");
         setIsOpen(true);
         document.body.style.overflow = "hidden";
     }, []);

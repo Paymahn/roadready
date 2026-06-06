@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test --grep-invert @visual",
+    "test:ui": "playwright test --ui --grep-invert @visual",
+    "test:visual": "PW_PROD=1 playwright test --grep @visual",
+    "test:visual:update": "PW_PROD=1 playwright test --grep @visual --update-snapshots",
+    "test:lighthouse": "npm run build && lhci autorun"
   },
   "dependencies": {
     "next": "16.1.6",
@@ -14,6 +20,9 @@
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

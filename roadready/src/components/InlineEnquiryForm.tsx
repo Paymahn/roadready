@@ -70,6 +70,7 @@ export default function InlineEnquiryForm() {
                             <input
                                 type="text"
                                 required
+                                aria-label="Your full name"
                                 value={form.name}
                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                                 className={inputClass}
@@ -80,6 +81,7 @@ export default function InlineEnquiryForm() {
                             <input
                                 type="tel"
                                 required
+                                aria-label="Phone number"
                                 value={form.phone}
                                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                                 className={inputClass}
@@ -91,6 +93,7 @@ export default function InlineEnquiryForm() {
                                 value={form.course}
                                 onChange={(e) => setForm({ ...form, course: e.target.value })}
                                 className={inputClass}
+                                aria-label="Select a course"
                             >
                                 <option value="">Select a course...</option>
                                 {courses.map((c) => (

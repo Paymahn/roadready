@@ -3,6 +3,21 @@
 import { stats } from "@/lib/data";
 import { useCountUp } from "@/lib/hooks";
 
+function StatCounter({ stat }: { stat: (typeof stats)[number] }) {
+  const { count, ref } = useCountUp(stat.value);
+  return (
+    <div ref={ref} className="text-center group">
+      <div className="inline-flex flex-col items-center bg-white/5 border border-white/10 rounded-2xl px-6 py-5 w-full hover:bg-white/8 hover:border-amber-400/30 transition-all duration-300">
+        <div className="text-4xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">
+          {stat.value % 1 !== 0 ? count.toFixed(1) : Math.floor(count)}
+          <span className="text-amber-400">{stat.suffix}</span>
+        </div>
+        <div className="text-xs font-medium text-white/50 uppercase tracking-widest mt-1">{stat.label}</div>
+      </div>
+    </div>
+  );
+}
+
 function TrustStrip() {
   return (
     <section className="relative py-16 lg:py-20" style={{ background: "#0A2318" }}>
@@ -14,20 +29,9 @@ function TrustStrip() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Stats row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
-          {stats.map((stat) => {
-            const { count, ref } = useCountUp(stat.value);
-            return (
-              <div key={stat.label} ref={ref} className="text-center group">
-                <div className="inline-flex flex-col items-center bg-white/5 border border-white/10 rounded-2xl px-6 py-5 w-full hover:bg-white/8 hover:border-amber-400/30 transition-all duration-300">
-                  <div className="text-4xl sm:text-5xl font-extrabold text-white mb-1 tracking-tight">
-                    {stat.value % 1 !== 0 ? count.toFixed(1) : Math.floor(count)}
-                    <span className="text-amber-400">{stat.suffix}</span>
-                  </div>
-                  <div className="text-xs font-medium text-white/50 uppercase tracking-widest mt-1">{stat.label}</div>
-                </div>
-              </div>
-            );
-          })}
+          {stats.map((stat) => (
+            <StatCounter key={stat.label} stat={stat} />
+          ))}
         </div>
 
         {/* Accreditations row */}
