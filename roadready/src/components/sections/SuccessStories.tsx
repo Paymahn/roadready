@@ -119,7 +119,6 @@ function SuccessStories() {
             const isFemale = ["Sarah", "Priya"].some((n) => s.name.startsWith(n));
             const cardBg = isFemale ? "bg-pink-50 border-pink-200/60" : "bg-blue-50 border-blue-200/60";
             const quoteTint = isFemale ? "text-pink-200/20" : "text-blue-200/20";
-            const borderTint = isFemale ? "border-pink-200/60" : "border-blue-200/60";
 
             return (
               <div key={s.name} className={`${cardBg} border rounded-2xl p-6 shadow-sm flex flex-col relative overflow-hidden hover:shadow-lg transition-all duration-300`}>
