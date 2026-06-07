@@ -16,6 +16,7 @@ export default function StickyMobileCTA() {
 
     return (
         <div
+            data-testid="sticky-mobile-cta"
             className={`fixed bottom-0 inset-x-0 z-50 lg:hidden transition-all duration-300 ${visible
                     ? "translate-y-0 opacity-100"
                     : "translate-y-full opacity-0 pointer-events-none"
