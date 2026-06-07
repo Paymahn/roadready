@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "playwright test --grep-invert @visual",
+    "test:unit": "vitest run",
     "test:ui": "playwright test --ui --grep-invert @visual",
     "test:visual": "PW_PROD=1 playwright test --grep @visual",
     "test:visual:update": "PW_PROD=1 playwright test --grep @visual --update-snapshots",
@@ -30,6 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.8"
   }
 }

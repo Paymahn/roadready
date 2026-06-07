@@ -23,6 +23,7 @@ type EnquiryPayload = {
     eventId?: string;
     formType?: string;
     attribution?: AttributionPayload;
+    consent?: boolean;
 };
 
 const CRM_ENQUIRY_URL = process.env.CRM_ENQUIRY_URL;
@@ -108,6 +109,7 @@ export async function POST(request: NextRequest) {
                 ? formTypeRaw
                 : undefined;
         const attribution = sanitizeAttribution(body.attribution);
+        const consent = body.consent === true;
 
         // Basic validation
         if (!name || !phone) {
@@ -201,7 +203,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Failed to submit enquiry" }, { status: 502 });
         }
 
-        if (eventId) {
+        // Meta CAPI is gated on consent. The CRM forward above is unconditional — the
+        // visitor asked us to contact them; that's the service they requested, not marketing.
+        if (eventId && consent) {
             await sendMetaLeadCapi({
                 eventId,
                 eventSourceUrl,
