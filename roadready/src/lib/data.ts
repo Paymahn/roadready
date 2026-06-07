@@ -39,7 +39,6 @@ export const courses: Course[] = [
       "5 days practical training",
       "Medical referral",
       "DVSA test fee included",
-      "Job placement support",
     ],
     modules: [
       "Vehicle safety checks",
@@ -65,7 +64,6 @@ export const courses: Course[] = [
       "5 days practical training",
       "Medical referral",
       "DVSA test fee included",
-      "Job placement support",
       "Trailer coupling training",
     ],
     modules: [
@@ -148,7 +146,6 @@ export const courses: Course[] = [
       "Both theory test preparations",
       "Medical referral",
       "Both DVSA test fees",
-      "Job placement support",
       "Priority booking",
     ],
     modules: [
@@ -212,7 +209,7 @@ export const testimonials: Testimonial[] = [
 
 // ── How It Works Steps (icon key for SVG render) ─────────
 export const howItWorksSteps = [
-  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll call you back within 2 hours.", iconKey: "phone" as const },
+  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll aim to call you back within 2 hours.", iconKey: "phone" as const },
   { step: 2, title: "Medical", description: "Book your D4 medical — we'll tell you exactly where and how.", iconKey: "medical" as const },
   { step: 3, title: "Train", description: "Complete your theory and practical training with expert instructors.", iconKey: "train" as const },
   { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", iconKey: "drive" as const },
@@ -220,7 +217,7 @@ export const howItWorksSteps = [
 
 // ── Extra Step Board (full journey: standard + where we go further) ─────────
 export const extraStepBoardSteps = [
-  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll call you back within 2 hours.", shortDescription: "We'll call you back within 2 hours.", iconKey: "phone" as const, isExtra: false },
+  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll aim to call you back within 2 hours.", shortDescription: "We'll aim to call you back within 2 hours.", iconKey: "phone" as const, isExtra: false },
   { step: 2, title: "Medical", description: "Book your D4 medical — we'll tell you exactly where and how.", shortDescription: "We guide you through the D4.", iconKey: "medical" as const, isExtra: false },
   { step: 3, title: "Train", description: "Complete your theory and practical training with expert instructors.", shortDescription: "Expert instructors, every time.", iconKey: "train" as const, isExtra: false },
   { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", shortDescription: "Pass your test, get your licence.", iconKey: "drive" as const, isExtra: false },

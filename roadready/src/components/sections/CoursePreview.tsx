@@ -35,7 +35,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12">
           <div>
             <h2 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-3 tracking-tight">Our Courses</h2>
-            <p className="text-lg text-slate-400">Everything included. Enquire for details on any course.</p>
+            <p className="text-lg text-slate-400">Enquire for details on any course.</p>
           </div>
           <Link
             href="/courses"

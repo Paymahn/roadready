@@ -69,7 +69,7 @@ export default function EnquiryModal() {
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <h2 className="text-xl font-bold text-slate-900">Get Your Free Quote</h2>
-                            <p className="text-sm text-slate-600 mt-0.5">We&apos;ll call you back within 2 hours</p>
+                            <p className="text-sm text-slate-600 mt-0.5">We&apos;ll aim to call you back within 2 hours</p>
                         </div>
                         <button
                             onClick={closeEnquiry}
@@ -82,7 +82,7 @@ export default function EnquiryModal() {
                         </button>
                     </div>
                     <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-slate-100">
-                        {["DVSA Approved", "No hidden fees", "2hr callback"].map((t) => (
+                        {["DVSA-aligned training", "Honest advice", "Quick callback"].map((t) => (
                             <span key={t} className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full">
                                 <svg className="w-3 h-3 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -103,7 +103,7 @@ export default function EnquiryModal() {
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Enquiry Sent!</h3>
                             <p className="text-slate-700 mb-8 max-w-xs mx-auto font-medium">
-                                We&apos;ll be in touch within 2 hours. Check your phone for our call.
+                                We&apos;ll aim to be in touch within 2 hours. Check your phone for our call.
                             </p>
                             <button
                                 onClick={closeEnquiry}
