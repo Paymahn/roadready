@@ -20,7 +20,7 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   metadataBase: new URL("https://roadreadyhgv.com"),
   title: {
-    default: "RoadReady — HGV & ADR Training | Your Licence Pays For Itself",
+    default: "RoadReady — HGV & ADR Training",
     template: "%s | RoadReady",
   },
   description:
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "RoadReady — HGV & ADR Training",
     description:
-      "Your licence pays for itself. No hidden fees, job placement included.",
+      "Honest advice on HGV and ADR training — courses, finance, and what comes next. UK-wide partner network, no hard sell.",
     type: "website",
     siteName: "RoadReady",
     locale: "en_GB",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "RoadReady — HGV & ADR Training",
-    description: "No hidden fees, job placement included. Enquire today.",
+    description: "HGV and ADR training with honest advice on courses, finance, and what comes next. No hard sell.",
   },
   robots: {
     index: true,

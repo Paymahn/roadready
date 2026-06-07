@@ -73,7 +73,7 @@ export default function CoursesPage() {
                         </h1>
 
                         <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-14">
-                            Everything included. No hidden fees. Enquire for details on any course to get started on your new career path today.
+                            Enquire for details on any course to get started on your new career path today.
                         </p>
 
                         {/* 4 Big Selling Points Grid */}
@@ -99,8 +99,8 @@ export default function CoursesPage() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">All-Inclusive</span>
-                                    <span className="block text-sm text-slate-400 font-medium">No hidden fees ever</span>
+                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">Upfront pricing</span>
+                                    <span className="block text-sm text-slate-400 font-medium">Costs explained before you book</span>
                                 </div>
                             </div>
 
