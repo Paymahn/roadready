@@ -1,5 +1,6 @@
 import { getStoredAttribution } from "@/lib/attribution";
 import { trackMetaLead, type MetaLeadParams } from "@/lib/meta-pixel";
+import { getStoredConsent } from "@/lib/consent";
 
 export type EnquiryFormType = MetaLeadParams["content_category"];
 
@@ -20,6 +21,8 @@ export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOpt
       : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
   const attribution = getStoredAttribution();
+  // Read consent at submit time (not page load) so a late accept is captured.
+  const consent = getStoredConsent() === "accepted";
 
   const res = await fetch("/api/enquiry", {
     method: "POST",
@@ -29,6 +32,7 @@ export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOpt
       eventId,
       formType,
       attribution,
+      consent,
     }),
   });
 
@@ -45,7 +49,9 @@ export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOpt
 
   const leadStored = data.leadStored === true;
 
-  if (leadStored) {
+  // Only fire the client-side Lead event when consent was given (the pixel isn't even
+  // loaded otherwise). The CRM forward is unconditional and handled server-side.
+  if (leadStored && consent) {
     trackMetaLead({
       content_category: formType,
       content_name: courseSlug || undefined,

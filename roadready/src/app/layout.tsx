@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { EnquiryProvider } from "@/context/EnquiryContext";
+import { ConsentProvider } from "@/context/ConsentContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AttributionCapture from "@/components/AttributionCapture";
 import EnquiryModal from "@/components/EnquiryModal";
 import MetaPixel from "@/components/MetaPixel";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import ConsentBanner from "@/components/ConsentBanner";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -66,15 +68,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${nunito.variable} font-sans antialiased`}>
-        <MetaPixel />
-        <EnquiryProvider>
-          <AttributionCapture />
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <EnquiryModal />
-          <StickyMobileCTA />
-        </EnquiryProvider>
+        <ConsentProvider>
+          <MetaPixel />
+          <EnquiryProvider>
+            <AttributionCapture />
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <EnquiryModal />
+            <StickyMobileCTA />
+          </EnquiryProvider>
+          <ConsentBanner />
+        </ConsentProvider>
       </body>
     </html>
   );

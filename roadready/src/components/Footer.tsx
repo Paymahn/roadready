@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { CONTACT } from "@/lib/contact";
+import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 
 const footerLinks = [
     {
@@ -80,6 +81,11 @@ export default function Footer() {
                                         </Link>
                                     </li>
                                 ))}
+                                {group.title === "Legal" && (
+                                    <li>
+                                        <CookiePreferencesButton />
+                                    </li>
+                                )}
                             </ul>
                         </div>
                     ))}

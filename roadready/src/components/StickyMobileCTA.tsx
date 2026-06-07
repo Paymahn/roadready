@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useEnquiry } from "@/context/EnquiryContext";
+import { useConsent } from "@/context/ConsentContext";
 import { CONTACT } from "@/lib/contact";
 
 export default function StickyMobileCTA() {
     const [visible, setVisible] = useState(false);
     const { openEnquiry } = useEnquiry();
+    const { isBannerOpen } = useConsent();
 
     useEffect(() => {
         const onScroll = () => setVisible(window.scrollY > 600);
@@ -17,7 +19,7 @@ export default function StickyMobileCTA() {
     return (
         <div
             data-testid="sticky-mobile-cta"
-            className={`fixed bottom-0 inset-x-0 z-50 lg:hidden transition-all duration-300 ${visible
+            className={`fixed bottom-0 inset-x-0 z-50 lg:hidden transition-all duration-300 ${visible && !isBannerOpen
                     ? "translate-y-0 opacity-100"
                     : "translate-y-full opacity-0 pointer-events-none"
                 }`}

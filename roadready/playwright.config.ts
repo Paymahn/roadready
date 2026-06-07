@@ -58,6 +58,9 @@ const config: PlaywrightTestConfig = {
         url: baseURL,
         reuseExistingServer: !CI && !PROD,
         timeout: 240_000,
+        // A dummy pixel id so MetaPixel has something to load in tests (pixel.spec.ts
+        // verifies the consent gate). Intercepted in tests — never hits Meta.
+        env: { NEXT_PUBLIC_META_PIXEL_ID: "0000000000" },
       },
 };
 
