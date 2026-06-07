@@ -10,6 +10,8 @@ import EnquiryModal from "@/components/EnquiryModal";
 import MetaPixel from "@/components/MetaPixel";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import ConsentBanner from "@/components/ConsentBanner";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -80,6 +82,9 @@ export default function RootLayout({
           </EnquiryProvider>
           <ConsentBanner />
         </ConsentProvider>
+        {/* Cookieless, GDPR-clean — rendered outside ConsentProvider, not consent-gated. */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
