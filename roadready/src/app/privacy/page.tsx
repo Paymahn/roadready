@@ -90,7 +90,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section>
+          <section id="cookies">
             <h2 className="text-xl font-bold text-white mb-3">7. Cookies and tracking</h2>
             <p>
               This website may use cookies or similar technologies to remember preferences, measure

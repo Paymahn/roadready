@@ -12,6 +12,9 @@ export const test = base.extend({
       const w = window as unknown as { fbq: (...args: unknown[]) => void; _fbq: unknown };
       w.fbq = () => {};
       w._fbq = w.fbq;
+      // Dismiss the cookie banner so it never interferes with functional/visual
+      // tests; consent behaviour itself is covered by consent.spec.ts.
+      document.cookie = "rr_consent=rejected; path=/";
     });
     await page.route(/connect\.facebook\.net/, (route) => route.abort());
     await use(page);
