@@ -25,6 +25,31 @@ function normalizePhoneDigits(phone: string): string {
   return digits;
 }
 
+// Bound the CAPI POST so a slow Graph API can't hang the caller. CAPI runs in `after()`
+// (post-response) so it never blocks the user, but the timeout still frees the function.
+const CAPI_TIMEOUT_MS = 3000;
+
+async function postToCapi(url: string, body: string): Promise<void> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), CAPI_TIMEOUT_MS);
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Meta CAPI request failed", res.status, text);
+    }
+  } catch (err) {
+    console.error("Meta CAPI request aborted/errored", err);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function sendMetaLeadCapi(args: SendLeadEventArgs): Promise<void> {
   const token = process.env.META_CAPI_ACCESS_TOKEN;
   const pixelId = process.env.META_PIXEL_ID || process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -64,16 +89,7 @@ export async function sendMetaLeadCapi(args: SendLeadEventArgs): Promise<void> {
   const url = new URL(`https://graph.facebook.com/v21.0/${pixelId}/events`);
   url.searchParams.set("access_token", token);
 
-  const res = await fetch(url.toString(), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    console.error("Meta CAPI Lead failed", res.status, text);
-  }
+  await postToCapi(url.toString(), JSON.stringify(payload));
 }
 
 // ── Phase 3 scaffolding: offline-conversion (Purchase) sync ──────────────────
@@ -125,13 +141,5 @@ export async function sendMetaPurchaseCapi(args: SendPurchaseEventArgs): Promise
 
   const url = new URL(`https://graph.facebook.com/v21.0/${pixelId}/events`);
   url.searchParams.set("access_token", token);
-  const res = await fetch(url.toString(), {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    console.error("Meta CAPI Purchase failed", res.status, text);
-  }
+  await postToCapi(url.toString(), JSON.stringify(payload));
 }
