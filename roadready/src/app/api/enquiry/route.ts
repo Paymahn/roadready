@@ -4,6 +4,10 @@ import { sendMetaLeadCapi } from "@/lib/meta-capi";
 import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
 import { CONTACT } from "@/lib/contact";
 
+// Deliberate cap (not the 300s Fluid Compute default) so a runaway is killed early, with
+// room for the CRM forward (up to CRM_TIMEOUT_MS) plus the post-response CAPI in after().
+export const maxDuration = 30;
+
 type AttributionPayload = {
     utm_source?: string;
     utm_medium?: string;
@@ -31,9 +35,10 @@ type EnquiryPayload = {
 const CRM_ENQUIRY_URL = process.env.CRM_ENQUIRY_URL;
 const CRM_ENQUIRY_TOKEN = process.env.CRM_ENQUIRY_TOKEN;
 const MIN_FORM_FILL_MS = 3000;
-// Bound the CRM forward well under Vercel's ~10s function budget so a slow/cold CRM
-// aborts cleanly instead of hanging the function into a 502.
-const CRM_TIMEOUT_MS = 8000;
+// Bound the CRM forward so a slow/cold CRM aborts cleanly instead of hanging the function.
+// 15s gives a cold Amplify Lambda room to wake and succeed (a warm CRM returns <2s), well
+// within maxDuration (30s), leaving room for the post-response CAPI.
+const CRM_TIMEOUT_MS = 15000;
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_IP = 8;
 const recentByIp = new Map<string, { count: number; windowStartMs: number }>();
