@@ -151,6 +151,17 @@ export const courses: Course[] = [
   },
 ];
 
+// ── Lead-value proxy ───────────────────────────────────
+// Maps a course slug to its internal `price` proxy (above) for the Meta Lead/Purchase
+// `value`. Returns undefined for unknown / general enquiries ("", "other") so callers
+// OMIT value rather than fabricate one. The client Pixel and server CAPI both call this
+// same helper, so both events carry an identical value and dedupe cleanly by event_id.
+export const LEAD_VALUE_CURRENCY = "GBP";
+export function courseLeadValue(slug?: string): number | undefined {
+  if (!slug) return undefined;
+  return courses.find((c) => c.slug === slug)?.price;
+}
+
 // ── Testimonials ───────────────────────────────────────
 export const testimonials: Testimonial[] = [
   {

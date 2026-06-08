@@ -28,7 +28,7 @@ beforeEach(() => {
 
 let seq = 0;
 // Unique name/phone/IP per request dodges the route's per-IP rate limit and payload dedup.
-function enquiry(consent: boolean): NextRequest {
+function enquiry(consent: boolean, course?: string): NextRequest {
   seq += 1;
   return new NextRequest("https://www.roadreadyhgv.com/api/enquiry", {
     method: "POST",
@@ -40,6 +40,7 @@ function enquiry(consent: boolean): NextRequest {
       formType: "inline",
       formStartedAt: Date.now() - 5000, // older than MIN_FORM_FILL_MS, so not rejected as too fast
       consent,
+      ...(course !== undefined && { course }),
     }),
   });
 }
@@ -57,5 +58,30 @@ describe("POST /api/enquiry — consent gates Meta CAPI, never the CRM forward",
     expect(res.status).toBe(200);
     expect(crmCalls).toContain("https://crm.test/enquiry"); // identical UX: CRM still gets the lead
     expect(sendMetaLeadCapi).not.toHaveBeenCalled(); // CAPI suppressed
+  });
+});
+
+describe("POST /api/enquiry — Lead value reflects the course (internal proxy)", () => {
+  it("Cat C+E enquiry → CAPI Lead carries value 3000 + GBP", async () => {
+    await POST(enquiry(true, "hgv-cat-ce"));
+    expect(sendMetaLeadCapi).toHaveBeenCalledWith(
+      expect.objectContaining({ value: 3000, currency: "GBP" }),
+    );
+  });
+
+  it("CPC enquiry → CAPI Lead carries value 75 + GBP", async () => {
+    await POST(enquiry(true, "cpc-periodic-training"));
+    expect(sendMetaLeadCapi).toHaveBeenCalledWith(
+      expect.objectContaining({ value: 75, currency: "GBP" }),
+    );
+  });
+
+  it("general enquiry (course='other') → CAPI Lead fires with NO value/currency, CRM still forwarded", async () => {
+    await POST(enquiry(true, "other"));
+    expect(sendMetaLeadCapi).toHaveBeenCalledTimes(1);
+    const arg = vi.mocked(sendMetaLeadCapi).mock.calls[0]?.[0];
+    expect(arg?.value).toBeUndefined();
+    expect(arg?.currency).toBeUndefined();
+    expect(crmCalls).toContain("https://crm.test/enquiry");
   });
 });

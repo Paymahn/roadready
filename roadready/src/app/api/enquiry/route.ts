@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { sendMetaLeadCapi } from "@/lib/meta-capi";
+import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
 
 type AttributionPayload = {
     utm_source?: string;
@@ -206,6 +207,7 @@ export async function POST(request: NextRequest) {
         // Meta CAPI is gated on consent. The CRM forward above is unconditional — the
         // visitor asked us to contact them; that's the service they requested, not marketing.
         if (eventId && consent) {
+            const value = courseLeadValue(course);
             await sendMetaLeadCapi({
                 eventId,
                 eventSourceUrl,
@@ -213,6 +215,8 @@ export async function POST(request: NextRequest) {
                 phone,
                 clientIp,
                 userAgent,
+                value,
+                currency: value !== undefined ? LEAD_VALUE_CURRENCY : undefined,
             }).catch((err) => console.error("Meta CAPI error", err));
         }
 
