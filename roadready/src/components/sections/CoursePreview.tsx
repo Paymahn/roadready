@@ -141,7 +141,7 @@ function CoursePreview({ onEnquire }: { onEnquire: (course?: string) => void }) 
                   )}
 
                   <p className="text-xs text-gray-500 mb-4 mt-auto">
-                    All-inclusive · {course.duration}
+                    {course.duration}
                   </p>
 
                   <button

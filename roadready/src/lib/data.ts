@@ -6,8 +6,6 @@ export interface Course {
   description: string;
   duration: string;
   price: number;
-  weeklyFrom: number;
-  retestPrice: number;
   includes: string[];
   modules: string[];
   careers?: string[];
@@ -23,6 +21,11 @@ export interface Testimonial {
 }
 
 // ── Courses ────────────────────────────────────────────
+// NOTE: `price` is INTERNAL data — rendered NOWHERE on the public site. It is an
+// internal Lead-value proxy sent to Meta for ad optimisation only: NOT a displayed
+// price and NOT a customer quote (real quotes vary by location/deal and are given on
+// enquiry). Do not surface it on any customer-facing page without re-verifying against
+// actual quoted prices.
 export const courses: Course[] = [
   {
     slug: "hgv-cat-c",
@@ -31,9 +34,7 @@ export const courses: Course[] = [
     description:
       "Get your rigid truck licence and open up a wide range of driving work across the UK — a practical first step for career changers.",
     duration: "5 days practical + theory",
-    price: 1800,
-    weeklyFrom: 35,
-    retestPrice: 350,
+    price: 2300,
     includes: [
       "Theory test preparation",
       "5 days practical training",
@@ -56,9 +57,7 @@ export const courses: Course[] = [
     description:
       "Upgrade to articulated trucks and move into some of the best-paid, most in-demand driving work.",
     duration: "5 days practical + theory",
-    price: 2200,
-    weeklyFrom: 42,
-    retestPrice: 350,
+    price: 3000,
     includes: [
       "Theory test preparation",
       "5 days practical training",
@@ -83,8 +82,6 @@ export const courses: Course[] = [
       "Dangerous goods by road is a burgeoning field: tanker, fuel, chemical, and specialist logistics all need ADR-qualified drivers, and demand is climbing. Training is available now — enquire for class options and dates that suit you.",
     duration: "Flexible dates — enquire",
     price: 650,
-    weeklyFrom: 18,
-    retestPrice: 0,
     includes: [
       "ADR core modules (class-dependent)",
       "Security awareness where required",
@@ -114,8 +111,6 @@ export const courses: Course[] = [
       "Stay legal and keep driving. Complete your 35 hours of CPC training over 5 years. We make it flexible and affordable.",
     duration: "1 day (7 hours) per module",
     price: 75,
-    weeklyFrom: 5,
-    retestPrice: 0,
     includes: [
       "7 hours of training per module",
       "JAUPT-approved content",
@@ -138,9 +133,7 @@ export const courses: Course[] = [
     description:
       "The complete package — go from car licence to full articulated in one booking, designed for people who want to get qualified at every level in one go.",
     duration: "10 days practical + theory",
-    price: 3500,
-    weeklyFrom: 67,
-    retestPrice: 350,
+    price: 5000,
     includes: [
       "Full Cat C + C+E training",
       "Both theory test preparations",
