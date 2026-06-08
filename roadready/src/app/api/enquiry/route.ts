@@ -1,7 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { createHash } from "node:crypto";
 import { sendMetaLeadCapi } from "@/lib/meta-capi";
 import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
+import { CONTACT } from "@/lib/contact";
+
+// Deliberate cap (not the 300s Fluid Compute default) so a runaway is killed early, with
+// room for the CRM forward (up to CRM_TIMEOUT_MS) plus the post-response CAPI in after().
+export const maxDuration = 30;
 
 type AttributionPayload = {
     utm_source?: string;
@@ -30,6 +35,10 @@ type EnquiryPayload = {
 const CRM_ENQUIRY_URL = process.env.CRM_ENQUIRY_URL;
 const CRM_ENQUIRY_TOKEN = process.env.CRM_ENQUIRY_TOKEN;
 const MIN_FORM_FILL_MS = 3000;
+// Bound the CRM forward so a slow/cold CRM aborts cleanly instead of hanging the function.
+// 15s gives a cold Amplify Lambda room to wake and succeed (a warm CRM returns <2s), well
+// within maxDuration (30s), leaving room for the post-response CAPI.
+const CRM_TIMEOUT_MS = 15000;
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_REQUESTS_PER_IP = 8;
 const recentByIp = new Map<string, { count: number; windowStartMs: number }>();
@@ -182,42 +191,84 @@ export async function POST(request: NextRequest) {
             ...attribution,
         };
 
-        const upstream = await fetch(CRM_ENQUIRY_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${CRM_ENQUIRY_TOKEN}`,
-            },
-            body: JSON.stringify({
-                name,
-                phone,
-                email: email || undefined,
-                course: course || undefined,
-                message: message || undefined,
-                hearAbout: hearAbout || undefined,
-                source: "roadready-website",
-                leadAttribution: leadAttributionJson,
-                metadata,
-            }),
-        });
-        if (!upstream.ok) {
-            return NextResponse.json({ error: "Failed to submit enquiry" }, { status: 502 });
+        // ── Lead capture: forward to the CRM, bounded by CRM_TIMEOUT_MS ─────────────
+        // This is the lead, so we await it (success depends on it) — but with a hard
+        // timeout so a slow/cold CRM can't hang the function into a 502. A non-ok response,
+        // an abort (timeout), or a network throw all funnel into the one graceful path below.
+        let crmOk = false;
+        const crmController = new AbortController();
+        const crmTimer = setTimeout(() => crmController.abort(), CRM_TIMEOUT_MS);
+        try {
+            const upstream = await fetch(CRM_ENQUIRY_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${CRM_ENQUIRY_TOKEN}`,
+                },
+                body: JSON.stringify({
+                    name,
+                    phone,
+                    email: email || undefined,
+                    course: course || undefined,
+                    message: message || undefined,
+                    hearAbout: hearAbout || undefined,
+                    source: "roadready-website",
+                    leadAttribution: leadAttributionJson,
+                    metadata,
+                }),
+                signal: crmController.signal,
+            });
+            crmOk = upstream.ok;
+        } catch {
+            crmOk = false; // abort (timeout) or network error
+        } finally {
+            clearTimeout(crmTimer);
         }
 
-        // Meta CAPI is gated on consent. The CRM forward above is unconditional — the
-        // visitor asked us to contact them; that's the service they requested, not marketing.
+        if (!crmOk) {
+            // Release the dedup claim so the user's retry isn't deduped away before it
+            // reaches the CRM, then log the COMPLETE lead (greppable) for manual recovery.
+            recentPayloads.delete(fingerprint);
+            console.error(
+                "LEAD_CAPTURE_FAILED",
+                JSON.stringify({
+                    name,
+                    phone,
+                    email: email || undefined,
+                    course: course || undefined,
+                    message: message || undefined,
+                    hearAbout: hearAbout || undefined,
+                    formType: formType || undefined,
+                    eventId: eventId || undefined,
+                    ip: clientIp,
+                    at: new Date(nowMs).toISOString(),
+                }),
+            );
+            return NextResponse.json(
+                {
+                    error: `We couldn't submit your enquiry just now — please try again, or call us on ${CONTACT.phone.display}.`,
+                },
+                { status: 503 },
+            );
+        }
+
+        // CRM confirmed receipt → the lead is captured. Fire the Meta CAPI AFTER the
+        // response is sent (analytics must never block or fail a submission). Consent gate
+        // intact: only scheduled when eventId && consent.
         if (eventId && consent) {
             const value = courseLeadValue(course);
-            await sendMetaLeadCapi({
-                eventId,
-                eventSourceUrl,
-                email: email || undefined,
-                phone,
-                clientIp,
-                userAgent,
-                value,
-                currency: value !== undefined ? LEAD_VALUE_CURRENCY : undefined,
-            }).catch((err) => console.error("Meta CAPI error", err));
+            after(async () => {
+                await sendMetaLeadCapi({
+                    eventId,
+                    eventSourceUrl,
+                    email: email || undefined,
+                    phone,
+                    clientIp,
+                    userAgent,
+                    value,
+                    currency: value !== undefined ? LEAD_VALUE_CURRENCY : undefined,
+                }).catch((err) => console.error("Meta CAPI error", err));
+            });
         }
 
         return NextResponse.json({ success: true, leadStored: true });
