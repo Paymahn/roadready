@@ -1,6 +1,7 @@
 import { getStoredAttribution } from "@/lib/attribution";
 import { trackMetaLead, type MetaLeadParams } from "@/lib/meta-pixel";
 import { getStoredConsent } from "@/lib/consent";
+import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
 
 export type EnquiryFormType = MetaLeadParams["content_category"];
 
@@ -52,10 +53,13 @@ export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOpt
   // Only fire the client-side Lead event when consent was given (the pixel isn't even
   // loaded otherwise). The CRM forward is unconditional and handled server-side.
   if (leadStored && consent) {
+    const value = courseLeadValue(courseSlug);
     trackMetaLead({
       content_category: formType,
       content_name: courseSlug || undefined,
       event_id: eventId,
+      value,
+      currency: value !== undefined ? LEAD_VALUE_CURRENCY : undefined,
     });
   }
 
