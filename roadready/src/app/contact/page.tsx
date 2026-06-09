@@ -5,12 +5,15 @@ import Image from "next/image";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 import { postEnquiry } from "@/lib/submit-enquiry";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt] = useState(() => Date.now());
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const [turnstileKey, setTurnstileKey] = useState(0);
     const [form, setForm] = useState({
         name: "", phone: "", email: "", course: "", message: "", hearAbout: "", website: "",
     });
@@ -24,6 +27,7 @@ export default function ContactPage() {
                 body: { ...form, formStartedAt },
                 formType: "contact",
                 courseSlug: form.course || undefined,
+                turnstileToken: turnstileToken ?? undefined,
             });
             if (!result.ok) {
                 setSubmitError(result.error);
@@ -34,6 +38,9 @@ export default function ContactPage() {
             setSubmitError("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
+            // Tokens are single-use — remount the widget for a fresh one on any retry.
+            setTurnstileToken(null);
+            setTurnstileKey((k) => k + 1);
         }
     };
 
@@ -90,6 +97,7 @@ export default function ContactPage() {
                                     autoComplete="off"
                                     aria-hidden="true"
                                 />
+                                <TurnstileWidget key={turnstileKey} onToken={setTurnstileToken} />
 
                                 <div className="relative z-10 border-b border-slate-700/50 pb-6 mb-2">
                                     <h2 className="text-3xl font-black text-white tracking-tight mb-2">Send Us an Enquiry</h2>

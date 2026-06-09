@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { sendMetaLeadCapi } from "@/lib/meta-capi";
 import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
 import { CONTACT } from "@/lib/contact";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 // Deliberate cap (not the 300s Fluid Compute default) so a runaway is killed early, with
 // room for the CRM forward (up to CRM_TIMEOUT_MS) plus the post-response CAPI in after().
@@ -31,6 +32,7 @@ type EnquiryPayload = {
     formType?: string;
     attribution?: AttributionPayload;
     consent?: boolean;
+    turnstileToken?: string;
 };
 
 const CRM_ENQUIRY_URL = process.env.CRM_ENQUIRY_URL;
@@ -56,6 +58,15 @@ function getClientIp(req: NextRequest): string {
 function normalize(value: unknown): string {
     return typeof value === "string" ? value.trim() : "";
 }
+
+function digitCount(value: string): number {
+    return (value.match(/\d/g) || []).length;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// http(s):// or www. or a bare domain.tld — used to reject links injected into name/phone
+// (spam bots stuff URLs into those fields; real names/numbers never contain them).
+const URL_RE = /https?:\/\/|www\.|[a-z0-9-]+\.(?:com|net|org|io|co|uk|ru|info|xyz|biz|top|online|site|shop|link|click)\b/i;
 
 function cleanupMaps(nowMs: number) {
     for (const [ip, state] of recentByIp.entries()) {
@@ -135,7 +146,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: true, leadStored: false });
         }
 
-        if (formStartedAt && nowMs - formStartedAt < MIN_FORM_FILL_MS) {
+        // Every real form stamps formStartedAt on mount. Require it and a plausible elapsed
+        // window: missing/zero (a direct POST that omits it) or <3s (instant bot) or absurdly
+        // old (forged) is rejected. Can't be skipped by omission anymore.
+        const elapsed = nowMs - formStartedAt;
+        if (!formStartedAt || elapsed < MIN_FORM_FILL_MS || elapsed > 24 * 60 * 60 * 1000) {
             return NextResponse.json({ error: "Form submitted too quickly" }, { status: 400 });
         }
 
@@ -145,6 +160,32 @@ export async function POST(request: NextRequest) {
 
         if (eventId.length > 200) {
             return NextResponse.json({ error: "Invalid enquiry payload" }, { status: 400 });
+        }
+
+        // Format validation — rejects obvious junk; real UK phone/email formats pass cleanly.
+        if (digitCount(phone) < 7) {
+            return NextResponse.json({ error: "Please enter a valid phone number" }, { status: 400 });
+        }
+        if (email && !EMAIL_RE.test(email)) {
+            return NextResponse.json({ error: "Please enter a valid email address" }, { status: 400 });
+        }
+        if (URL_RE.test(name) || URL_RE.test(phone)) {
+            return NextResponse.json({ error: "Invalid enquiry payload" }, { status: 400 });
+        }
+
+        // ── Bot challenge — gated: only enforced when TURNSTILE_SECRET_KEY is set ──────
+        // No keys → "unconfigured" → skipped (forms behave exactly as before).
+        const verdict = await verifyTurnstile(normalize(body.turnstileToken), clientIp);
+        if (verdict === "fail") {
+            console.warn("LEAD_BLOCKED_TURNSTILE", JSON.stringify({ ip: clientIp, at: new Date(nowMs).toISOString() }));
+            return NextResponse.json(
+                { error: `We couldn't verify your browser — please try again, or call us on ${CONTACT.phone.display}.` },
+                { status: 403 },
+            );
+        }
+        if (verdict === "unavailable") {
+            // Cloudflare unreachable → FAIL OPEN. An outage must never block a real lead.
+            console.error("TURNSTILE_VERIFY_UNAVAILABLE", JSON.stringify({ ip: clientIp, at: new Date(nowMs).toISOString() }));
         }
 
         const fingerprint = createHash("sha256")
