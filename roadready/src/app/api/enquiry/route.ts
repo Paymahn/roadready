@@ -15,6 +15,7 @@ type AttributionPayload = {
     utm_term?: string;
     utm_content?: string;
     fbclid?: string;
+    referrer?: string;
 };
 
 type EnquiryPayload = {
@@ -72,7 +73,7 @@ function cleanupMaps(nowMs: number) {
 function sanitizeAttribution(raw: AttributionPayload | undefined): AttributionPayload {
     if (!raw || typeof raw !== "object") return {};
     const out: AttributionPayload = {};
-    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid"] as const;
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "referrer"] as const;
     for (const k of keys) {
         const v = raw[k];
         if (typeof v === "string" && v.length > 0 && v.length < 2048) {
