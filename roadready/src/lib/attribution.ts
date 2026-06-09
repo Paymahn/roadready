@@ -7,6 +7,7 @@ export type StoredAttribution = {
   utm_term?: string;
   utm_content?: string;
   fbclid?: string;
+  referrer?: string;
 };
 
 export function captureAttributionFromUrl(): void {
@@ -30,6 +31,11 @@ export function captureAttributionFromUrl(): void {
         parsed[k] = v;
         changed = true;
       }
+    }
+    // Capture the external referrer once, on first landing (ignore navigations within our site).
+    if (!parsed.referrer && document.referrer && !document.referrer.startsWith(window.location.origin)) {
+      parsed.referrer = document.referrer;
+      changed = true;
     }
     if (changed) {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
