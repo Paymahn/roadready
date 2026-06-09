@@ -129,6 +129,10 @@ export default function PrivacyPage() {
               We take reasonable technical and organisational measures to protect your personal data
               against unauthorised access, alteration, or loss. All form submissions are transmitted
               over HTTPS (TLS encryption). Access to enquiry data is limited to authorised personnel.
+              We use Cloudflare Turnstile to protect our forms from automated abuse and spam — a
+              privacy-preserving bot check that sets no tracking cookies and does no advertising
+              profiling, and may process limited technical data (such as your IP address) for that
+              security purpose only.
             </p>
           </section>
 

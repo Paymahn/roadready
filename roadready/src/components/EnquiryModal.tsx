@@ -5,6 +5,7 @@ import { useEnquiry } from "@/context/EnquiryContext";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 import { postEnquiry } from "@/lib/submit-enquiry";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 const inputClass = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm";
 const labelClass = "block text-sm font-semibold text-slate-700 mb-1.5";
@@ -15,6 +16,8 @@ export default function EnquiryModal() {
     const [loading, setLoading] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt, setFormStartedAt] = useState(() => Date.now());
+    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+    const [turnstileKey, setTurnstileKey] = useState(0);
     const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", message: "", website: "" });
 
     useEffect(() => {
@@ -44,6 +47,7 @@ export default function EnquiryModal() {
                 body: { ...form, formStartedAt },
                 formType: "modal",
                 courseSlug: form.course || undefined,
+                turnstileToken: turnstileToken ?? undefined,
             });
             if (!result.ok) {
                 setSubmitError(result.error);
@@ -54,6 +58,9 @@ export default function EnquiryModal() {
             setSubmitError("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
+            // Tokens are single-use — remount the widget for a fresh one on any retry.
+            setTurnstileToken(null);
+            setTurnstileKey((k) => k + 1);
         }
     };
 
@@ -123,6 +130,7 @@ export default function EnquiryModal() {
                                 autoComplete="off"
                                 aria-hidden="true"
                             />
+                            <TurnstileWidget key={turnstileKey} onToken={setTurnstileToken} />
                             <div>
                                 <label htmlFor="eq-name" className={labelClass}>Full Name *</label>
                                 <input

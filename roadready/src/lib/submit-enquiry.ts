@@ -9,13 +9,14 @@ export type PostEnquiryOptions = {
   body: Record<string, unknown>;
   formType: EnquiryFormType;
   courseSlug?: string;
+  turnstileToken?: string;
 };
 
 export type PostEnquiryResult =
   | { ok: true; leadStored: boolean }
   | { ok: false; error: string };
 
-export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOptions): Promise<PostEnquiryResult> {
+export async function postEnquiry({ body, formType, courseSlug, turnstileToken }: PostEnquiryOptions): Promise<PostEnquiryResult> {
   const eventId =
     typeof crypto !== "undefined" && crypto.randomUUID
       ? crypto.randomUUID()
@@ -34,6 +35,7 @@ export async function postEnquiry({ body, formType, courseSlug }: PostEnquiryOpt
       formType,
       attribution,
       consent,
+      turnstileToken,
     }),
   });
 
