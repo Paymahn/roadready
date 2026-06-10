@@ -1,4 +1,4 @@
-import { getStoredAttribution } from "@/lib/attribution";
+import { getStoredAttribution, readMetaCookies } from "@/lib/attribution";
 import { trackMetaLead, type MetaLeadParams } from "@/lib/meta-pixel";
 import { getStoredConsent } from "@/lib/consent";
 import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
@@ -22,7 +22,9 @@ export async function postEnquiry({ body, formType, courseSlug, turnstileToken }
       ? crypto.randomUUID()
       : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-  const attribution = getStoredAttribution();
+  // URL-derived attribution from landing + Meta's cookies read live at submit (they only
+  // exist once the consented pixel has run, and can appear later than the landing capture).
+  const attribution = { ...getStoredAttribution(), ...readMetaCookies() };
   // Read consent at submit time (not page load) so a late accept is captured.
   const consent = getStoredConsent() === "accepted";
 

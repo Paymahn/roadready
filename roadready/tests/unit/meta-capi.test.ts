@@ -49,3 +49,30 @@ describe("sendMetaLeadCapi — value/currency placement", () => {
     expect(event.custom_data).toBeUndefined();
   });
 });
+
+describe("sendMetaLeadCapi — fbp/fbc match keys", () => {
+  it("forwards well-formed _fbp/_fbc into user_data unhashed (Meta spec)", async () => {
+    await sendMetaLeadCapi({
+      ...baseArgs,
+      fbp: "fb.1.1749500000000.987654321",
+      fbc: "fb.1.1749500000000.IwAR2xyz",
+    });
+    const userData = lastBody!.data[0].user_data as Record<string, unknown>;
+    expect(userData.fbp).toBe("fb.1.1749500000000.987654321");
+    expect(userData.fbc).toBe("fb.1.1749500000000.IwAR2xyz");
+  });
+
+  it("drops malformed fbp/fbc rather than sending junk to Meta", async () => {
+    await sendMetaLeadCapi({ ...baseArgs, fbp: "not-a-cookie", fbc: "<script>" });
+    const userData = lastBody!.data[0].user_data as Record<string, unknown>;
+    expect(userData.fbp).toBeUndefined();
+    expect(userData.fbc).toBeUndefined();
+  });
+
+  it("omits fbp/fbc when absent", async () => {
+    await sendMetaLeadCapi({ ...baseArgs });
+    const userData = lastBody!.data[0].user_data as Record<string, unknown>;
+    expect(userData.fbp).toBeUndefined();
+    expect(userData.fbc).toBeUndefined();
+  });
+});
