@@ -18,20 +18,23 @@ import { sendMetaLeadCapi } from "@/lib/meta-capi";
 import { POST } from "@/app/api/enquiry/route";
 
 let crmCalls: string[] = [];
+let crmBodies: string[] = [];
 let crmBehavior: "ok" | "non-ok" | "throw" = "ok";
 let errSpy: MockInstance;
 
 beforeEach(() => {
   vi.clearAllMocks();
   crmCalls = [];
+  crmBodies = [];
   crmBehavior = "ok";
   vi.spyOn(console, "log").mockImplementation(() => {});
   errSpy = vi.spyOn(console, "error").mockImplementation(() => {});
   // CRM forward is a server-side global fetch; behaviour is switched per test via crmBehavior.
   vi.stubGlobal(
     "fetch",
-    vi.fn(async (url: string | URL | Request) => {
+    vi.fn(async (url: string | URL | Request, init?: { body?: string }) => {
       crmCalls.push(String(url));
+      if (init?.body) crmBodies.push(init.body);
       if (crmBehavior === "throw") throw new Error("simulated CRM abort/network failure");
       if (crmBehavior === "non-ok") return new Response("upstream error", { status: 500 });
       return new Response(JSON.stringify({ ok: true }), { status: 200 });
@@ -46,7 +49,11 @@ afterEach(() => {
 
 let seq = 0;
 // Unique name/phone/IP per request dodges the route's per-IP rate limit and payload dedup.
-function enquiry(consent: boolean, course?: string): NextRequest {
+function enquiry(
+  consent: boolean,
+  course?: string,
+  attribution?: Record<string, string>,
+): NextRequest {
   seq += 1;
   return new NextRequest("https://www.roadreadyhgv.com/api/enquiry", {
     method: "POST",
@@ -59,6 +66,7 @@ function enquiry(consent: boolean, course?: string): NextRequest {
       formStartedAt: Date.now() - 5000, // older than MIN_FORM_FILL_MS
       consent,
       ...(course !== undefined && { course }),
+      ...(attribution !== undefined && { attribution }),
     }),
   });
 }
@@ -104,6 +112,38 @@ describe("POST /api/enquiry — CRM capture, CAPI deferred to after()", () => {
     expect(res.status).toBe(200);
     expect(crmCalls.length).toBe(1); // CRM forward is unconditional
     expect(after).not.toHaveBeenCalled();
+  });
+});
+
+describe("POST /api/enquiry — fbp/fbc attribution pass-through", () => {
+  const META_COOKIES = { fbp: "fb.1.1749500000000.987654321", fbc: "fb.1.1749500000000.IwAR2xyz" };
+
+  it("forwards fbp/fbc to the CRM (metadata + leadAttribution) and to the CAPI", async () => {
+    const res = await POST(enquiry(true, "hgv-cat-ce", { ...META_COOKIES, utm_source: "meta" }));
+    expect(res.status).toBe(200);
+
+    const crmBody = JSON.parse(crmBodies[0]) as {
+      metadata: Record<string, string>;
+      leadAttribution: string;
+    };
+    expect(crmBody.metadata.fbp).toBe(META_COOKIES.fbp);
+    expect(crmBody.metadata.fbc).toBe(META_COOKIES.fbc);
+    expect(JSON.parse(crmBody.leadAttribution)).toMatchObject(META_COOKIES);
+
+    await flushAfter();
+    expect(sendMetaLeadCapi).toHaveBeenCalledWith(expect.objectContaining(META_COOKIES));
+  });
+
+  it("oversized/empty attribution values are dropped by the sanitizer, not forwarded", async () => {
+    const res = await POST(enquiry(true, "hgv-cat-ce", { fbp: "x".repeat(3000), fbc: "" }));
+    expect(res.status).toBe(200);
+    const crmBody = JSON.parse(crmBodies[0]) as { metadata: Record<string, string> };
+    expect(crmBody.metadata.fbp).toBeUndefined();
+    expect(crmBody.metadata.fbc).toBeUndefined();
+    await flushAfter();
+    const arg = vi.mocked(sendMetaLeadCapi).mock.calls[0]?.[0] as Record<string, unknown>;
+    expect(arg.fbp).toBeUndefined();
+    expect(arg.fbc).toBeUndefined();
   });
 });
 

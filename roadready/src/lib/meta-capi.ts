@@ -7,10 +7,17 @@ type SendLeadEventArgs = {
   phone: string;
   clientIp: string;
   userAgent: string;
+  /** Meta's first-party cookie ids (_fbp/_fbc), read client-side at submit. */
+  fbp?: string;
+  fbc?: string;
   /** Internal Lead-value proxy + currency. Omitted for general enquiries. */
   value?: number;
   currency?: string;
 };
+
+// fb.<subdomainIndex>.<creationTime>.<value> — guard so junk from a tampered request never
+// reaches user_data (a malformed fbp/fbc hurts match quality more than omitting it).
+const FB_COOKIE_RE = /^fb\.\d+\.\d+\..+/;
 
 function hashSha256(value: string): string {
   return createHash("sha256").update(value, "utf8").digest("hex");
@@ -69,6 +76,12 @@ export async function sendMetaLeadCapi(args: SendLeadEventArgs): Promise<void> {
   const phoneDigits = normalizePhoneDigits(args.phone);
   if (phoneDigits) {
     userData.ph = [hashSha256(phoneDigits)];
+  }
+  if (args.fbp && FB_COOKIE_RE.test(args.fbp)) {
+    userData.fbp = args.fbp;
+  }
+  if (args.fbc && FB_COOKIE_RE.test(args.fbc)) {
+    userData.fbc = args.fbc;
   }
 
   const eventTime = Math.floor(Date.now() / 1000);
