@@ -18,6 +18,10 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      // `server-only` is a compiler-enforced marker: Next resolves it internally during
+      // builds (it isn't an installed package), so vitest's real node resolution can't
+      // find it. Alias it to an inert stub — the unit suite imports server modules directly.
+      "server-only": fileURLToPath(new URL("./tests/stubs/server-only.ts", import.meta.url)),
     },
   },
 });
