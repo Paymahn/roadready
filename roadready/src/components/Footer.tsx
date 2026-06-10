@@ -45,7 +45,8 @@ export default function Footer() {
                             />
                         </div>
                         <p className="text-sm text-white/70 leading-relaxed mb-6">
-                            Ethical HGV &amp; ADR training that gets you licensed, employed, and earning more.
+                            Ethical HGV &amp; ADR training that gets you licensed — straightforward
+                            advice from real people, end to end.
                         </p>
                         {/* Social Media */}
                         <div className="flex items-center gap-3 mt-5">

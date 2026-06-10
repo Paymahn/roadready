@@ -35,7 +35,7 @@ function HeroSection({ onEnquire }: { onEnquire: () => void }) {
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
         <div className="flex flex-col gap-6 lg:gap-8 flex-1">
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-            Your New Career Starts With{" "}
+            Your HGV Licence Starts With{" "}
             <span className="block mt-1 text-amber-400 font-black uppercase">RoadReady</span>
           </h1>
 

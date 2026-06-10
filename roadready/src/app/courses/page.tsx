@@ -73,7 +73,8 @@ export default function CoursesPage() {
                         </h1>
 
                         <p className="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-14">
-                            Enquire for details on any course to get started on your new career path today.
+                            Enquire for details on any course — we&apos;ll talk you through the route and
+                            get you started.
                         </p>
 
                         {/* 4 Big Selling Points Grid */}

@@ -55,7 +55,7 @@ export const courses: Course[] = [
     title: "HGV Category C+E",
     category: "HGV",
     description:
-      "Upgrade to articulated trucks and move into some of the best-paid, most in-demand driving work.",
+      "Upgrade to articulated trucks and move into some of the most in-demand driving work.",
     duration: "5 days practical + theory",
     price: 3000,
     includes: [

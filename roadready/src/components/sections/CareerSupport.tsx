@@ -39,7 +39,7 @@ const STEP_BENEFITS: Record<number, { description: string; roadreadyShine: strin
   1: {
     description: "You tell us which licence you need. We take it from there — no endless forms, no waiting in the dark.",
     roadreadyShine:
-      "We'll call you back the same day. A real person, every time — you're not a number. We care about your progression from first call through training and into work, not just closing a sale.",
+      "We aim to call you back the same day. A real person, every time — you're not a number. We care about your progression from first call through training and into work, not just closing a sale.",
   },
   2: {
     description: "Booking your D4 medical is a requirement. Knowing where to go, what to bring, and what to expect shouldn't be a puzzle.",
