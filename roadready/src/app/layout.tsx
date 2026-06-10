@@ -3,12 +3,8 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 import { EnquiryProvider } from "@/context/EnquiryContext";
 import { ConsentProvider } from "@/context/ConsentContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import AttributionCapture from "@/components/AttributionCapture";
-import EnquiryModal from "@/components/EnquiryModal";
 import MetaPixel from "@/components/MetaPixel";
-import StickyMobileCTA from "@/components/StickyMobileCTA";
 import ConsentBanner from "@/components/ConsentBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -78,12 +74,11 @@ export default function RootLayout({
         <ConsentProvider>
           <MetaPixel />
           <EnquiryProvider>
+            {/* Consent + tracking live here so EVERY route (incl. the chrome-free ads
+                landing page) gets PageView, attribution capture and the banner. Visual
+                chrome (nav/footer/modal/sticky CTA) lives in the (site) group layout. */}
             <AttributionCapture />
-            <Navbar />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-            <EnquiryModal />
-            <StickyMobileCTA />
+            {children}
           </EnquiryProvider>
           <ConsentBanner />
         </ConsentProvider>

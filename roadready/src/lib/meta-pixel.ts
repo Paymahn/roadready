@@ -6,7 +6,7 @@ declare global {
 
 export type MetaLeadParams = {
   content_name?: string;
-  content_category: "inline" | "modal" | "contact";
+  content_category: "inline" | "modal" | "contact" | "landing";
   event_id: string;
   /** Internal Lead-value proxy (course price). Omitted for general enquiries. */
   value?: number;

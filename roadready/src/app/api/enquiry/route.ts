@@ -127,7 +127,7 @@ export async function POST(request: NextRequest) {
         const eventId = normalize(body.eventId);
         const formTypeRaw = normalize(body.formType);
         const formType =
-            formTypeRaw === "inline" || formTypeRaw === "modal" || formTypeRaw === "contact"
+            formTypeRaw === "inline" || formTypeRaw === "modal" || formTypeRaw === "contact" || formTypeRaw === "landing"
                 ? formTypeRaw
                 : undefined;
         const attribution = sanitizeAttribution(body.attribution);
