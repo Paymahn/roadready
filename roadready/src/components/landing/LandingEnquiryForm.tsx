@@ -1,22 +1,24 @@
 "use client";
 
+import { courses } from "@/lib/data";
 import { useEnquiryForm } from "@/lib/use-enquiry-form";
 import TurnstileWidget from "@/components/TurnstileWidget";
 
 const inputClass =
     "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm shadow-sm";
 
-// Compact card variant of the enquiry form for the ads landing page: the course is locked
-// to the page's course (static line, no dropdown — fewer decisions on cold traffic), and
-// submissions are tagged formType "landing" so page → Lead conversion is measurable in the
-// CRM and in Meta separately from the homepage inline form.
+// Compact card variant of the enquiry form for the ads landing page. Submissions are tagged
+// formType "landing" so page → Lead conversion is measurable in the CRM and in Meta
+// separately from the homepage inline form. Pass courseSlug/courseTitle to LOCK the form to
+// one course (static line, no dropdown — for single-course campaign pages); omit them on the
+// general page, which offers the full course dropdown instead.
 export default function LandingEnquiryForm({
     courseSlug,
     courseTitle,
 }: {
-    courseSlug: string;
-    courseTitle: string;
-}) {
+    courseSlug?: string;
+    courseTitle?: string;
+} = {}) {
     const { submitted, loading, submitError, form, setForm, handleSubmit, turnstileKey, setTurnstileToken } =
         useEnquiryForm("landing", courseSlug);
 
@@ -30,7 +32,7 @@ export default function LandingEnquiryForm({
                 </div>
                 <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Received!</h3>
                 <p className="text-slate-600 font-medium">
-                    We&apos;ll call you about your {courseTitle} training as soon as we can.
+                    We&apos;ll call you about your {courseTitle ?? "HGV"} training as soon as we can.
                 </p>
             </div>
         );
@@ -63,9 +65,26 @@ export default function LandingEnquiryForm({
                     className={inputClass}
                     placeholder="Phone number *"
                 />
-                <p className="text-sm text-slate-500 px-1">
-                    Course: <span className="font-semibold text-slate-700">{courseTitle}</span>
-                </p>
+                {courseSlug ? (
+                    <p className="text-sm text-slate-500 px-1">
+                        Course: <span className="font-semibold text-slate-700">{courseTitle}</span>
+                    </p>
+                ) : (
+                    <select
+                        value={form.course}
+                        onChange={(e) => setForm({ ...form, course: e.target.value })}
+                        className={inputClass}
+                        aria-label="Select a course"
+                    >
+                        <option value="">Which course? (optional)</option>
+                        {courses.map((c) => (
+                            <option key={c.slug} value={c.slug}>
+                                {c.title}
+                            </option>
+                        ))}
+                        <option value="other">Not sure yet</option>
+                    </select>
+                )}
                 <input
                     type="text"
                     value={form.website}

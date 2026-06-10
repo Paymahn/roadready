@@ -1,22 +1,30 @@
 import { test, expect, settle } from "./fixtures";
 
-// Meta ads landing page (/cat-ce-direct-access): chrome-free by design — no site nav,
-// no sticky CTA, minimal footer. Consent + pixel gating on this route is covered in
-// pixel.spec.ts (bare test, real banner); a11y.spec.ts includes the route in its sweep.
+// Meta ads landing page (/hgv-training): the main site compacted into one converting page —
+// chrome-free by design (no site nav, no sticky CTA, minimal footer), all courses covered.
+// Consent + pixel gating on this route is covered in pixel.spec.ts (bare test, real banner);
+// a11y.spec.ts includes the route in its sweep.
 
-const ROUTE = "/cat-ce-direct-access";
+const ROUTE = "/hgv-training";
 
 test.describe("meta ads landing page", () => {
-  test("renders the licence-framed hero with the locked-course enquiry form", async ({ page }) => {
+  test("renders the licence-framed hero with the enquiry form and course dropdown", async ({ page }) => {
     await page.goto(ROUTE);
-    await expect(page).toHaveTitle(/cat c\+e/i);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(/cat c\+e licence/i);
+    await expect(page).toHaveTitle(/hgv training/i);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(/hgv licence/i);
     await expect(page.getByLabel(/your full name/i)).toBeVisible();
     await expect(page.getByLabel(/phone number/i)).toBeVisible();
-    // Course is locked to the page's course — static text, no dropdown.
-    await expect(page.getByText("HGV Category C+E").first()).toBeVisible();
-    await expect(page.getByRole("combobox")).toHaveCount(0);
+    // General page: course is chosen in the form (all catalogue courses + "not sure").
+    await expect(page.getByRole("combobox", { name: /select a course/i })).toBeVisible();
     await expect(page.getByRole("button", { name: /get my free quote/i })).toBeVisible();
+  });
+
+  test("features the full course catalogue as compact cards", async ({ page }) => {
+    await page.goto(ROUTE);
+    for (const title of ["HGV Category C", "HGV Category C+E", "ADR — Dangerous Goods"]) {
+      await expect(page.getByRole("heading", { name: title, exact: true })).toBeVisible();
+    }
+    await expect(page.getByRole("link", { name: /enquire about this course/i }).first()).toBeVisible();
   });
 
   test("has no site navigation — the page's one job is the form", async ({ page }) => {

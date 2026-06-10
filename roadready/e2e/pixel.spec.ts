@@ -33,7 +33,7 @@ test("meta pixel network request fires only after consent is accepted", async ({
 // consent + pixel stack from the root layout — this is the page paid traffic lands on.
 test("ads landing page: banner shows and pixel loads on accept", async ({ page }) => {
   const requests = await trackPixelRequests(page);
-  await page.goto("/cat-ce-direct-access");
+  await page.goto("/hgv-training");
   await expect(banner(page)).toBeVisible();
   expect(requests, "no pixel request before consent").toHaveLength(0);
 

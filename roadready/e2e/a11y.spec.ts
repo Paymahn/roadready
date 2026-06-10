@@ -3,7 +3,7 @@ import { test, expect } from "./fixtures";
 
 // Catch the big stuff: missing labels, accessible names, structure, contrast.
 // Fails only on critical/serious — not a full WCAG audit.
-const ROUTES = ["/", "/contact", "/courses", "/cat-ce-direct-access"];
+const ROUTES = ["/", "/contact", "/courses", "/hgv-training"];
 
 // Pre-existing debt that is reported but not yet blocking, so the suite can gate on
 // real regressions today. Fix these, then remove the id to make them block too.
