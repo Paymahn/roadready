@@ -57,6 +57,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    other: {
+      "facebook-domain-verification": "6etwx75umokl9e7iwcdi5j07k89yyp",
+    },
+  },
   other: {
     "theme-color": "#0B2419",
   },
