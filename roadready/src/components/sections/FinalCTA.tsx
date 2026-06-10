@@ -17,11 +17,13 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
 
   return (
     <section className="py-20 lg:py-28 relative overflow-hidden bg-slate-950 border-t border-slate-800">
-      {/* Background Image */}
+      {/* Background image — local asset (the previous unsplash URL 404s upstream, leaving
+          a guaranteed dead request and a blank band). Decorative → empty alt. */}
       <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay">
         <Image
-          src="https://images.unsplash.com/photo-1541882822188-7ee24075f1ec?auto=format&fit=crop&q=80&w=1920"
-          alt="Happy successful truck driver"
+          src="/images/hgvdepot.jpg"
+          alt=""
+          aria-hidden
           fill
           className="object-cover object-center"
           sizes="100vw"
