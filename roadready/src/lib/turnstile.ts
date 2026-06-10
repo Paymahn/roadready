@@ -13,7 +13,14 @@ export type TurnstileVerdict = "pass" | "fail" | "unconfigured" | "unavailable";
 //                    because a Cloudflare outage must never block a real lead.
 export async function verifyTurnstile(token: string, ip?: string): Promise<TurnstileVerdict> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return "unconfigured";
+  if (!secret) {
+    // TEMPORARY (remove with the route diag): surface the missing secret in function logs.
+    console.warn(
+      "TURNSTILE_UNCONFIGURED",
+      JSON.stringify({ turnstileEnvKeys: Object.keys(process.env).filter((k) => k.toUpperCase().includes("TURNSTILE")) }),
+    );
+    return "unconfigured";
+  }
   if (!token) return "fail"; // configured but no token → a direct POST / bot → reject
 
   const body = new URLSearchParams();

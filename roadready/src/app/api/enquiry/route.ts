@@ -176,6 +176,20 @@ export async function POST(request: NextRequest) {
         // ── Bot challenge — gated: only enforced when TURNSTILE_SECRET_KEY is set ──────
         // No keys → "unconfigured" → skipped (forms behave exactly as before).
         const verdict = await verifyTurnstile(normalize(body.turnstileToken), clientIp);
+        // TEMPORARY (remove once the Turnstile env issue is resolved): header-gated
+        // diagnostic reporting which TURNSTILE* env NAMES the runtime sees — never values.
+        // Returns before the CRM forward, so diagnostic probes never create leads.
+        if (request.headers.get("x-rr-diag") === "turnstile-env-2026-06-10") {
+            return NextResponse.json({
+                diag: true,
+                verdict,
+                turnstileEnvKeys: Object.keys(process.env).filter((k) => k.toUpperCase().includes("TURNSTILE")),
+                hasSecret: Boolean(process.env.TURNSTILE_SECRET_KEY),
+                vercelEnv: process.env.VERCEL_ENV,
+                project: process.env.VERCEL_PROJECT_PRODUCTION_URL,
+                commit: (process.env.VERCEL_GIT_COMMIT_SHA || "").slice(0, 7),
+            });
+        }
         if (verdict === "fail") {
             console.warn("LEAD_BLOCKED_TURNSTILE", JSON.stringify({ ip: clientIp, at: new Date(nowMs).toISOString() }));
             return NextResponse.json(
