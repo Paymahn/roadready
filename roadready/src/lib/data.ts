@@ -213,18 +213,18 @@ export const testimonials: Testimonial[] = [
 
 // ── How It Works Steps (icon key for SVG render) ─────────
 export const howItWorksSteps = [
-  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll aim to call you back within 2 hours.", iconKey: "phone" as const },
+  { step: 1, title: "Enquire", description: "Tell us which licence you need. We aim to call you back the same working day.", iconKey: "phone" as const },
   { step: 2, title: "Medical", description: "Book your D4 medical — we'll tell you exactly where and how.", iconKey: "medical" as const },
   { step: 3, title: "Train", description: "Complete your theory and practical training with expert instructors.", iconKey: "train" as const },
-  { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", iconKey: "drive" as const },
+  { step: 4, title: "Drive", description: "Pass your test, get your licence, and get out on the road.", iconKey: "drive" as const },
 ];
 
 // ── Extra Step Board (full journey: standard + where we go further) ─────────
 export const extraStepBoardSteps = [
-  { step: 1, title: "Enquire", description: "Tell us which licence you need. We'll aim to call you back within 2 hours.", shortDescription: "We'll aim to call you back within 2 hours.", iconKey: "phone" as const, isExtra: false },
+  { step: 1, title: "Enquire", description: "Tell us which licence you need. We aim to call you back the same working day.", shortDescription: "We aim to call you back the same working day.", iconKey: "phone" as const, isExtra: false },
   { step: 2, title: "Medical", description: "Book your D4 medical — we'll tell you exactly where and how.", shortDescription: "We guide you through the D4.", iconKey: "medical" as const, isExtra: false },
   { step: 3, title: "Train", description: "Complete your theory and practical training with expert instructors.", shortDescription: "Expert instructors, every time.", iconKey: "train" as const, isExtra: false },
-  { step: 4, title: "Drive", description: "Pass your test, get your licence, and start your new career.", shortDescription: "Pass your test, get your licence.", iconKey: "drive" as const, isExtra: false },
+  { step: 4, title: "Drive", description: "Pass your test, get your licence, and get out on the road.", shortDescription: "Pass your test, get your licence.", iconKey: "drive" as const, isExtra: false },
   { step: 5, title: "Recruitment", description: "Your licence is the start, not the finish line. We stay involved with practical support to help you move into work.", shortDescription: "We stay involved after you pass.", iconKey: "recruitment" as const, isExtra: false },
   { step: 6, title: "Industry Contacts", description: "We've built relationships with major haulage firms, agencies, and logistics companies. We don't just train you — we introduce you.", shortDescription: "We introduce you to employers.", iconKey: "contacts" as const, isExtra: true },
   { step: 7, title: "Interview Preparation", description: "Know what employers look for. We'll coach you on industry-specific questions, what to wear, what to bring, and how to stand out.", shortDescription: "Industry-specific interview coaching.", iconKey: "interview" as const, isExtra: true },

@@ -100,7 +100,7 @@ export default function CoursesPage() {
                                     </svg>
                                 </div>
                                 <div>
-                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">Upfront pricing</span>
+                                    <span className="block text-lg font-extrabold text-white tracking-wide mb-1">Clear costs</span>
                                     <span className="block text-sm text-slate-400 font-medium">Costs explained before you book</span>
                                 </div>
                             </div>
