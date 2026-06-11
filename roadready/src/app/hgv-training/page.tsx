@@ -41,7 +41,7 @@ const TRUST_BULLETS = [
 const STEPS = [
     {
         title: "Free quote",
-        body: "Tell us which licence you're after — or let us help you choose. We aim to call you back the same day.",
+        body: "Tell us which licence you're after — or let us help you choose. We aim to call you back the same working day.",
     },
     {
         title: "Medical",

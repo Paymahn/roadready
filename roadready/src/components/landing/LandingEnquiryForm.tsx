@@ -44,7 +44,7 @@ export default function LandingEnquiryForm({
                 Get your <span className="text-emerald-700">free quote</span>
             </h2>
             <p className="text-slate-600 text-sm mb-5">
-                Leave your name and number — we aim to call you back the same day.
+                Leave your name and number — we aim to call you back the same working day.
             </p>
             <form onSubmit={handleSubmit} className="space-y-3">
                 <input

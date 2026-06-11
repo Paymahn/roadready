@@ -76,7 +76,7 @@ export default function EnquiryModal() {
                     <div className="flex items-start justify-between gap-4">
                         <div>
                             <h2 className="text-xl font-bold text-slate-900">Get Your Free Quote</h2>
-                            <p className="text-sm text-slate-600 mt-0.5">We&apos;ll aim to call you back within 2 hours</p>
+                            <p className="text-sm text-slate-600 mt-0.5">We aim to call you back the same working day</p>
                         </div>
                         <button
                             onClick={closeEnquiry}
@@ -110,7 +110,7 @@ export default function EnquiryModal() {
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-2">Enquiry Sent!</h3>
                             <p className="text-slate-700 mb-8 max-w-xs mx-auto font-medium">
-                                We&apos;ll aim to be in touch within 2 hours. Check your phone for our call.
+                                We aim to be in touch the same working day. Check your phone for our call.
                             </p>
                             <button
                                 onClick={closeEnquiry}

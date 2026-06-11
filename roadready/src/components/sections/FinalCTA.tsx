@@ -7,12 +7,12 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
   const { ref, revealed } = useReveal();
 
   const careerPaths = [
-    { role: "Owner-Operator", descriptor: "Build your own business, set your routes, take home what you earn" },
-    { role: "Heavy Haulage Driver", descriptor: "Specialist loads, top-end driving, pay reflects the skill" },
-    { role: "Specialist / ADR Driver", descriptor: "Dangerous goods and tanker work — niche, in demand, well rewarded" },
+    { role: "Owner-Operator", descriptor: "Run your own truck, set your own routes" },
+    { role: "Heavy Haulage Driver", descriptor: "Specialist loads and top-end driving" },
+    { role: "Specialist / ADR Driver", descriptor: "Dangerous goods and tanker work — niche and in demand" },
     { role: "Fleet Manager", descriptor: "Step out of the cab into operational leadership" },
-    { role: "International Haulage", descriptor: "Cross-border routes, varied work, premium rates" },
-    { role: "Long-Haul Trunking", descriptor: "Steady long-distance work, predictable income" },
+    { role: "International Haulage", descriptor: "Cross-border routes and varied work" },
+    { role: "Long-Haul Trunking", descriptor: "Steady long-distance driving" },
   ];
 
   return (
@@ -40,7 +40,7 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
           <div className="absolute inset-0" aria-hidden>
             <Image
               src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1920"
-              alt="HGV training and career progression"
+              alt="HGV training on the road"
               fill
               className="object-cover object-center"
               sizes="100vw"
@@ -48,9 +48,9 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
             <div className="absolute inset-0 bg-slate-950/75" />
           </div>
           <h2 className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight text-center leading-tight">
-            A pathway to{" "}
+            Where the licence{" "}
             <span className="block mt-2 sm:mt-3 text-amber-400 uppercase tracking-[0.12em] sm:tracking-[0.16em]">
-              real career progression
+              can take you
             </span>
           </h2>
         </div>
@@ -72,8 +72,8 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
             <div key={path.role} className="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-sm hover:border-slate-600 transition-colors duration-200">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                   </svg>
                 </div>
                 <h3 className="font-bold text-white text-lg">{path.role}</h3>
@@ -92,13 +92,13 @@ function FinalCTA({ onEnquire }: { onEnquire: () => void }) {
               Ready for a fresh start?
             </h3>
             <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-              If you want a career with real progression and a stable income in an industry that needs you — <span className="text-white font-semibold flex-1">this is where it begins</span>.
+              If you want real progression in an industry that needs you — <span className="text-white font-semibold flex-1">this is where it begins</span>.
             </p>
             <button
               onClick={onEnquire}
               className="inline-flex items-center justify-center w-full sm:w-auto gap-2 px-10 py-5 bg-emerald-600 hover:bg-emerald-500 text-white text-lg sm:text-xl font-bold rounded-full transition-colors duration-200 shadow-md border-2 border-emerald-500"
             >
-              Start Your New Chapter
+              Get My Free Quote
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
