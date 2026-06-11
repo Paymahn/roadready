@@ -29,6 +29,18 @@ test("meta pixel network request fires only after consent is accepted", async ({
   await expect.poll(() => requests.length, { message: "request after Accept", timeout: 5000 }).toBeGreaterThan(0);
 });
 
+// The ads landing page sits outside the (site) chrome group but must inherit the full
+// consent + pixel stack from the root layout — this is the page paid traffic lands on.
+test("ads landing page: banner shows and pixel loads on accept", async ({ page }) => {
+  const requests = await trackPixelRequests(page);
+  await page.goto("/hgv-training");
+  await expect(banner(page)).toBeVisible();
+  expect(requests, "no pixel request before consent").toHaveLength(0);
+
+  await banner(page).getByRole("button", { name: /accept all/i }).click();
+  await expect.poll(() => requests.length, { message: "request after Accept", timeout: 5000 }).toBeGreaterThan(0);
+});
+
 test("pixel tears down on reject and re-loads on re-accept", async ({ page }) => {
   const requests = await trackPixelRequests(page);
   await page.goto("/");

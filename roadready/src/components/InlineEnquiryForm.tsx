@@ -1,46 +1,14 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
 import { courses } from "@/lib/data";
-import { postEnquiry } from "@/lib/submit-enquiry";
+import { useEnquiryForm } from "@/lib/use-enquiry-form";
 import TurnstileWidget from "@/components/TurnstileWidget";
 
 const inputClass = "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm shadow-sm";
 
 export default function InlineEnquiryForm() {
-    const [submitted, setSubmitted] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [submitError, setSubmitError] = useState<string | null>(null);
-    const [formStartedAt] = useState(() => Date.now());
-    const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-    const [turnstileKey, setTurnstileKey] = useState(0);
-    const [form, setForm] = useState({ name: "", phone: "", course: "", website: "" });
-
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setSubmitError(null);
-        try {
-            const result = await postEnquiry({
-                body: { ...form, formStartedAt },
-                formType: "inline",
-                courseSlug: form.course || undefined,
-                turnstileToken: turnstileToken ?? undefined,
-            });
-            if (!result.ok) {
-                setSubmitError(result.error);
-                return;
-            }
-            setSubmitted(true);
-        } catch {
-            setSubmitError("Something went wrong. Please try again.");
-        } finally {
-            setLoading(false);
-            // Tokens are single-use — remount the widget for a fresh one on any retry.
-            setTurnstileToken(null);
-            setTurnstileKey((k) => k + 1);
-        }
-    };
+    const { submitted, loading, submitError, form, setForm, handleSubmit, turnstileKey, setTurnstileToken } =
+        useEnquiryForm("inline");
 
     if (submitted) {
         return (
