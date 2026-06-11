@@ -43,6 +43,7 @@ export default function Navbar() {
                                 alt="RoadReady HGV"
                                 width={240}
                                 height={72}
+                                sizes="267px"
                                 className="h-16 sm:h-20 w-auto group-hover:opacity-90 transition-opacity invert hue-rotate-180"
                                 priority
                             />

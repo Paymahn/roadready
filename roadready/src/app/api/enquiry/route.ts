@@ -16,6 +16,8 @@ type AttributionPayload = {
     utm_term?: string;
     utm_content?: string;
     fbclid?: string;
+    fbp?: string;
+    fbc?: string;
     referrer?: string;
 };
 
@@ -84,7 +86,7 @@ function cleanupMaps(nowMs: number) {
 function sanitizeAttribution(raw: AttributionPayload | undefined): AttributionPayload {
     if (!raw || typeof raw !== "object") return {};
     const out: AttributionPayload = {};
-    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "referrer"] as const;
+    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "fbp", "fbc", "referrer"] as const;
     for (const k of keys) {
         const v = raw[k];
         if (typeof v === "string" && v.length > 0 && v.length < 2048) {
@@ -307,6 +309,8 @@ export async function POST(request: NextRequest) {
                     phone,
                     clientIp,
                     userAgent,
+                    fbp: attribution.fbp,
+                    fbc: attribution.fbc,
                     value,
                     currency: value !== undefined ? LEAD_VALUE_CURRENCY : undefined,
                 }).catch((err) => console.error("Meta CAPI error", err));
