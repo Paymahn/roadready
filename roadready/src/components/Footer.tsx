@@ -41,6 +41,7 @@ export default function Footer() {
                                 alt="RoadReady HGV"
                                 width={240}
                                 height={72}
+                                sizes="320px"
                                 className="h-20 sm:h-24 w-auto invert hue-rotate-180"
                             />
                         </div>
