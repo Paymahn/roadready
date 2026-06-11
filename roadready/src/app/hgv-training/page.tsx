@@ -327,7 +327,10 @@ export default function HgvTrainingLandingPage() {
                             Visit roadreadyhgv.com
                         </Link>
                     </div>
-                    <p>© {new Date().getFullYear()} RoadReady</p>
+                    <p className="text-center">
+                        © {new Date().getFullYear()} RoadReady
+                        <span className="block mt-1">VAT registered. VAT number GB 519306788.</span>
+                    </p>
                 </div>
             </footer>
         </div>
