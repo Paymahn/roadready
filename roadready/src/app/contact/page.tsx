@@ -82,7 +82,7 @@ export default function ContactPage() {
                                 </div>
                                 <h2 className="text-4xl font-black text-white mb-4">You&apos;re On Your Way!</h2>
                                 <p className="text-emerald-400 font-bold text-xl mb-3">Your enquiry has been received securely.</p>
-                                <p className="text-slate-300 text-lg">One of our experts will call you back within 2 business hours to discuss your next steps.</p>
+                                <p className="text-slate-300 text-lg">We aim to call you back within 2 business hours to discuss your next steps.</p>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="bg-slate-900/60 backdrop-blur-2xl border border-slate-700/50 rounded-[2.5rem] p-8 sm:p-12 space-y-7 shadow-[0_0_40px_rgba(0,0,0,0.3)] relative overflow-hidden">
