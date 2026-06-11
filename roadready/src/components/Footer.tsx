@@ -105,9 +105,15 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-14 pt-10 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-sm text-white/50">
-                        © {new Date().getFullYear()} RoadReady. All rights reserved.
-                    </p>
+                    <div className="text-center sm:text-left">
+                        <p className="text-sm text-white/50">
+                            © {new Date().getFullYear()} RoadReady. All rights reserved.
+                        </p>
+                        {/* Legally required once VAT-registered (B2C, prices shown inc VAT). */}
+                        <p className="text-sm text-white/50 mt-1">
+                            VAT registered. VAT number GB 519306788.
+                        </p>
+                    </div>
                     <div className="flex items-center gap-4">
                         <a href={`tel:${CONTACT.phone.raw}`} className="flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors">
                             <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
