@@ -40,47 +40,54 @@ export default function InlineEnquiryForm() {
                 </div>
 
                 <form onSubmit={handleSubmit} className="max-w-4xl mx-auto">
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="flex-1">
-                            <input
-                                type="text"
-                                required
-                                aria-label="Your full name"
-                                value={form.name}
-                                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                className={inputClass}
-                                placeholder="Your full name *"
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <input
-                                type="tel"
-                                required
-                                aria-label="Phone number"
-                                value={form.phone}
-                                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                                className={inputClass}
-                                placeholder="Phone number *"
-                            />
-                        </div>
-                        <div className="flex-1">
-                            <select
-                                value={form.course}
-                                onChange={(e) => setForm({ ...form, course: e.target.value })}
-                                className={inputClass}
-                                aria-label="Select a course"
-                            >
-                                <option value="">Select a course...</option>
-                                {courses.map((c) => (
-                                    <option key={c.slug} value={c.slug}>{c.title}</option>
-                                ))}
-                                <option value="other">Not sure yet</option>
-                            </select>
-                        </div>
+                    {/* 2x2 on tablet, single row on desktop — the optional email made a
+                        one-row-with-button layout too cramped. Mobile stays stacked. */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                        <input
+                            type="text"
+                            required
+                            aria-label="Your full name"
+                            value={form.name}
+                            onChange={(e) => setForm({ ...form, name: e.target.value })}
+                            className={inputClass}
+                            placeholder="Your full name *"
+                        />
+                        <input
+                            type="tel"
+                            required
+                            aria-label="Phone number"
+                            value={form.phone}
+                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                            className={inputClass}
+                            placeholder="Phone number *"
+                        />
+                        {/* Optional — format checks (browser + server) only apply when non-empty. */}
+                        <input
+                            type="email"
+                            aria-label="Email (optional — for your quote and info pack)"
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
+                            className={inputClass}
+                            placeholder="Email (optional)"
+                        />
+                        <select
+                            value={form.course}
+                            onChange={(e) => setForm({ ...form, course: e.target.value })}
+                            className={inputClass}
+                            aria-label="Select a course"
+                        >
+                            <option value="">Select a course...</option>
+                            {courses.map((c) => (
+                                <option key={c.slug} value={c.slug}>{c.title}</option>
+                            ))}
+                            <option value="other">Not sure yet</option>
+                        </select>
+                    </div>
+                    <div className="mt-4 flex justify-center">
                         <button
                             type="submit"
                             disabled={loading}
-                            className="md:w-auto px-8 py-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg active:scale-95 min-h-[44px] whitespace-nowrap"
+                            className="w-full md:w-auto px-10 py-3 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg active:scale-95 min-h-[44px] whitespace-nowrap"
                         >
                             {loading ? "Sending..." : "Get Free Quote"}
                         </button>
