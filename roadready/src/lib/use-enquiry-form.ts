@@ -17,7 +17,8 @@ export function useEnquiryForm(formType: EnquiryFormType, lockedCourseSlug?: str
   const [formStartedAt] = useState(() => Date.now());
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [turnstileKey, setTurnstileKey] = useState(0);
-  const [form, setForm] = useState({ name: "", phone: "", course: "", website: "" });
+  // email is optional everywhere; the API omits it from the CRM forward when empty.
+  const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", website: "" });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
