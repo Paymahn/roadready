@@ -65,6 +65,15 @@ export default function LandingEnquiryForm({
                     className={inputClass}
                     placeholder="Phone number *"
                 />
+                {/* Optional — format checks (browser + server) only apply when non-empty. */}
+                <input
+                    type="email"
+                    aria-label="Email (optional — for your quote and info pack)"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className={inputClass}
+                    placeholder="Email (optional — for your quote and info pack)"
+                />
                 {courseSlug ? (
                     <p className="text-sm text-slate-500 px-1">
                         Course: <span className="font-semibold text-slate-700">{courseTitle}</span>

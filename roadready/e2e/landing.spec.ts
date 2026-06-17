@@ -14,9 +14,26 @@ test.describe("meta ads landing page", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText(/hgv licence/i);
     await expect(page.getByLabel(/your full name/i)).toBeVisible();
     await expect(page.getByLabel(/phone number/i)).toBeVisible();
+    await expect(page.getByLabel(/email \(optional/i)).toBeVisible();
     // General page: course is chosen in the form (all catalogue courses + "not sure").
     await expect(page.getByRole("combobox", { name: /select a course/i })).toBeVisible();
     await expect(page.getByRole("button", { name: /get my free quote/i })).toBeVisible();
+  });
+
+  test("submits cleanly with the optional email left blank", async ({ page }) => {
+    await page.route("**/api/enquiry", (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ success: true, leadStored: true }),
+      }),
+    );
+    await page.goto(ROUTE);
+    await page.getByLabel(/your full name/i).fill("Test Tester");
+    await page.getByLabel(/phone number/i).fill("07700900123");
+    // email deliberately left blank — it's optional and must not block submission
+    await page.getByRole("button", { name: /get my free quote/i }).click();
+    await expect(page.getByRole("heading", { name: /enquiry received/i })).toBeVisible();
   });
 
   test("features the full course catalogue as compact cards", async ({ page }) => {
