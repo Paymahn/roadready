@@ -240,6 +240,7 @@ export async function POST(request: NextRequest) {
         // timeout so a slow/cold CRM can't hang the function into a 502. A non-ok response,
         // an abort (timeout), or a network throw all funnel into the one graceful path below.
         let crmOk = false;
+        let crmRepeat = false;
         const crmController = new AbortController();
         const crmTimer = setTimeout(() => crmController.abort(), CRM_TIMEOUT_MS);
         try {
@@ -263,6 +264,17 @@ export async function POST(request: NextRequest) {
                 signal: crmController.signal,
             });
             crmOk = upstream.ok;
+            if (crmOk) {
+                try {
+                    // The CRM tags repeat enquiries (same person's phone/email seen recently)
+                    // and reports it here so we can skip the duplicate Meta Lead below.
+                    const crmData = (await upstream.json()) as { repeat?: boolean };
+                    crmRepeat = crmData.repeat === true;
+                } catch {
+                    // Non-JSON or older CRM response — treat as a fresh lead (fail open:
+                    // better a duplicate Meta event than a missing one).
+                }
+            }
         } catch {
             crmOk = false; // abort (timeout) or network error
         } finally {
@@ -298,8 +310,16 @@ export async function POST(request: NextRequest) {
 
         // CRM confirmed receipt → the lead is captured. Fire the Meta CAPI AFTER the
         // response is sent (analytics must never block or fail a submission). Consent gate
-        // intact: only scheduled when eventId && consent.
-        if (eventId && consent) {
+        // intact: only scheduled when eventId && consent — and skipped entirely when the CRM
+        // matched this submission to an existing lead, so repeat enquiries stop inflating
+        // Meta's Lead counts. (The client Pixel for this submission has already fired — the
+        // browser can't know it's a repeat before submitting; see PR notes.)
+        if (crmRepeat) {
+            console.log(
+                "LEAD_REPEAT_CAPI_SKIPPED",
+                JSON.stringify({ eventId: eventId || undefined, at: new Date(nowMs).toISOString() }),
+            );
+        } else if (eventId && consent) {
             const value = courseLeadValue(course);
             after(async () => {
                 await sendMetaLeadCapi({
