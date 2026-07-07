@@ -19,7 +19,7 @@ import { POST } from "@/app/api/enquiry/route";
 
 let crmCalls: string[] = [];
 let crmBodies: string[] = [];
-let crmBehavior: "ok" | "non-ok" | "throw" = "ok";
+let crmBehavior: "ok" | "ok-repeat" | "non-ok" | "throw" = "ok";
 let errSpy: MockInstance;
 
 beforeEach(() => {
@@ -37,6 +37,8 @@ beforeEach(() => {
       if (init?.body) crmBodies.push(init.body);
       if (crmBehavior === "throw") throw new Error("simulated CRM abort/network failure");
       if (crmBehavior === "non-ok") return new Response("upstream error", { status: 500 });
+      if (crmBehavior === "ok-repeat")
+        return new Response(JSON.stringify({ success: true, id: "lead-1", repeat: true }), { status: 200 });
       return new Response(JSON.stringify({ ok: true }), { status: 200 });
     }),
   );
@@ -89,6 +91,24 @@ describe("POST /api/enquiry — CRM capture, CAPI deferred to after()", () => {
     expect(sendMetaLeadCapi).toHaveBeenCalledWith(
       expect.objectContaining({ value: 3000, currency: "GBP" }),
     );
+  });
+
+  it("CRM flags a repeat → 200 success, but NO CAPI Lead is scheduled", async () => {
+    crmBehavior = "ok-repeat";
+    const res = await POST(enquiry(true, "hgv-cat-ce"));
+    expect(res.status).toBe(200);
+    const body = (await res.json()) as { success?: boolean; leadStored?: boolean };
+    expect(body.success).toBe(true);
+    expect(body.leadStored).toBe(true); // the lead IS captured — only the Meta event is skipped
+    expect(after).not.toHaveBeenCalled(); // nothing deferred
+    expect(sendMetaLeadCapi).not.toHaveBeenCalled();
+  });
+
+  it("CRM response without a repeat field (older CRM) → CAPI fires as before", async () => {
+    // The default "ok" behaviour body has no `repeat` key at all — this is the cross-repo
+    // deploy-order case, which must fail open to firing.
+    await POST(enquiry(true, "hgv-cat-ce"));
+    expect(after).toHaveBeenCalledTimes(1);
   });
 
   it("CPC → CAPI (on flush) carries value 75 + GBP", async () => {
