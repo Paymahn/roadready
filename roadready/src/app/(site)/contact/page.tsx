@@ -1,14 +1,21 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 import { postEnquiry } from "@/lib/submit-enquiry";
+import { hasSubmittedEnquiry } from "@/lib/enquiry-session";
 import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+
+    // Already submitted this visit (any form variant) → show the thanks state instead of
+    // inviting a duplicate enquiry. Post-hydration effect: sessionStorage isn't there in SSR.
+    useEffect(() => {
+        if (hasSubmittedEnquiry()) setSubmitted(true);
+    }, []);
     const [loading, setLoading] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt] = useState(() => Date.now());

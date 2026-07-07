@@ -2,6 +2,7 @@ import { getStoredAttribution, readMetaCookies } from "@/lib/attribution";
 import { trackMetaLead, type MetaLeadParams } from "@/lib/meta-pixel";
 import { getStoredConsent } from "@/lib/consent";
 import { courseLeadValue, LEAD_VALUE_CURRENCY } from "@/lib/data";
+import { markEnquirySubmitted } from "@/lib/enquiry-session";
 
 export type EnquiryFormType = MetaLeadParams["content_category"];
 
@@ -53,6 +54,10 @@ export async function postEnquiry({ body, formType, courseSlug, turnstileToken }
   }
 
   const leadStored = data.leadStored === true;
+
+  // Single choke point for every form variant: the server accepted the enquiry, so flag the
+  // session — all forms render their thanks state for the rest of the visit.
+  markEnquirySubmitted();
 
   // Only fire the client-side Lead event when consent was given (the pixel isn't even
   // loaded otherwise). The CRM forward is unconditional and handled server-side.

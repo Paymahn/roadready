@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { postEnquiry, type EnquiryFormType } from "@/lib/submit-enquiry";
+import { hasSubmittedEnquiry } from "@/lib/enquiry-session";
 
 // Shared machinery for every enquiry form variant: field state, honeypot, fill-time stamp,
 // single-use Turnstile token management, and the postEnquiry orchestration (client Lead
@@ -19,6 +20,13 @@ export function useEnquiryForm(formType: EnquiryFormType, lockedCourseSlug?: str
   const [turnstileKey, setTurnstileKey] = useState(0);
   // email is optional everywhere; the API omits it from the CRM forward when empty.
   const [form, setForm] = useState({ name: "", phone: "", email: "", course: "", website: "" });
+
+  // Already submitted this visit (any form variant) → open on the thanks state instead of
+  // inviting a duplicate. Effect, not initial state: sessionStorage isn't there during SSR,
+  // and flipping post-hydration keeps server and client markup identical.
+  useEffect(() => {
+    if (hasSubmittedEnquiry()) setSubmitted(true);
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
