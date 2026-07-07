@@ -5,7 +5,7 @@ import { useEnquiry } from "@/context/EnquiryContext";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 import { postEnquiry } from "@/lib/submit-enquiry";
-import { hasSubmittedEnquiry } from "@/lib/enquiry-session";
+import { clearEnquirySubmitted, hasSubmittedEnquiry } from "@/lib/enquiry-session";
 import TurnstileWidget from "@/components/TurnstileWidget";
 
 const inputClass = "w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm";
@@ -126,6 +126,19 @@ export default function EnquiryModal() {
                             >
                                 Close
                             </button>
+                            <p className="text-sm text-slate-500 mt-5">
+                                Made a mistake in your details?{" "}
+                                <button
+                                    onClick={() => {
+                                        clearEnquirySubmitted();
+                                        setSubmitError(null);
+                                        setSubmitted(false);
+                                    }}
+                                    className="underline underline-offset-2 font-medium hover:text-slate-700"
+                                >
+                                    Submit again here
+                                </button>
+                            </p>
                         </div>
                     ) : (
                         <form onSubmit={handleSubmit} className="space-y-5">

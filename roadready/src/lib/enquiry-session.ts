@@ -25,3 +25,15 @@ export function hasSubmittedEnquiry(): boolean {
     return false;
   }
 }
+
+// The correction path: "made a mistake in your details? submit again" clears the flag so the
+// form re-renders. The default thanks state stops ACCIDENTAL doubles; this keeps a DELIBERATE
+// correction (wrong phone number typed — it happens) one click away. The corrected submission
+// re-marks the session, and the CRM's repeat detection ties it back to the original lead.
+export function clearEnquirySubmitted(): void {
+  try {
+    sessionStorage.removeItem(KEY);
+  } catch {
+    /* storage unavailable — nothing to clear */
+  }
+}

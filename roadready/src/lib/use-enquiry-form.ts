@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import { postEnquiry, type EnquiryFormType } from "@/lib/submit-enquiry";
-import { hasSubmittedEnquiry } from "@/lib/enquiry-session";
+import { clearEnquirySubmitted, hasSubmittedEnquiry } from "@/lib/enquiry-session";
 
 // Shared machinery for every enquiry form variant: field state, honeypot, fill-time stamp,
 // single-use Turnstile token management, and the postEnquiry orchestration (client Lead
@@ -55,6 +55,14 @@ export function useEnquiryForm(formType: EnquiryFormType, lockedCourseSlug?: str
     }
   };
 
+  // "Made a mistake in your details? Submit again" — deliberate correction path out of the
+  // thanks state. Field values are kept, so fixing a typo'd number is genuinely one click.
+  const startCorrection = () => {
+    clearEnquirySubmitted();
+    setSubmitted(false);
+    setSubmitError(null);
+  };
+
   return {
     submitted,
     loading,
@@ -62,6 +70,7 @@ export function useEnquiryForm(formType: EnquiryFormType, lockedCourseSlug?: str
     form,
     setForm,
     handleSubmit,
+    startCorrection,
     turnstileKey,
     setTurnstileToken,
   };

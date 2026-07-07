@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import { markEnquirySubmitted, hasSubmittedEnquiry } from "@/lib/enquiry-session";
+import { markEnquirySubmitted, hasSubmittedEnquiry, clearEnquirySubmitted } from "@/lib/enquiry-session";
 
 // Minimal sessionStorage stub — vitest runs in a node environment.
 function stubStorage(overrides?: Partial<Storage>) {
@@ -7,6 +7,7 @@ function stubStorage(overrides?: Partial<Storage>) {
   const storage = {
     getItem: (k: string) => (store.has(k) ? (store.get(k) as string) : null),
     setItem: (k: string, v: string) => void store.set(k, v),
+    removeItem: (k: string) => void store.delete(k),
     ...overrides,
   } as Storage;
   vi.stubGlobal("sessionStorage", storage);
@@ -30,6 +31,14 @@ describe("enquiry-session flag", () => {
     const stored = store.get("rr_enquiry_submitted_at");
     expect(stored).toBeTruthy();
     expect(Number.isNaN(Date.parse(stored as string))).toBe(false);
+  });
+
+  it("clear (the correction path) resets the flag so the form re-renders", () => {
+    stubStorage();
+    markEnquirySubmitted();
+    expect(hasSubmittedEnquiry()).toBe(true);
+    clearEnquirySubmitted();
+    expect(hasSubmittedEnquiry()).toBe(false);
   });
 
   it("never throws when storage is unavailable (SSR / private browsing)", () => {
