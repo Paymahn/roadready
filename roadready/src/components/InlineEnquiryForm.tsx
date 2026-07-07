@@ -7,7 +7,7 @@ import TurnstileWidget from "@/components/TurnstileWidget";
 const inputClass = "w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all min-h-[44px] text-sm shadow-sm";
 
 export default function InlineEnquiryForm() {
-    const { submitted, loading, submitError, form, setForm, handleSubmit, turnstileKey, setTurnstileToken } =
+    const { submitted, loading, submitError, form, setForm, handleSubmit, startCorrection, turnstileKey, setTurnstileToken } =
         useEnquiryForm("inline");
 
     if (submitted) {
@@ -21,6 +21,12 @@ export default function InlineEnquiryForm() {
                     </div>
                     <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Received!</h3>
                     <p className="text-slate-600 font-medium">We&apos;ll be in touch as soon as we can.</p>
+                    <p className="text-sm text-slate-500 mt-3">
+                        Made a mistake in your details?{" "}
+                        <button onClick={startCorrection} className="underline underline-offset-2 font-medium hover:text-slate-700">
+                            Submit again here
+                        </button>
+                    </p>
                 </div>
             </div>
         );

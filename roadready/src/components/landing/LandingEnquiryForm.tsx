@@ -19,7 +19,7 @@ export default function LandingEnquiryForm({
     courseSlug?: string;
     courseTitle?: string;
 } = {}) {
-    const { submitted, loading, submitError, form, setForm, handleSubmit, turnstileKey, setTurnstileToken } =
+    const { submitted, loading, submitError, form, setForm, handleSubmit, startCorrection, turnstileKey, setTurnstileToken } =
         useEnquiryForm("landing", courseSlug);
 
     if (submitted) {
@@ -33,6 +33,12 @@ export default function LandingEnquiryForm({
                 <h3 className="text-xl font-bold text-slate-900 mb-1">Enquiry Received!</h3>
                 <p className="text-slate-600 font-medium">
                     We&apos;ll call you about your {courseTitle ?? "HGV"} training as soon as we can.
+                </p>
+                <p className="text-sm text-slate-500 mt-3">
+                    Made a mistake in your details?{" "}
+                    <button onClick={startCorrection} className="underline underline-offset-2 font-medium hover:text-slate-700">
+                        Submit again here
+                    </button>
                 </p>
             </div>
         );

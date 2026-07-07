@@ -1,14 +1,21 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { CONTACT } from "@/lib/contact";
 import { courses } from "@/lib/data";
 import { postEnquiry } from "@/lib/submit-enquiry";
+import { clearEnquirySubmitted, hasSubmittedEnquiry } from "@/lib/enquiry-session";
 import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+
+    // Already submitted this visit (any form variant) → show the thanks state instead of
+    // inviting a duplicate enquiry. Post-hydration effect: sessionStorage isn't there in SSR.
+    useEffect(() => {
+        if (hasSubmittedEnquiry()) setSubmitted(true);
+    }, []);
     const [loading, setLoading] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [formStartedAt] = useState(() => Date.now());
@@ -83,6 +90,19 @@ export default function ContactPage() {
                                 <h2 className="text-4xl font-black text-white mb-4">You&apos;re On Your Way!</h2>
                                 <p className="text-emerald-400 font-bold text-xl mb-3">Your enquiry has been received securely.</p>
                                 <p className="text-slate-300 text-lg">We aim to call you back the same working day to discuss your next steps.</p>
+                                <p className="text-sm text-slate-400 mt-6">
+                                    Made a mistake in your details?{" "}
+                                    <button
+                                        onClick={() => {
+                                            clearEnquirySubmitted();
+                                            setSubmitError(null);
+                                            setSubmitted(false);
+                                        }}
+                                        className="underline underline-offset-2 font-medium hover:text-slate-200"
+                                    >
+                                        Submit again here
+                                    </button>
+                                </p>
                             </div>
                         ) : (
                             <form onSubmit={handleSubmit} className="bg-slate-900/60 backdrop-blur-2xl border border-slate-700/50 rounded-[2.5rem] p-8 sm:p-12 space-y-7 shadow-[0_0_40px_rgba(0,0,0,0.3)] relative overflow-hidden">
